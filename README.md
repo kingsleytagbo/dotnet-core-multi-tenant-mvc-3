@@ -3,7 +3,7 @@ https://getbootstrap.com/docs/4.5/getting-started/download/
 =======
 # How To Build Your Website in ASP.NET CORE (3.1) MVC
 
-## Steps
+## STEPS
 
 ### Step 1
 ![Login](LMS/Content/Images/Login.PNG?raw=true "Login Page")
@@ -18,3 +18,11 @@ https://getbootstrap.com/docs/4.5/getting-started/download/
 ![Thank You](LMS/Content/Images/ThankYou.PNG?raw=true "Thank You")
 
 
+## GIT COMMANDS
+
+### git init
+### git add --all
+### git commit -am "asp.net mvc core launch project"
+### git remote add origin https://github.com/kingsleytagbo/dotnet-core-mvc-3.git
+### git pull https://github.com/kingsleytagbo/dotnet-core-mvc-3.git --allow-unrelated-histories
+### git push origin master 
