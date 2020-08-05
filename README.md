@@ -6,7 +6,7 @@ https://getbootstrap.com/docs/4.5/getting-started/download/
 ## STEPS
 
 ### Step 1
-![Login](LMS/Content/Images/Login.PNG?raw=true "Login Page")
+![Login](wwwroot/Images/setup-step1.png "Login Page")
 
 ### Step 2
 ![Register](LMS/Content/Images/Register.PNG?raw=true "Register")
@@ -25,4 +25,5 @@ https://getbootstrap.com/docs/4.5/getting-started/download/
 ### git commit -am "asp.net mvc core launch project"
 ### git remote add origin https://github.com/kingsleytagbo/dotnet-core-mvc-3.git
 ### git pull https://github.com/kingsleytagbo/dotnet-core-mvc-3.git --allow-unrelated-histories
+### git push --set-upstream origin master
 ### git push origin master 
