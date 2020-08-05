@@ -6,7 +6,7 @@ https://getbootstrap.com/docs/4.5/getting-started/download/
 ## STEPS
 
 ### Step 1
-![Login](wwwroot/Images/setup-step1.png "Login Page")
+![Login](KT.Core.Mvc/wwwroot/images/setup-step1.png "Login Page")
 
 ### Step 2
 ![Register](LMS/Content/Images/Register.PNG?raw=true "Register")
