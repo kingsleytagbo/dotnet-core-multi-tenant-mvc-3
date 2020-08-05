@@ -6,16 +6,19 @@ https://getbootstrap.com/docs/4.5/getting-started/download/
 ## STEPS
 
 ### Step 1
-![Login](KT.Core.Mvc/wwwroot/images/setup-step1.png "Login Page")
+![Step #1](KT.Core.Mvc/wwwroot/images/setup-step1.png "Step #1")
 
 ### Step 2
-![Register](LMS/Content/Images/Register.PNG?raw=true "Register")
+![Step #2](KT.Core.Mvc/wwwroot/images/setup-step2.png "Step #2")
 
 ### Step 3
-![Register](LMS/Content/Images/Register_Validation.PNG?raw=true "Register Validation")
+![Step #3](KT.Core.Mvc/wwwroot/images/setup-step3.png "Step #3")
 
 ### Step 4
-![Thank You](LMS/Content/Images/ThankYou.PNG?raw=true "Thank You")
+![Step #4](KT.Core.Mvc/wwwroot/images/setup-step4.png "Step #4")
+
+### Step 5
+![Step #5](KT.Core.Mvc/wwwroot/images/setup-step5.png "Step #5")
 
 
 ## GIT COMMANDS
