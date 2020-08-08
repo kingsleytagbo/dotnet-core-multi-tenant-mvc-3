@@ -8,7 +8,6 @@
 /Users/itcareercoach/Projects/Public/KT.Core.Mvc/KT.Core.Mvc/bin/Debug/netcoreapp3.1/KT.Core.Mvc.pdb
 /Users/itcareercoach/Projects/Public/KT.Core.Mvc/KT.Core.Mvc/bin/Debug/netcoreapp3.1/KT.Core.Mvc.Views.dll
 /Users/itcareercoach/Projects/Public/KT.Core.Mvc/KT.Core.Mvc/bin/Debug/netcoreapp3.1/KT.Core.Mvc.Views.pdb
-/Users/itcareercoach/Projects/Public/KT.Core.Mvc/KT.Core.Mvc/obj/Debug/netcoreapp3.1/KT.Core.Mvc.csprojAssemblyReference.cache
 /Users/itcareercoach/Projects/Public/KT.Core.Mvc/KT.Core.Mvc/obj/Debug/netcoreapp3.1/KT.Core.Mvc.AssemblyInfoInputs.cache
 /Users/itcareercoach/Projects/Public/KT.Core.Mvc/KT.Core.Mvc/obj/Debug/netcoreapp3.1/KT.Core.Mvc.AssemblyInfo.cs
 /Users/itcareercoach/Projects/Public/KT.Core.Mvc/KT.Core.Mvc/obj/Debug/netcoreapp3.1/KT.Core.Mvc.csproj.CoreCompileInputs.cache
