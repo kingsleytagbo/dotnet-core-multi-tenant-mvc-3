@@ -60,26 +60,23 @@
                     <div class="card card-info mt-5">
                         <a id="users-top" name="users-top" href="#"></a>
                         <div class="card-header" id="userHeader" name="userHeader">
-                            <button type="button" class="btn btn-info btn-block" id="btn ToggleForm" onclick="return AdminPageModule.toggleForm(this);">
+                            <button type="button" class="btn btn-info btn-block" id="createForm" onclick="return AdminPageModule.createForm(this);">
                                     Add / Edit a User
                             </button>
                         </div>
                         <div class="card-body" style="display:block;">
                             <form id="userForm" name="userForm">
                                 <div class="row">
-                                    <div class="form-group col-md-12">
+                                    <div class="form-group col-12 col-sm-5">
                                         <label>First Name:</label>
                                         <input type="text" class="form-control input-md" id="firstName" name="firstName" placeholder="First Name" required />
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-md-12">
+                                    <div class="form-group col-12 col-sm-5">
                                         <label>Last Name:</label>
                                         <input type="text" class="form-control input-md" id="lastName" name="lastName" placeholder="Last Name" required />
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="form-group col-md-12">
+   
+                                    <div class="form-group col-12 col-sm-2">
                                         <label>Sorting:</label>
                                         <span> <input type="text" class="form-control input-md" id="sort" name="sort" /></span>
                                     </div>
@@ -155,12 +152,21 @@
                 },
 
                 cancelForm: function (self) {
+                    $(self).closest('.card').find('.card-header').toggle();
+                    $(self).closest('.card').find('.card-body').toggle();
+                    $(self).closest('.card').find('.card-footer').toggle();
+                    this.clearForm(self);
+                },
+
+                createForm: function (self) {
+                    $(self).closest('.card').find('.card-header').toggle();
                     $(self).closest('.card').find('.card-body').toggle();
                     $(self).closest('.card').find('.card-footer').toggle();
                     this.clearForm(self);
                 },
 
                 toggleForm: function (self) {
+                    $(self).closest('.card').find('.card-header').toggle();
                     $(self).closest('.card').find('.card-body').toggle();
                     $(self).closest('.card').find('.card-footer').toggle();
                 },
@@ -287,7 +293,7 @@
 
         $(document).ready(function () {
             const data = AdminPageModule.loadData();
-            AdminPageModule.cancelForm($('#userForm'));
+            // AdminPageModule.cancelForm($('#userForm'));
         });
 
     </script>

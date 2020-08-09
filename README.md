@@ -1,9 +1,16 @@
 ﻿### Download Minified & Compiled Bootstrap 4.5
 https://getbootstrap.com/docs/4.5/getting-started/download/
 =======
-# How To Build Your Website in ASP.NET CORE (3.1) MVC
+# How To Build Your Website in ASP.NET CORE (3.1) MVC\
 
-## STEPS
+
+## STEPS - CRUD
+
+### Step 1
+![Step #1](KT.Core.Mvc/wwwroot/images/crud-step1.png "Step #1")
+
+
+## STEPS - SETUP
 
 ### Step 1
 ![Step #1](KT.Core.Mvc/wwwroot/images/setup-step1.png "Step #1")
