@@ -1,20 +1,17 @@
 ﻿<Properties StartupConfiguration="{E9E3108C-FD19-4F27-A642-CF29400CFF95}|KT.Core.Mvc">
   <MonoDevelop.Ide.ItemProperties.KT.Core.Mvc PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="README.md">
+  <MonoDevelop.Ide.Workbench ActiveDocument="KT.Core.Mvc/wwwroot/admin/index.html">
     <Files>
-      <File FileName="KT.Core.Mvc/wwwroot/admin/index.html" Line="298" Column="1" />
+      <File FileName="KT.Core.Mvc/wwwroot/admin/index.html" Line="159" Column="23" />
       <File FileName="KT.Core.Mvc/Views/Shared/_Layout.cshtml" />
-      <File FileName="KT.Core.Mvc/Views/Home/Index.cshtml" Line="1" Column="1" />
       <File FileName="KT.Core.Mvc/wwwroot/js/LocalStorageDatabase.js" Line="55" Column="22" />
-      <File FileName="README.md" Line="6" Column="17" />
+      <File FileName="README.md" Line="2" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="KT.Core.Mvc" expanded="True">
-            <Node name="Solution Items" expanded="True">
-              <Node name="/Users/itcareercoach/Projects/Public/KT.Core.Mvc/README.md" selected="True" />
-            </Node>
+            <Node name="Solution Items" expanded="True" />
             <Node name="KT.Core.Mvc" expanded="True">
               <Node name="Controllers" expanded="True" />
               <Node name="Models" expanded="True" />
@@ -24,7 +21,9 @@
                 <Node name="Shared" expanded="True" />
               </Node>
               <Node name="wwwroot" expanded="True">
-                <Node name="admin" expanded="True" />
+                <Node name="admin" expanded="True">
+                  <Node name="index.html" selected="True" />
+                </Node>
                 <Node name="images" expanded="True" />
                 <Node name="js" expanded="True" />
               </Node>
