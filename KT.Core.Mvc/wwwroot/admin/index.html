@@ -15,20 +15,6 @@
     <link href="/css/bootstrap/4.5/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 
     <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
     </style>
     <!-- Custom styles for this template -->
     <link href="/css/site.css" rel="stylesheet">
@@ -65,14 +51,83 @@
         </div>
     </nav>
 
-    <main role="main" class="container">
+    <div role="main" class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="pt-5">
+                    <!-- BEGIN USER ADMIN -->
+                    <!-- BEGIN CONTACT CARD -->
+                    <div class="card card-info mt-5">
+                        <a id="users-top" name="users-top" href="#"></a>
+                        <div class="card-header" id="userHeader" name="userHeader">
+                            <button type="button" class="btn btn-info btn-block" id="btn ToggleForm" onclick="return AdminPageModule.toggleForm(this);">
+                                    Add / Edit a User
+                            </button>
+                        </div>
+                        <div class="card-body" style="display:block;">
+                            <form id="userForm" name="userForm">
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <label>First Name:</label>
+                                        <input type="text" class="form-control input-md" id="firstName" name="firstName" placeholder="First Name" required />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <label>Last Name:</label>
+                                        <input type="text" class="form-control input-md" id="lastName" name="lastName" placeholder="Last Name" required />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <label>Sorting:</label>
+                                        <span> <input type="text" class="form-control input-md" id="sort" name="sort" /></span>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-12">
+                                        <input type="hidden" id="Id" name="Id" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer" style="display:block;">
+                            <button type="button" class="btn btn-info" id="btnSave" onclick="return AdminPageModule.saveForm();">Save</button>
+                            <button type="button" class="btn btn-warning" id="btnCancel" onclick="return AdminPageModule.cancelForm(this);">Cancel</button>
+                            <button type="button" class="btn btn-danger" id="btnDelete" onclick="return AdminPageModule.deleteForm(this);">Delete</button>
+                        </div>
+                    </div>
+                    <!-- END CONTACT CARD -->
 
-        <div class="starter-template">
-            <h1>Admin Page</h1>
-            <p class="lead">Welcome to an empty admin page</p>
+                    <!-- BEGIN CONTACT TABLE -->
+                    <div class="table-responsive mt-5">
+                        <h3 class="text-center"> Manage Users</h3>
+                        <table class="table table-striped table-condensed table-hover">
+                            <thead>
+                                <tr>
+                                    <th colspan="4">
+                                        #
+                                    </th>
+                                    <th colspan="3">
+                                        First Name
+                                    </th>
+                                    <th colspan="3">
+                                        Last Name
+                                    </th>
+                                    <th colspan="2">
+                                        Sorting
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="tbody"></tbody>
+                        </table>
+                    </div>
+                    <!-- END CONTACT TABLE -->
+                    <!-- END USER ADMIN -->
+                </div>
+            </div>
         </div>
-
-    </main>
+    </div>
     <!-- /.container -->
     <script src="/js/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
@@ -83,6 +138,9 @@
 
     <script type="text/javascript">
         const AdminPageModule = (function () {
+            // your module code goes here
+            const DATA_KEYID = 'Forms';
+            const formName = 'userForm';
 
             return {
                 /* gets an empty model representing user data */
@@ -94,14 +152,142 @@
                         sort: 0
                     };
                     return model;
+                },
+
+                cancelForm: function (self) {
+                    $(self).closest('.card').find('.card-body').toggle();
+                    $(self).closest('.card').find('.card-footer').toggle();
+                    this.clearForm(self);
+                },
+
+                toggleForm: function (self) {
+                    $(self).closest('.card').find('.card-body').toggle();
+                    $(self).closest('.card').find('.card-footer').toggle();
+                },
+
+                clearForm: function () {
+                    $('#' + formName).find('input, select, textarea').each(function () {
+                        $(this).val('');
+                    });
+                },
+
+                /** Load Data function */
+                loadData: function () {
+
+                    let result = database.fetch(DATA_KEYID);
+                    let html = '';
+                    let count = result.length + 1;
+
+                    $.each(result, function (key, item) {
+                        count -= 1;
+                        html += '<tr>';
+                        html += '<td  colspan="4">' + '<span><strong>' + count + '<br /> </strong></span>' + '<a class="btn btn-sm btn-outline btn-warning" href="#" onclick="return AdminPageModule.getbyID(' + "'" + item.Id + "'" + ')">Edit</a> </td>';
+                        html += '<td  colspan="3">' + '<p><span>' + (item.firstName ? item.firstName : '') + '</td>';
+                        html += '<td  colspan="3">' + '<p><span>' + (item.lastName ? item.lastName : '') + '</td>';
+                        html += '<td  colspan="2">' + '<p><span>' + (item.sort ? item.sort : '') + '</td>';
+                        html += '</tr>';
+                    });
+
+                    $('.tbody').html(html);
+                },
+
+                /** Select one item using a unique key */
+                getbyID: function (ID) {
+
+                    //get one item from a collection based on the item's unique key
+                    let result = database.selectOne(ID, DATA_KEYID);
+
+                    // Put the value of each field back into the form
+                    $('#' + formName).find('input, select, textarea').each(function () {
+                        let id = $(this).attr('id');
+                        let val = (result[id]) || '';
+                        $(this).val(val);
+                    });
+
+                    $('#' + formName).closest('.card').find('.card-body').show();
+                    $('#' + formName).closest('.card').find('.card-footer').show();
+
+                    return false;
+                },
+
+                //** Save Data Function */
+                saveForm: function () {
+                    // allow a save if all the needed fields are present on the form.
+                    let res = AdminPageModule.validate();
+                    if (res == false) {
+                        return false;
+                    }
+
+                    //get the value of all the fields on the form
+                    let model = {};
+                    $('#' + formName).find('input, select, textarea').each(function () {
+                        let key = $(this).attr('id');
+                        let val = $("#" + key).val() || ' ';
+                        model[key] = val;
+                    });
+
+                    //save the values on the form to a data store
+                    database.save(DATA_KEYID, model);
+                    AdminPageModule.clearForm();
+
+                    AdminPageModule.toggleForm($('#userHeader'));
+
+                    //refresh the data on the page after saving it
+                    AdminPageModule.loadData();
+                },
+
+                deleteForm: function () {
+                    let model = {};
+
+                    $('#' + formName).find('input, select, textarea').each(function () {
+                        let key = $(this).attr('id');
+                        let val = $("#" + key).val() || ' ';
+                        model[key] = val;
+                    });
+
+                    database.removeOne(DATA_KEYID, model);
+
+                    AdminPageModule.clearForm();
+                    AdminPageModule.toggleForm($('#userHeader'));
+                    AdminPageModule.loadData();
+                },
+
+                /** Valdidation using jquery */
+                validate: function () {
+                    let isValid = true;
+                    if ($('#firstName').val().trim() == "") {
+                        $('#lastName').css('border-color', 'red');
+                        isValid = false;
+                    }
+                    else {
+                        $('#firstName').css('border-color', 'green');
+                    }
+
+                    if ($('#lastName').val().trim() == "") {
+                        $('#lastName').css('border-color', 'red');
+                        isValid = false;
+                    }
+                    else {
+                        $('#lastName').css('border-color', 'green');
+                    }
+
+                    if ($('#sort').val().trim() == "") {
+                        $('#sort').css('border-color', 'red');
+                        isValid = false;
+                    }
+                    else {
+                        $('#sort').css('border-color', 'green');
+                    }
+
+                    return isValid;
                 }
             };
 
         }());
 
         $(document).ready(function () {
-            let data = AdminPageModule.getUserModel();
-            console.log(data);
+            const data = AdminPageModule.loadData();
+            AdminPageModule.cancelForm($('#userForm'));
         });
 
     </script>
