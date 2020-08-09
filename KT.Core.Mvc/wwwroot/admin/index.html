@@ -72,9 +72,41 @@
             <p class="lead">Welcome to an empty admin page</p>
         </div>
 
-    </main><!-- /.container -->
+    </main>
+    <!-- /.container -->
     <script src="/js/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="/js/bootstrap/4.5/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script src="/js/LocalStorage.js" crossorigin="anonymous"></script>
+
+    <!--BEGIN JAVASCRIPT CODE -->
+
+    <script type="text/javascript">
+        const AdminPageModule = (function () {
+
+            return {
+                /* gets an empty model representing user data */
+                getUserModel: function () {
+                    const model = {
+                        Id: '',
+                        firstName: '',
+                        lastName: '',
+                        sort: 0
+                    };
+                    return model;
+                }
+            };
+
+        }());
+
+        $(document).ready(function () {
+            let data = AdminPageModule.getUserModel();
+            console.log(data);
+        });
+
+    </script>
+
+    <!--END JAVASCRIPT CODE -->
+
 </body>
 </html>
