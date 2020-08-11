@@ -70,7 +70,7 @@ const database = new function () {
             let dataItems = JSON.parse(items);
             let i = dataItems.length
             while (i--) {
-                if (itemKey === dataItems[i].Id) {
+                if (String(itemKey) === String(dataItems[i][itemsKey])) {
                     match = dataItems[i];
                     break;
                 }
