@@ -48,7 +48,7 @@ const database = new function () {
 
             if (dataItems.length > 0) {
                 for (let d = 0; d < dataItems.length; d++) {
-                    if (dataItems[d].Id === item.Id) {
+                    if (String(dataItems[d][key]) === String(item[key])) {
                         found = true;
                         dataItems[d] = item;
                         break;
@@ -87,7 +87,7 @@ const database = new function () {
             let dataItems = JSON.parse(items);
             let i = dataItems.length
             while (i--) {
-                if (data.Id === dataItems[i].Id) {
+                if (String(data[key]) === String(dataItems[i][key])) {
 
                     dataItems.splice(i, 1);
 

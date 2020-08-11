@@ -2,9 +2,8 @@
   <MonoDevelop.Ide.ItemProperties.KT.Core.Mvc PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.Workbench ActiveDocument="KT.Core.Mvc/wwwroot/admin/index.html">
     <Files>
-      <File FileName="KT.Core.Mvc/wwwroot/admin/index.html" Line="159" Column="23" />
+      <File FileName="KT.Core.Mvc/wwwroot/admin/index.html" Line="223" Column="60" />
       <File FileName="KT.Core.Mvc/Views/Shared/_Layout.cshtml" />
-      <File FileName="KT.Core.Mvc/wwwroot/js/LocalStorageDatabase.js" Line="55" Column="22" />
       <File FileName="README.md" Line="2" Column="1" />
     </Files>
     <Pads>
@@ -17,7 +16,6 @@
               <Node name="Models" expanded="True" />
               <Node name="Properties" expanded="True" />
               <Node name="Views" expanded="True">
-                <Node name="Home" expanded="True" />
                 <Node name="Shared" expanded="True" />
               </Node>
               <Node name="wwwroot" expanded="True">

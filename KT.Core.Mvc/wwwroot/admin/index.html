@@ -74,11 +74,11 @@
                                 <div class="row">
                                     <div class="form-group col-12 col-sm-5">
                                         <label>First Name:</label>
-                                        <input type="text" class="form-control input-md" id="firstName" name="firstName" placeholder="First Name" required />
+                                        <input type="text" class="form-control input-md" id="firstName" name="firstName" placeholder="First Name" />
                                     </div>
                                     <div class="form-group col-12 col-sm-5">
                                         <label>Last Name:</label>
-                                        <input type="text" class="form-control input-md" id="lastName" name="lastName" placeholder="Last Name" required />
+                                        <input type="text" class="form-control input-md" id="lastName" name="lastName" placeholder="Last Name" />
                                     </div>
 
                                     <div class="form-group col-12 col-sm-2">
@@ -258,13 +258,15 @@
 
                 //** Save Data Function */
                 saveForm: function () {
-                    this.showToast("Save", "Saving ...");
 
                     /* allow a save if all the needed fields are present on the form. */
                     let res = AdminPageModule.validate();
                     if (res == false) {
+                        this.showToast("Warning", "Complete all required fields ...");
                         return false;
                     }
+
+                    this.showToast("Save", "Saving ...");
 
                     /* get the value of all the fields on the form */
                     let model = {};
@@ -301,28 +303,20 @@
                 /** Validate using jquery */
                 validate: function () {
                     let isValid = true;
-                    if ($('#firstName').val().trim() == "") {
-                        $('#lastName').css('border-color', 'red');
-                        isValid = false;
-                    }
-                    else {
-                        $('#firstName').css('border-color', 'green');
-                    }
+                    const elements = ['firstName', 'lastName', 'sort'];
 
-                    if ($('#lastName').val().trim() == "") {
-                        $('#lastName').css('border-color', 'red');
-                        isValid = false;
-                    }
-                    else {
-                        $('#lastName').css('border-color', 'green');
-                    }
-
-                    if ($('#sort').val().trim() == "") {
-                        $('#sort').css('border-color', 'red');
-                        isValid = false;
-                    }
-                    else {
-                        $('#sort').css('border-color', 'green');
+                    if (elements != null && elements.length > 0) {
+                        for (let e = 0; e < elements.length; e++) {
+                            const id = elements[e];
+                            const $element = $('#' + id);
+                            if ((!$element.val()) || ($element.val() === '')) {
+                                $element.css('border-color', 'red');
+                                isValid = false;
+                            }
+                            else {
+                                $element.css('border-color', 'green');
+                            }
+                        }
                     }
 
                     return isValid;
