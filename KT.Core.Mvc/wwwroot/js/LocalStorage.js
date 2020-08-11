@@ -50,7 +50,7 @@ const database = new function () {
                 for (let d = 0; d < dataItems.length; d++) {
                     if (String(dataItems[d][key]) === String(item[key])) {
                         found = true;
-                        dataItems[d] = item;
+                        dataItems[d] = Object.assign(dataItems[d], item); item;
                         break;
                     }
                 };

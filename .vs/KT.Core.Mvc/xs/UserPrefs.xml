@@ -1,10 +1,11 @@
 ﻿<Properties StartupConfiguration="{E9E3108C-FD19-4F27-A642-CF29400CFF95}|KT.Core.Mvc">
   <MonoDevelop.Ide.ItemProperties.KT.Core.Mvc PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="KT.Core.Mvc/wwwroot/admin/index.html">
+  <MonoDevelop.Ide.Workbench ActiveDocument="KT.Core.Mvc/wwwroot/js/LocalStorage.js">
     <Files>
-      <File FileName="KT.Core.Mvc/wwwroot/admin/index.html" Line="223" Column="60" />
+      <File FileName="KT.Core.Mvc/wwwroot/admin/index.html" Line="314" Column="49" />
       <File FileName="KT.Core.Mvc/Views/Shared/_Layout.cshtml" />
       <File FileName="README.md" Line="2" Column="1" />
+      <File FileName="KT.Core.Mvc/wwwroot/js/LocalStorage.js" Line="53" Column="45" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -19,11 +20,11 @@
                 <Node name="Shared" expanded="True" />
               </Node>
               <Node name="wwwroot" expanded="True">
-                <Node name="admin" expanded="True">
-                  <Node name="index.html" selected="True" />
-                </Node>
+                <Node name="admin" expanded="True" />
                 <Node name="images" expanded="True" />
-                <Node name="js" expanded="True" />
+                <Node name="js" expanded="True">
+                  <Node name="LocalStorage.js" selected="True" />
+                </Node>
               </Node>
             </Node>
           </Node>
