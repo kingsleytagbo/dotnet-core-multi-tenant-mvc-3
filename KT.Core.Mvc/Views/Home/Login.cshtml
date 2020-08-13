@@ -8,7 +8,7 @@
 <script type="text/javascript">$(document).ready(function () {
 
         // ### TODO: Change this to the url of your api server
-        const apiUrl = 'https://localhost:44395';
+    const apiUrl = 'https://localhost:5001';
 
         const public_key = "d62c03a2-57b6-4e14-8153-d05d3aa9ab10";
 
@@ -39,7 +39,7 @@
         const authenticate = function (url, login) {
             return $.ajax({
                 method: 'post',
-                url: url + "/account/authenticate",
+                url: url + "/account/login",
                 headers: login,
                 body: JSON.stringify({})
             });

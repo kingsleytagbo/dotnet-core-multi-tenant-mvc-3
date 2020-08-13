@@ -53,9 +53,9 @@ namespace KT.Core.Mvc.Controllers
         /// </summary>
         /// <returns>Return a valid user account or null if authentication is unsuccessful</returns>
         [HttpPost("login")]
-        public IActionResult Authenticate([FromHeader] Login value)
+        public JsonResult Login([FromHeader] Login value)
         {
-            IActionResult response = Unauthorized();
+          JsonResult response = null;
             kt_wp_user user = null;
 
             // Validate that this user is authentic and is authorized to access your system
@@ -63,10 +63,29 @@ namespace KT.Core.Mvc.Controllers
             if (value.UserName == "Kingsley")
             {
                 user = new kt_wp_user { user_login = "Kingsley Tagbo", user_email = "test.test@gmail.com" };
-                response = Ok(new { user = user });
+                //response = new JsonResult({ user = user });
             }
 
             return response;
+        }
+
+        [HttpGet]
+        public IEnumerable<dynamic> Get()
+        {
+
+            string[] Values = new[]
+            {
+            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+        };
+
+            var rng = new Random();
+            return Enumerable.Range(1, 5).Select(index => new
+            {
+                Date = DateTime.Now.AddDays(index),
+                TemperatureC = rng.Next(-20, 55),
+                Value = Values[rng.Next(Values.Length)]
+            })
+            .ToArray();
         }
 
     }
