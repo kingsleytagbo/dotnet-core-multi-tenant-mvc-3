@@ -4,13 +4,9 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 #Visual Studio build / obj files
-bin
-obj
-bin/
-obj/
+*/obj
+*/bin/
 jwt/obj/
-obj/Debug/
-obj/Release
 
 # User-specific files
 *.rsuser
