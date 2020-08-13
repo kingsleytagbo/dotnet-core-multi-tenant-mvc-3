@@ -1,30 +1,18 @@
 ﻿<Properties StartupConfiguration="{E9E3108C-FD19-4F27-A642-CF29400CFF95}|KT.Core.Mvc">
   <MonoDevelop.Ide.ItemProperties.KT.Core.Mvc PreferredExecutionTarget="/Applications/Google Chrome.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="README.md">
+  <MonoDevelop.Ide.Workbench ActiveDocument="KT.Core.Mvc/Models/kt_wp_user.cs">
     <Files>
-      <File FileName="KT.Core.Mvc/wwwroot/admin/index.html" Line="41" Column="1" />
-      <File FileName="KT.Core.Mvc/Views/Shared/_Layout.cshtml" />
-      <File FileName="README.md" Line="3" Column="74" />
-      <File FileName="KT.Core.Mvc/wwwroot/js/LocalStorage.js" />
-      <File FileName="KT.Core.Mvc/wwwroot/lesson-html.html" Line="30" Column="10" />
+      <File FileName="KT.Core.Mvc/Models/kt_wp_post.cs" Line="4" Column="21" />
+      <File FileName="KT.Core.Mvc/Models/kt_wp_comment.cs" Line="4" Column="21" />
+      <File FileName="KT.Core.Mvc/Models/kt_wp_user.cs" Line="4" Column="21" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="KT.Core.Mvc" expanded="True">
-            <Node name="Solution Items" expanded="True">
-              <Node name="/Users/itcareercoach/Projects/Public/KT.Core.Mvc/README.md" selected="True" />
-            </Node>
             <Node name="KT.Core.Mvc" expanded="True">
-              <Node name="Controllers" expanded="True" />
-              <Node name="Models" expanded="True" />
-              <Node name="Properties" expanded="True" />
-              <Node name="Views" expanded="True">
-                <Node name="Home" expanded="True" />
-                <Node name="Shared" expanded="True" />
-              </Node>
-              <Node name="wwwroot" expanded="True">
-                <Node name="images" expanded="True" />
+              <Node name="Models" expanded="True">
+                <Node name="kt_wp_user.cs" selected="True" />
               </Node>
             </Node>
           </Node>

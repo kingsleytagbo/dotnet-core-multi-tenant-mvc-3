@@ -33,4 +33,3 @@
 /Users/itcareercoach/Projects/Public/KT.Core.Mvc/KT.Core.Mvc/obj/Debug/netcoreapp3.1/KT.Core.Mvc.pdb
 /Users/itcareercoach/Projects/Public/KT.Core.Mvc/KT.Core.Mvc/obj/Debug/netcoreapp3.1/KT.Core.Mvc.genruntimeconfig.cache
 /Users/itcareercoach/Projects/Public/KT.Core.Mvc/KT.Core.Mvc/obj/Debug/netcoreapp3.1/KT.Core.Mvc.csproj.CopyComplete
-/Users/itcareercoach/Projects/Public/KT.Core.Mvc/KT.Core.Mvc/obj/Debug/netcoreapp3.1/KT.Core.Mvc.csprojAssemblyReference.cache
