@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using KT.Core.Mvc.Models;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Logging;
 
 namespace KT.Core.Mvc.Api
 {
@@ -12,6 +15,21 @@ namespace KT.Core.Mvc.Api
     [ApiController]
     public class AccountController : ControllerBase
     {
+        private readonly IConfiguration _configuration;
+        private readonly IOptions<List<Tenant>> _tenants;
+        private readonly ILogger<AccountController> _logger;
+
+        public AccountController(
+    ILogger<AccountController> logger,
+    IConfiguration configuration,
+    IOptions<List<Tenant>> tenants)
+        {
+            _logger = logger;
+            _configuration = configuration;
+            _tenants = tenants;
+        }
+
+
         // GET: api/AccountsContoller
         [HttpGet]
         public IEnumerable<string> Get()
@@ -54,17 +72,18 @@ namespace KT.Core.Mvc.Api
         {
             kt_wp_user user = null;
             var headers = Request.Headers;
-            var authSite = headers["auth_site"];
+            var tenantId = headers["auth_site"];
+            var tenant = (this._tenants != null) ? this._tenants.Value.Where(s => s.Key == tenantId).FirstOrDefault() : null;
 
             // Validate that this user is authentic and is authorized to access your system
             // TODO: Implement your own authetication logic
-            if (username == "Kingsley")
+            if (tenant != null && username == "Kingsley")
             {
                 user = new kt_wp_user { user_login = "Kingsley Tagbo", user_email = "test.test@gmail.com" };
                 //response = new JsonResult({ user = user });
             }
 
-            return Ok(new { token = authSite });
+            return Ok(new { token = tenantId });
         }
 
         // POST: api/Accounts/getusers
