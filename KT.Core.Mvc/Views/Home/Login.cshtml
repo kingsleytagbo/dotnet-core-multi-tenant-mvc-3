@@ -30,7 +30,7 @@
 
     /* Function used to get authenticated data */
    const getUsers = function (url, jwt) {
-
+       console.log({ jwt: jwt, token: jwt.token });
             return $.ajax({
                 method: 'post',
                 url: url + "/api/account/getusers",

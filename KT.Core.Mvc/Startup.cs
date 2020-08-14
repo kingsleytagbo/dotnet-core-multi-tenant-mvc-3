@@ -132,6 +132,7 @@ namespace KT.Core.Mvc
                        // Console.WriteLine(context.ToString());
                        return Task.CompletedTask;
                    }
+                    
                };
 
            });
@@ -141,6 +142,15 @@ namespace KT.Core.Mvc
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            /*  
+             *  .NET Core 3.1, UseAuthentication goes before UseRouting, etc. 
+             *  or a 401 Error is Thrown: https://stackoverflow.com/questions/61976960/asp-net-core-jwt-authentication-always-throwing-401-unauthorized
+             */
+            //JWT Token
+            app.UseAuthentication();
+            // Shows UseCors with named policy.
+            app.UseCors("AllowAllHeaders");
+
             #region ORIGINAL
 
             if (env.IsDevelopment())
@@ -157,9 +167,7 @@ namespace KT.Core.Mvc
             app.UseStaticFiles();
 
             app.UseRouting();
-
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -168,12 +176,6 @@ namespace KT.Core.Mvc
             });
 
             #endregion ORIGINAL
-
-            //JWT Token
-            app.UseAuthentication();
-
-            // Shows UseCors with named policy.
-            app.UseCors("AllowAllHeaders");
 
         }
 
