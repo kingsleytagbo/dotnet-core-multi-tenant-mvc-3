@@ -50,19 +50,21 @@ namespace KT.Core.Mvc.Api
         /// </summary>
         /// <returns>Return a valid user account or null if authentication is unsuccessful</returns>
         [HttpPost("login")]
-        public kt_wp_user Login([FromHeader] Login value)
+        public IActionResult Login([FromHeader] String username, [FromHeader] string password, [FromHeader] bool rememberme)
         {
             kt_wp_user user = null;
+            var headers = Request.Headers;
+            var authSite = headers["auth_site"];
 
             // Validate that this user is authentic and is authorized to access your system
             // TODO: Implement your own authetication logic
-            if (value.UserName == "Kingsley")
+            if (username == "Kingsley")
             {
                 user = new kt_wp_user { user_login = "Kingsley Tagbo", user_email = "test.test@gmail.com" };
                 //response = new JsonResult({ user = user });
             }
 
-            return user;
+            return Ok(new { token = user });
         }
 
         // POST: api/Accounts/getusers
