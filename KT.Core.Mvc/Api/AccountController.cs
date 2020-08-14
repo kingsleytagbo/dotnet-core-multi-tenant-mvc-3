@@ -64,13 +64,15 @@ namespace KT.Core.Mvc.Api
                 //response = new JsonResult({ user = user });
             }
 
-            return Ok(new { token = user });
+            return Ok(new { token = authSite });
         }
 
         // POST: api/Accounts/getusers
         [HttpPost("getusers")]
         public IEnumerable<string> GetUsers()
         {
+            var headers = Request.Headers;
+            var authorization = headers["Authorization"];
             return new string[] { "value1", "value2" };
         }
     }
