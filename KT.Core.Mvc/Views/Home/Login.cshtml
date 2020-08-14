@@ -14,7 +14,7 @@
 
         const data = { "UserName": "Kingsley", Password: "..gmail.com", RememberMe: true };
 
-        const login = { auth_site: public_key, login: data, username: data.UserName, password: data.Password, rememberme: data.RememberMe };
+    const login = { auth_site: public_key, login: data, UserName: data.UserName, Password: data.Password, RememberMe: data.RememberMe };
 
         const self = this;
 
@@ -22,7 +22,7 @@
 
             return $.ajax({
                 method: 'post',
-                url: url + "/account/getusers",
+                url: url + "/api/account/getusers",
                 body: JSON.stringify({}),
                 headers: {
                     'Authorization': 'Bearer ' + jwt.token
@@ -39,8 +39,8 @@
         const authenticate = function (url, login) {
             return $.ajax({
                 method: 'post',
-                url: url + "/account/login",
-                headers: login,
+                url: url + "/api/account/login",
+                headers: JSON.stringify(login),
                 body: JSON.stringify({})
             });
         }
