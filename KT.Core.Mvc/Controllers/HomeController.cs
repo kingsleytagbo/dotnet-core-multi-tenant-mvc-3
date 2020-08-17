@@ -31,8 +31,22 @@ IOptions<List<Tenant>> tenants, IHttpContextAccessor httpContextAccessor) : base
 
         public IActionResult Index()
         {
-            var login = new { auth_site= "d62c03a2-57b6-4e14-8153-d05d3aa9ab10", username="Kingsley", password= "..gmail.com", rememberme=false  };
-            var result = this.PostHttpRequest("/api/account/login", login);
+            // var login = new { auth_site= "d62c03a2-57b6-4e14-8153-d05d3aa9ab10", username="Kingsley", password= "..gmail.com", rememberme=false  };
+            var headers = new Dictionary<string, string>(){
+                {
+                    "auth_site", "d62c03a2-57b6-4e14-8153-d05d3aa9ab10"
+                },
+                {
+                    "username", "Kingsley"
+                },
+                {
+                    "password", "..gmail.com"
+                },
+                {
+                    "rememberme", "false"
+                }
+            };
+            var result = this.PostHttpRequest("/api/account/login", headers, null);
 
             return View(result);
         }

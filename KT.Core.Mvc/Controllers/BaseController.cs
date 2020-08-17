@@ -114,19 +114,64 @@ namespace KT.Core.Mvc.Controllers
         /// <param name="path"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        protected Object PostHttpRequest(string path, object value)
+        protected Object PostHttpRequest(string path, IDictionary<string, string> headers, object body)
         {
             var response = new Object();
 
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(this.BaseUrl);
+                foreach (KeyValuePair<string, string> header in headers)
+                {
+                    client.DefaultRequestHeaders.Add(header.Key, header.Value);
+                }
                 //client.DefaultRequestHeaders.Add("auth_origin", this.site_origin);
                 //client.DefaultRequestHeaders.Add("auth_site", this.site_key);
 
                 string url = BaseUrl + path;
 
-                var responseTask = client.PostAsJsonAsync(url, value);
+                var responseTask = client.PostAsJsonAsync(url, body);
+
+                responseTask.Wait();
+                var result = responseTask.Result;
+
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<object>();
+
+                    readTask.Wait();
+
+                    response = readTask.Result;
+                }
+            }
+
+            return response;
+        }
+
+
+        /// <summary>
+        /// http://www.binaryintellect.net/articles/065c15ee-7da4-408c-aca8-4a86af6ede23.aspx
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        protected Object PutHttpRequest(string path, IDictionary<string, string> headers, object body)
+        {
+            var response = new Object();
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(this.BaseUrl);
+                foreach (KeyValuePair<string, string> header in headers)
+                {
+                    client.DefaultRequestHeaders.Add(header.Key, header.Value);
+                }
+                //client.DefaultRequestHeaders.Add("auth_origin", this.site_origin);
+                //client.DefaultRequestHeaders.Add("auth_site", this.site_key);
+
+                string url = BaseUrl + path;
+
+                var responseTask = client.PutAsJsonAsync(url, body);
 
                 responseTask.Wait();
                 var result = responseTask.Result;
