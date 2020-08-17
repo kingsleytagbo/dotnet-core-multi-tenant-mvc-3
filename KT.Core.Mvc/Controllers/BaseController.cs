@@ -11,14 +11,14 @@ using Microsoft.Extensions.Configuration;
 
 namespace KT.Core.Mvc.Controllers
 {
-    public class AccountController : Controller
+    public class BaseController : Controller
     {
         private readonly IConfiguration _configuration;
         private readonly IOptions<List<Tenant>> _tenants;
-        private readonly ILogger<AccountController> _logger;
+        private readonly ILogger<BaseController> _logger;
 
-        public AccountController(
-            ILogger<AccountController> logger,
+        public BaseController(
+            ILogger<BaseController> logger,
             IConfiguration configuration,
             IOptions<List<Tenant>> tenants)
         {
@@ -27,9 +27,9 @@ namespace KT.Core.Mvc.Controllers
             _tenants = tenants;
         }
 
-        public IActionResult Index()
+        protected Tenant GetTenant()
         {
-            return View();
+            return null;
         }
 
     }

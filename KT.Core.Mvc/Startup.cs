@@ -173,6 +173,37 @@ namespace KT.Core.Mvc
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                //Login
+                endpoints.MapControllerRoute(
+                        name: "login",
+                            pattern: "/login",
+                          defaults: new { controller = "Home", action = "Login" });
+
+                //Contact
+                endpoints.MapControllerRoute(
+                        name: "contact",
+                            pattern: "/contact",
+                          defaults: new { controller = "Home", action = "Contact" });
+
+                //Ask A Question
+                endpoints.MapControllerRoute(
+                        name: "askaquestion",
+                            pattern: "/askaquestion",
+                          defaults: new { controller = "Home", action = "askaquestion" });
+
+                //Privacy
+                endpoints.MapControllerRoute(
+                        name: "privacy",
+                            pattern: "/privacy",
+                          defaults: new { controller = "Home", action = "Privacy" });
+
+                //Blog Permalinks
+                endpoints.MapControllerRoute(
+                    name: "slug", 
+                        pattern: "{id}",
+                      defaults: new { controller = "Home", action = "Slug" });
+
             });
 
             #endregion ORIGINAL
