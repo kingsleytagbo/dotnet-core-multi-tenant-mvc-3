@@ -50,6 +50,12 @@ namespace KT.Core.Mvc.Controllers
             return View();
         }
 
+        public IActionResult Privacy()
+        {
+            @ViewData["Title"] = "Privacy";
+            return View();
+        }
+
         public IActionResult Slug(string id)
         {
             @ViewData["Title"] = id;
