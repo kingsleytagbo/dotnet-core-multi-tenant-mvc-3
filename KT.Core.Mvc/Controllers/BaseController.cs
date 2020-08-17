@@ -30,6 +30,7 @@ namespace KT.Core.Mvc.Controllers
             _logger = logger;
             _configuration = configuration;
             _tenants = tenants;
+            _httpContext = httpContextAccessor;
         }
 
         protected string BaseUrl
@@ -71,13 +72,20 @@ namespace KT.Core.Mvc.Controllers
         }
 
 
-        protected Object GetHttpRequest(string path, bool isBasePath = false)
+        protected Object GetHttpRequest(string path, IDictionary<string, string> headers, bool isBasePath = false)
         {
             var response = new Object();
 
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(this.BaseUrl);
+                if (headers != null && headers.Count > 0)
+                {
+                    foreach (KeyValuePair<string, string> header in headers)
+                    {
+                        client.DefaultRequestHeaders.Add(header.Key, header.Value);
+                    }
+                }
                 //client.DefaultRequestHeaders.Add("auth_origin", this.site_origin);
                 //client.DefaultRequestHeaders.Add("auth_site", this.site_key);
 
@@ -102,7 +110,7 @@ namespace KT.Core.Mvc.Controllers
 
         protected dynamic GetHttpRequestAsDynamic(string path, bool isBasePath = false)
         {
-            var response = this.GetHttpRequest(path, isBasePath);
+            var response = this.GetHttpRequest(path, null, isBasePath);
             var responseString = Newtonsoft.Json.JsonConvert.SerializeObject(response);
             dynamic result = Newtonsoft.Json.JsonConvert.DeserializeObject(responseString);
             return result;
@@ -121,9 +129,12 @@ namespace KT.Core.Mvc.Controllers
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(this.BaseUrl);
-                foreach (KeyValuePair<string, string> header in headers)
+                if (headers != null && headers.Count > 0)
                 {
-                    client.DefaultRequestHeaders.Add(header.Key, header.Value);
+                    foreach (KeyValuePair<string, string> header in headers)
+                    {
+                        client.DefaultRequestHeaders.Add(header.Key, header.Value);
+                    }
                 }
                 //client.DefaultRequestHeaders.Add("auth_origin", this.site_origin);
                 //client.DefaultRequestHeaders.Add("auth_site", this.site_key);
@@ -162,9 +173,12 @@ namespace KT.Core.Mvc.Controllers
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri(this.BaseUrl);
-                foreach (KeyValuePair<string, string> header in headers)
+                if (headers != null && headers.Count > 0)
                 {
-                    client.DefaultRequestHeaders.Add(header.Key, header.Value);
+                    foreach (KeyValuePair<string, string> header in headers)
+                    {
+                        client.DefaultRequestHeaders.Add(header.Key, header.Value);
+                    }
                 }
                 //client.DefaultRequestHeaders.Add("auth_origin", this.site_origin);
                 //client.DefaultRequestHeaders.Add("auth_site", this.site_key);
