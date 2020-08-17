@@ -8,28 +8,33 @@ using Microsoft.Extensions.Logging;
 using KT.Core.Mvc.Models;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Http;
 
 namespace KT.Core.Mvc.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly IConfiguration _configuration;
-        private readonly IOptions<List<Tenant>> _tenants;
-        private readonly ILogger<HomeController> _logger;
+    private readonly IOptions<List<Tenant>> _tenants;
+    private readonly ILogger<HomeController> _logger;
 
-        public HomeController(
-            ILogger<HomeController> logger,
-            IConfiguration configuration,
-            IOptions<List<Tenant>> tenants)
-        {
-            _logger = logger;
-            _configuration = configuration;
-            _tenants = tenants;
-        }
+    public HomeController(
+ILogger<HomeController> logger,
+IConfiguration configuration,
+IOptions<List<Tenant>> tenants, IHttpContextAccessor httpContextAccessor) : base
+    (logger, configuration, tenants, httpContextAccessor)
+    {
+        _logger = logger;
+        _configuration = configuration;
+        _tenants = tenants;
+    }
 
         public IActionResult Index()
         {
-            return View();
+            var login = new { auth_site= "d62c03a2-57b6-4e14-8153-d05d3aa9ab10", username="Kingsley", password= "..gmail.com", rememberme=false  };
+            var result = this.PostHttpRequest("/api/account/login", login);
+
+            return View(result);
         }
 
         public IActionResult AskAQuestion()

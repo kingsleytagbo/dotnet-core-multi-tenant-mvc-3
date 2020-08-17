@@ -36,7 +36,7 @@ namespace KT.Core.Mvc.Controllers
         {
             get
             {
-                string base_url = "";
+                string base_url = "https://localhost:5001";
                 return base_url;
             }
         }
@@ -71,7 +71,7 @@ namespace KT.Core.Mvc.Controllers
         }
 
 
-        public Object GetHttpRequest(string path, bool isBasePath = false)
+        protected Object GetHttpRequest(string path, bool isBasePath = false)
         {
             var response = new Object();
 
@@ -100,7 +100,7 @@ namespace KT.Core.Mvc.Controllers
             return response;
         }
 
-        public dynamic GetHttpRequestAsDynamic(string path, bool isBasePath = false)
+        protected dynamic GetHttpRequestAsDynamic(string path, bool isBasePath = false)
         {
             var response = this.GetHttpRequest(path, isBasePath);
             var responseString = Newtonsoft.Json.JsonConvert.SerializeObject(response);
@@ -114,7 +114,7 @@ namespace KT.Core.Mvc.Controllers
         /// <param name="path"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public Object PostHttpRequest(string path, object value)
+        protected Object PostHttpRequest(string path, object value)
         {
             var response = new Object();
 

@@ -54,6 +54,7 @@ namespace KT.Core.Mvc
             });
 
             // Add the whole configuration object here.
+            services.AddSingleton<Microsoft.AspNetCore.Http.IHttpContextAccessor, Microsoft.AspNetCore.Http.HttpContextAccessor>();
             services.AddSingleton<IConfiguration>(Configuration);
             services.Configure<List<Tenant>>(Configuration.GetSection("Tenants:Tenant"));
 
