@@ -58,17 +58,47 @@ namespace KT.Core.Mvc.Controllers
             }
         }
 
-        protected Tenant GetSetting()
+        protected Tenant GetTenant()
         {
             var request = _HttpContext.Request;
             var host = request.Host.ToString();
-            Tenant setting = null; // GetSetting(null, host);
-            return setting;
+            Tenant tenant = GetTenant(null, host);
+            return tenant;
         }
 
-        protected Tenant GetTenant()
+        protected Tenant GetTenant(string id, string name)
         {
-            return null;
+            Tenant tenant = null;
+
+            for (var s = 0; s < this._tenants.Value.Count; s++)
+            {
+                if (!string.IsNullOrEmpty(id))
+                {
+                    if (this._tenants.Value[s].Key.Trim().ToLower() == id.Trim().ToLower())
+                    {
+                        tenant = this._tenants.Value[s];
+                        break;
+                    }
+                }
+                else if (!string.IsNullOrEmpty(name))
+                {
+                    var hosts = this._tenants.Value[s].Host.Trim().ToLower().Split(",", StringSplitOptions.None);
+                    foreach (var item in hosts)
+                    {
+                        if (item == name.Trim().ToLower())
+                        {
+                            tenant = this._tenants.Value[s];
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    break;
+                }
+            }
+
+            return tenant;
         }
 
 

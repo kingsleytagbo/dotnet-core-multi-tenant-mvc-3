@@ -31,6 +31,10 @@ IOptions<List<Tenant>> tenants, IHttpContextAccessor httpContextAccessor) : base
 
         public IActionResult Index()
         {
+            var tenant = this.GetTenant();
+            @ViewData["Title"] = "Login";
+            @ViewData["Tenant"] = tenant;
+            @ViewData["Layout"] = tenant.Template;
             // var login = new { auth_site= "d62c03a2-57b6-4e14-8153-d05d3aa9ab10", username="Kingsley", password= "..gmail.com", rememberme=false  };
             var headers = new Dictionary<string, string>(){
                 {
@@ -65,7 +69,10 @@ IOptions<List<Tenant>> tenants, IHttpContextAccessor httpContextAccessor) : base
 
         public IActionResult Login()
         {
+            var tenant = this.GetTenant();
             @ViewData["Title"] = "Login";
+            @ViewData["Tenant"] = tenant;
+            @ViewData["Layout"] = tenant.Template;
             return View();
         }
 
