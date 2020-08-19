@@ -87,14 +87,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- BEGIN META -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - KT.Core.Mvc</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <!-- END META -->
+    <!-- BEGIN CUSTOM HEADER STYLES -->
     @RenderSection("Styles", required: false);
+    <!-- END CUSTOM HEADER STYLES -->
 </head>
 <body>
+    <!-- BEGIN NAVIGATION HEADER -->
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container">
@@ -122,12 +127,15 @@
             </div>
         </nav>
     </header>
+    <!-- END NAVIGATION HEADER -->
     <div class="container">
         <main role="main" class="pb-3">
+            <!-- BEGIN BODY -->
             @RenderBody()
+            <!-- END BODY -->
         </main>
     </div>
-
+    <!-- BEGIN FOOTER -->
     <footer class="footer text-muted">
         <div class="container">
             <nav class="navbar fixed-bottom navbar-expand-sm navbar-light bg-light text-center">
@@ -135,9 +143,14 @@
             </nav>
         </div>
     </footer>
+    <!-- END FOOTER -->
+    <!-- BEGIN SCRIPTS -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <!-- END SCRIPTS -->
+    <!-- BEGIN CUSTOM SCRIPTS -->
     @RenderSection("Scripts", required: false)
+    <!-- END CUSTOM SCRIPTS -->
 </body>
 </html>
