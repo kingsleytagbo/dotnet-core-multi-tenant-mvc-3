@@ -4,14 +4,10 @@ A Multi-Tenant .NET Core (3.x) project that speeds up the design, code & launch 
 ## Framework
 Currently built with .NET Core, JavaScript, Jquery & Bootstrap 4.5 
 
-
-## Features
-- Users - Add, Edit, Delete, List
-
 ## Roadmap
 - [X] Pages
-- [ ] Data Access  
 - [ ] User Management
+- [ ] Data Access  
 - [ ] Roles & Permissions Management
 - [ ] Authentication & Authorization
 - [ ] Searching
@@ -25,11 +21,15 @@ Currently built with .NET Core, JavaScript, Jquery & Bootstrap 4.5
 - [ ] Apis & Remote / Cloud Data Access
 
 
-## User Interfaces (UI)
+## Pages
+### Home Page
+![Home Page #1](KT.Core.Mvc/wwwroot/images/cms-page-home.png "Home Page #1")
 
-### Add New User
+## User Management - Add, Edit, Delete, List
+### User Admin Home Page
+![User Admin Home Page #1](KT.Core.Mvc/wwwroot/images/cms-page-useradmin-home.png "User Admin Home Page #1")
 
-
+## Style Guide
 
 ## Contributions
 You can checkin code using COMMON GIT COMMMANDS like: git add --all git commit -am "CRUD" git push
@@ -42,7 +42,7 @@ Kingsley Tagbo is the author of this project and he reserves all rights for it a
 This project, repository and all the accopamying code or ideas are licensed under the GNU Affero General Public License v3.0 [GNU AGPLv3](https://choosealicense.com/licenses/agpl-3.0/),
 You are permitted to use this work provided you make available the complete source code of licensed works and modifications, which include larger works using a licensed work, under the same license. Copyright and license notices must be preserved. Contributors provide an express grant of patent rights. When a modified version is used to provide a service over a network, the complete source code of the modified version must be made available.
 
-# How To Build ASP.NET CORE (3.1) MVC Websites 
+# How To Build ASP.NET CORE (3.1) Multi Tenant CMS Website
 ### .NET CORE 3.1, C#, ASP.NET MVC, LINQ, JQUERY, JavaScript, HTML5, CSS3
 
 ## STEPS - CRUD
