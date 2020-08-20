@@ -90,20 +90,20 @@
     <!-- BEGIN META -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - KT.Core.Mvc</title>
+    <title>@ViewData["Title"] - .NET CORE Multi Tenant</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <!-- END META -->
     <!-- BEGIN CUSTOM HEADER STYLES -->
-    @RenderSection("Styles", required: false);
+    @RenderSection("Styles", required: false)
     <!-- END CUSTOM HEADER STYLES -->
 </head>
 <body>
     <!-- BEGIN NAVIGATION HEADER -->
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow bg-faded mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">.NET CORE 3.1 - KT.Core.Mvc</a>
+                <a class="navbar-brand py-0" asp-area="" asp-controller="Home" asp-action="Index">.NET CORE Multi Tenant</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -111,16 +111,16 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-white py-0" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-light py-0" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
+                            <a class="nav-link text-white py-0" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="/admin/index.html">Admin</a>
+                            <a class="nav-link text-light py-0" href="/admin/index.html">Admin</a>
                         </li>
                     </ul>
                 </div>
@@ -136,10 +136,10 @@
         </main>
     </div>
     <!-- BEGIN FOOTER -->
-    <footer class="text-muted">
+    <footer>
         <div class="container">
-            <nav class="navbar fixed-bottom navbar-expand-sm navbar-light bg-light mx-auto">
-                &copy; 2020 - KT.Core.Mvc - <a asp-area="" asp-controller="" asp-action="Privacy">Privacy</a>
+            <nav class="navbar fixed-bottom navbar-expand-sm navbar-light bg-light">
+                <span class="mx-auto text-secondary">&copy; 2020 - All Rights Reserved. .NET CORE Multi Tenant <a asp-area="" asp-controller="" asp-action="Privacy">Privacy</a></span>
             </nav>
         </div>
     </footer>
