@@ -29,6 +29,9 @@ Currently built with .NET Core, JavaScript, Jquery & Bootstrap 4.5
 ### Home Page
 ![Home Page #1](KT.Core.Mvc/wwwroot/images/cms-page-home.png "Home Page #1")
 
+### HTML Layout
+![HTML Layout #1](KT.Core.Mvc/wwwroot/images/cms-page-html-layout.png "HTML Layout #1")
+
 ## Style Guide
 ...
 
