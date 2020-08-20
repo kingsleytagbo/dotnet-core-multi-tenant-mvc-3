@@ -1,5 +1,5 @@
 ﻿# .NET Core CMS
-A .NET Core (3.x) project that speeds up the design, code & launch for features needed by business apps or websites like pages, forms, administrative & management user interfaces (UI) for manging your data, users and business processes.
+A Multi-Tenant .NET Core (3.x) project that speeds up the design, code & launch for features needed by business apps or websites like pages, forms, administrative & management user interfaces (UI) for manging your data, users and business processes.
 
 ## Framework
 Currently built with .NET Core, JavaScript, Jquery & Bootstrap 4.5 
