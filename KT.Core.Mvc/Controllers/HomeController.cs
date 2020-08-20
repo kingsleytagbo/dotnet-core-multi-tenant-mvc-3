@@ -6,32 +6,87 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using KT.Core.Mvc.Models;
+using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Http;
 
 namespace KT.Core.Mvc.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IConfiguration _configuration;
+    private readonly IOptions<List<Tenant>> _tenants;
+    private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
+    public HomeController(
+ILogger<HomeController> logger,
+IConfiguration configuration,
+IOptions<List<Tenant>> tenants, IHttpContextAccessor httpContextAccessor) : base
+    (logger, configuration, tenants, httpContextAccessor)
+    {
+        _logger = logger;
+        _configuration = configuration;
+        _tenants = tenants;
+    }
 
         public IActionResult Index()
         {
+            var tenant = this.GetTenant();
+            @ViewData["Title"] = "Login";
+            @ViewData["Tenant"] = tenant;
+            @ViewData["Layout"] = tenant.Template;
+            // var login = new { auth_site= "d62c03a2-57b6-4e14-8153-d05d3aa9ab10", username="Kingsley", password= "..gmail.com", rememberme=false  };
+            var headers = new Dictionary<string, string>(){
+                {
+                    "auth_site", "d62c03a2-57b6-4e14-8153-d05d3aa9ab10"
+                },
+                {
+                    "username", "Kingsley"
+                },
+                {
+                    "password", "..gmail.com"
+                },
+                {
+                    "rememberme", "false"
+                }
+            };
+            var result = this.PostHttpRequest("/api/account/login", headers, null);
+
+            return View(result);
+        }
+
+        public IActionResult AskAQuestion()
+        {
+            @ViewData["Title"] = "Ask A Question";
+            return View();
+        }
+
+        public IActionResult Contact()
+        {
+            @ViewData["Title"] = "Contact";
+            return View();
+        }
+
+        public IActionResult Login()
+        {
+            var tenant = this.GetTenant();
+            @ViewData["Title"] = "Login";
+            @ViewData["Tenant"] = tenant;
+            @ViewData["Layout"] = tenant.Template;
             return View();
         }
 
         public IActionResult Privacy()
         {
+            @ViewData["Title"] = "Privacy";
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult Slug(string id)
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            @ViewData["Title"] = id;
+            return View();
         }
+
     }
 }

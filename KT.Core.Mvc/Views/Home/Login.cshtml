@@ -1,0 +1,64 @@
+﻿@{
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Use this page to @ViewData["Title"].</p>
+
+@section Scripts {
+    <script type="text/javascript">$(document).ready(function () {
+
+            // ### TODO: Change this to the url of your api server
+            const apiUrl = 'https://localhost:5001';
+
+            const public_key = "d62c03a2-57b6-4e14-8153-d05d3aa9ab10";
+
+            const data = { "UserName": "Kingsley", Password: "..gmail.com", RememberMe: true };
+
+            const login = { auth_site: public_key, username: data.UserName, password: data.Password, rememberme: data.RememberMe };
+
+            const self = this;
+
+            /* Function used to authenticate a user */
+            const authenticate = function (url, login) {
+                return $.ajax({
+                    method: 'post',
+                    url: url + "/api/account/login",
+                    headers: login,
+                    body: JSON.stringify({})
+                });
+            };
+
+            /* Function used to get authenticated data */
+            const getUsers = function (url, jwt) {
+                console.log({ jwt: jwt, token: jwt.token });
+                return $.ajax({
+                    method: 'post',
+                    url: url + "/api/account/getusers",
+                    body: JSON.stringify({}),
+                    headers: {
+                        'Authorization': 'Bearer ' + jwt.token
+                    }
+                })
+                    .done(function (users) {
+                        console.log({ "getUsers > Success ...": users });
+                    })
+                    .fail(function (xhr, status, error) {
+                        console.log({ "getUsers > Error ...": xhr.responseText, status: status, error: error });
+                    });
+            };
+
+            /* Main Function used to 1. autheticate and 2. get user data */
+            authenticate(apiUrl, login).done(function (jwt) {
+                console.log({ "Authentication done > ": jwt });
+
+                setTimeout(
+                    function () {
+                        getUsers(apiUrl, jwt);
+                    }, 5000);
+
+            }).fail(function (xhr, status, error) {
+                console.log({ "Authentication > Error ...": xhr.responseText, status: status, error: error });
+            });
+
+        });</script>
+}
