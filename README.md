@@ -85,4 +85,5 @@ https://getbootstrap.com/docs/4.5/getting-started/download/
 ### git remote add origin https://github.com/kingsleytagbo/dotnet-core-mvc-3.git
 ### git pull https://github.com/kingsleytagbo/dotnet-core-mvc-3.git --allow-unrelated-histories
 ### git push --set-upstream origin master
-### git push origin master 
+### git push origin master
+### git remote set-url origin https://github.com/kingsleytagbo/dotnet-core-multi-tenant-mvc-3.git
