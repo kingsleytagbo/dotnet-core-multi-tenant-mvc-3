@@ -21,13 +21,13 @@ Currently built with .NET Core, JavaScript, Jquery & Bootstrap 4.5
 - [ ] Apis & Remote / Cloud Data Access
 
 
-## Pages
-### Home Page
-![Home Page #1](KT.Core.Mvc/wwwroot/images/cms-page-home.png "Home Page #1")
-
 ## User Management - Add, Edit, Delete, List
 ### User Admin Home Page
 ![User Admin Home Page #1](KT.Core.Mvc/wwwroot/images/cms-page-useradmin-home.png "User Admin Home Page #1")
+
+## Pages
+### Home Page
+![Home Page #1](KT.Core.Mvc/wwwroot/images/cms-page-home.png "Home Page #1")
 
 ## Style Guide
 ...
