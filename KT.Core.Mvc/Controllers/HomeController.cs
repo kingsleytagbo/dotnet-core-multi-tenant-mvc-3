@@ -79,6 +79,7 @@ IOptions<List<Tenant>> tenants, IHttpContextAccessor httpContextAccessor) : base
         public IActionResult Privacy()
         {
             @ViewData["Title"] = "Privacy";
+            var files = this.readWordpressFile();
             return View();
         }
 

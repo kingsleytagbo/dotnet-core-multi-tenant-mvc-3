@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Http;
 using System.Net.Http;
 using KT.Core.Mvc.Business;
+using System.Text.Json;
 
 namespace KT.Core.Mvc.Controllers
 {
@@ -233,7 +234,21 @@ namespace KT.Core.Mvc.Controllers
             return response;
         }
 
+        public dynamic readWordpressFile()
+        {
+            var options = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                WriteIndented = true
+            };
 
+            var jsonString = System.IO.File.ReadAllText("/Users/itcareercoach/Backups/NDCHost/it-career-coachnet.json");
+            var jsonModel = JsonSerializer.Deserialize<dynamic>(jsonString, options);
+
+            Console.WriteLine(jsonModel);
+
+            return jsonModel;
+        }
 
     }
 }
