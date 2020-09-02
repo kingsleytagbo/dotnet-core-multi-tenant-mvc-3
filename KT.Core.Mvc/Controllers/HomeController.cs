@@ -91,7 +91,13 @@ IOptions<List<Tenant>> tenants, IHttpContextAccessor httpContextAccessor) : base
         {
             @ViewData["Title"] = id;
             var post = new Post();
-            var data = post.GetPost(id, connectionString, null, null);
+            kt_wp_post data = null;
+            try
+            {
+                data = post.GetPost(id, connectionString, null, null);
+            }
+            catch (Exception) { }
+            @ViewData["Title"] = (data!= null && !string.IsNullOrEmpty(data.post_title)) ? data.post_title : id;
             return View("Details", data);
         }
 
