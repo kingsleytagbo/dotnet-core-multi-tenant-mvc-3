@@ -26,7 +26,7 @@ namespace KT.Core.Mvc.Business
 
             var _connection = GetConnection(connection, connectionString);
 
-            var sQuery = "SELECT TOP 10 * FROM kt_wp_posts WHERE (post_status = @post_status) ";
+            var sQuery = "SELECT TOP 1000 * FROM kt_wp_posts WHERE (post_status = @post_status) ";
 
             result = _connection.Query<kt_wp_post>(sQuery, new
             {

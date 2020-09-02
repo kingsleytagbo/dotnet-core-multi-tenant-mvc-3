@@ -18,7 +18,7 @@ namespace KT.Core.Mvc.Controllers
         private readonly IConfiguration _configuration;
     private readonly IOptions<List<Tenant>> _tenants;
     private readonly ILogger<HomeController> _logger;
-    private string connectionString = "Data Source=SQL5052.site4now.net;Initial Catalog=DB_A38FF7_itcareercoachnet;User Id=DB_A38FF7_itcareercoachnet_admin;Password=Xarch2014#";
+    private string connectionString = "";
 
         public HomeController(
 ILogger<HomeController> logger,

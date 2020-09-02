@@ -7,10 +7,10 @@
     <h1 class="display-2">
         IT Career Coach
     </h1>
-    <ul>
+    <ol>
         @foreach (kt_wp_post post in Model)
         {
             <li><a href="~/@post.post_name" target="_new" class="btn btn-block">@post.post_name</a></li>
         }
-    </ul>
+    </ol>
 </div>
