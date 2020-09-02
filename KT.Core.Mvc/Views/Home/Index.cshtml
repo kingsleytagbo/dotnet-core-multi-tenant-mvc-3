@@ -1,10 +1,16 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    @using KT.Core.Mvc.Models;
 }
 
 <div class="text-center">
     <h1 class="display-2">
-        .NET CORE Multi Tenant
+        IT Career Coach
     </h1>
-    <p>Learn .NET CORE 3.1 Multi Tenant CMS</p>
+    <ul>
+        @foreach (kt_wp_post post in Model)
+        {
+            <li><a href="~/@post.post_name" target="_new" class="btn btn-block">@post.post_name</a></li>
+        }
+    </ul>
 </div>

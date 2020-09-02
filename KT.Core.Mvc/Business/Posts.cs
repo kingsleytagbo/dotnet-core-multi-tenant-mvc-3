@@ -35,5 +35,22 @@ namespace KT.Core.Mvc.Business
 
             return result;
         }
+
+
+        public kt_wp_post GetPost(string id, string connectionString, IDbConnection connection, IDbTransaction transaction)
+        {
+            kt_wp_post result = null;
+
+            var _connection = GetConnection(connection, connectionString);
+
+            var sQuery = "SELECT TOP 10 * FROM kt_wp_posts WHERE (post_name = @post_name) ";
+
+            result = _connection.Query<kt_wp_post>(sQuery, new
+            {
+                post_name = id
+            }, transaction: transaction).FirstOrDefault();
+
+            return result;
+        }
     }
 }

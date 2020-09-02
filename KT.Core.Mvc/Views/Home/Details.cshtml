@@ -1,0 +1,14 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    @using KT.Core.Mvc.Models;
+    var post = (kt_wp_post)Model;
+}
+
+<div>
+    <h1 class="display-2 text-center">
+        @post.post_title
+    </h1>
+    <div class="lead">
+       @Html.Raw(post.post_content)
+    </div>
+</div>

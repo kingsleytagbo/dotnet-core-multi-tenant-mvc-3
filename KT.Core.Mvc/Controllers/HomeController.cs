@@ -18,8 +18,9 @@ namespace KT.Core.Mvc.Controllers
         private readonly IConfiguration _configuration;
     private readonly IOptions<List<Tenant>> _tenants;
     private readonly ILogger<HomeController> _logger;
+    private string connectionString = "Data Source=SQL5052.site4now.net;Initial Catalog=DB_A38FF7_itcareercoachnet;User Id=DB_A38FF7_itcareercoachnet_admin;Password=Xarch2014#";
 
-    public HomeController(
+        public HomeController(
 ILogger<HomeController> logger,
 IConfiguration configuration,
 IOptions<List<Tenant>> tenants, IHttpContextAccessor httpContextAccessor) : base
@@ -54,9 +55,9 @@ IOptions<List<Tenant>> tenants, IHttpContextAccessor httpContextAccessor) : base
             var result = this.PostHttpRequest("/api/account/login", headers, null);
 
             var post = new Post();
-            var posts = post.GetAllPosts("", null, null);
+            var data = post.GetAllPosts(connectionString, null, null);
 
-            return View(posts);
+            return View(data);
         }
 
         public IActionResult AskAQuestion()
@@ -89,7 +90,9 @@ IOptions<List<Tenant>> tenants, IHttpContextAccessor httpContextAccessor) : base
         public IActionResult Slug(string id)
         {
             @ViewData["Title"] = id;
-            return View();
+            var post = new Post();
+            var data = post.GetPost(id, connectionString, null, null);
+            return View("Details", data);
         }
 
     }
