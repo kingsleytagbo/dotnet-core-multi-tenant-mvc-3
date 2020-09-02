@@ -234,21 +234,8 @@ namespace KT.Core.Mvc.Controllers
             return response;
         }
 
-        public dynamic readWordpressFile()
-        {
-            var options = new JsonSerializerOptions
-            {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                WriteIndented = true
-            };
-
-            var jsonString = System.IO.File.ReadAllText("/Users/itcareercoach/Backups/NDCHost/it-career-coachnet.json");
-            var jsonModel = JsonSerializer.Deserialize<dynamic>(jsonString, options);
-
-            Console.WriteLine(jsonModel);
-
-            return jsonModel;
-        }
-
     }
+
+
+
 }

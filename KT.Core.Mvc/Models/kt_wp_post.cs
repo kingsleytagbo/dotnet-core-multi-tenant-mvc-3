@@ -1,8 +1,13 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace KT.Core.Mvc.Models
 {
+    [Table("kt_wp_posts  ")]
     public class kt_wp_post
     {
+        [Key]
         public UInt64 ID { get; set; }
         public UInt64 post_author { get; set; }
         public DateTime post_date { get; set; }

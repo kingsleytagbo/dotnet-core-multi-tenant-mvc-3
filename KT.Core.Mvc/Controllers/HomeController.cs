@@ -5,10 +5,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using KT.Core.Mvc.Models;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Http;
+using KT.Core.Mvc.Models;
+using KT.Core.Mvc.Business;
 
 namespace KT.Core.Mvc.Controllers
 {
@@ -52,7 +53,10 @@ IOptions<List<Tenant>> tenants, IHttpContextAccessor httpContextAccessor) : base
             };
             var result = this.PostHttpRequest("/api/account/login", headers, null);
 
-            return View(result);
+            var post = new Post();
+            var posts = post.GetAllPosts("", null, null);
+
+            return View(posts);
         }
 
         public IActionResult AskAQuestion()
@@ -79,7 +83,6 @@ IOptions<List<Tenant>> tenants, IHttpContextAccessor httpContextAccessor) : base
         public IActionResult Privacy()
         {
             @ViewData["Title"] = "Privacy";
-            var files = this.readWordpressFile();
             return View();
         }
 
