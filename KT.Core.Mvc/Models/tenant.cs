@@ -8,5 +8,6 @@ namespace KT.Core.Mvc.Models
         public string PrivateKey { get; set; }
         public string Template { get; set; }
         public string Host { get; set; }
+        public string ConnectionString { get; set; }
     }
 }

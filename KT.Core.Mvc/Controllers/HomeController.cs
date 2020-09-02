@@ -19,7 +19,7 @@ namespace KT.Core.Mvc.Controllers
         private readonly IOptions<List<Tenant>> _tenants;
         private readonly ILogger<HomeController> _logger;
         private readonly Tenant _tenant = null;
-        private string connectionString = "Data Source = SQL5052.site4now.net; Initial Catalog = DB_A38FF7_itcareercoachnet; User Id = DB_A38FF7_itcareercoachnet_admin; Password=Xarch2014#";
+        private readonly string _connectionString;
 
         public HomeController(
 ILogger<HomeController> logger,
@@ -31,6 +31,7 @@ IOptions<List<Tenant>> tenants, IHttpContextAccessor httpContextAccessor) : base
         _configuration = configuration;
         _tenants = tenants;
             _tenant = this.GetTenant();
+            _connectionString = _tenant.ConnectionString;
     }
 
         public IActionResult Index()
@@ -56,7 +57,7 @@ IOptions<List<Tenant>> tenants, IHttpContextAccessor httpContextAccessor) : base
             var result = this.PostHttpRequest("/api/account/login", headers, null);
 
             var post = new Post();
-            var data = post.GetAllPosts(connectionString, null, null);
+            var data = post.GetAllPosts(this._connectionString, null, null);
 
             return View(data);
         }
@@ -100,7 +101,7 @@ IOptions<List<Tenant>> tenants, IHttpContextAccessor httpContextAccessor) : base
             kt_wp_post data = null;
             try
             {
-                data = post.GetPost(id, connectionString, null, null);
+                data = post.GetPost(id, this._connectionString, null, null);
             }
             catch (Exception) { }
             @ViewData["Title"] = string.Concat( (((data!= null) && !string.IsNullOrEmpty(data.post_title))
