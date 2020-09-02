@@ -1,70 +1,19 @@
 ﻿@using System.Text.RegularExpressions;
 @functions{
-    public string StripHtml(string value)
-    {
-        var result = string.Empty;
-
-        if (!string.IsNullOrEmpty(value))
-        {
-            var regex2 = "(?i)<(?!img|/img).*?>"; // with images
-            result = Regex.Replace(value, regex2, String.Empty).Trim();
-        }
-
-        return result;
-    }
-    public string TruncateHtml(string value, string link, string title)
-    {
-        var result = string.Empty;
-
-        if (!string.IsNullOrEmpty(value))
-        {
-            result = StripHtml(value);
-
-            if (result.Length > 300)
-            {
-                result = result.Substring(0, 300) + " ...";
-            }
-        }
-
-        if (!string.IsNullOrEmpty(link))
-        {
-            result += "<p><a title=\"" + title + "\"" + " href=" + link + " class=\"btn btn-block btn-outline-info\">Learn More</a></p>";
-        }
-
-        return result;
-    }
-    public string BuildColumnClass(dynamic value)
-    {
-        string result = string.Empty;
-        int length = value.Count;
-
-        if (length == 3)
-        {
-            result = "col-12 col-6 col-4";
-        }
-        else if (length == 2)
-        {
-            result = "col-12 col-6 col-6";
-        }
-        else
-        {
-            result = "col-12";
-        }
-
-        return result;
-    }
+    /*
     public string GetSettingAsString(string propertyName)
     {
         var value = string.Empty;
 
-        if (!string.IsNullOrEmpty(propertyName) && @ViewData["Setting"] != null)
+        if (!string.IsNullOrEmpty(propertyName) && @ViewData["Tenant"] != null)
         {
-            var setting = (Tenant)@ViewData["Setting"];
+            var setting = (Tenant)@ViewData["Tenant"];
             value = (string)(setting.GetType().GetProperty(propertyName).GetValue(setting, null));
         }
 
         return value;
     }
+    */
     public static bool IsDebug()
     {
         #if DEBUG
@@ -90,10 +39,10 @@
     <!-- BEGIN META -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content=".NET CORE Multi Tenant CMS">
+    <meta name="description" content="@ViewData["Title"]">
     <meta name="author" content="Kingsley Tagbo">
     <meta name="generator" content=".NET CORE 3.1">
-    <title>@ViewData["Title"] - .NET CORE Multi Tenant</title>
+    <title>@ViewData["Title"]</title>
     <link rel="canonical" href="https://github.com/kingsleytagbo/dotnet-core-multi-tenant-mvc-3">
     <link href="~/css/bootstrap/4.5/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" href="~/css/custom.css" />

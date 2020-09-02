@@ -59,9 +59,9 @@
     {
         var value = string.Empty;
 
-        if (!string.IsNullOrEmpty(propertyName) && @ViewData["Setting"] != null)
+        if (!string.IsNullOrEmpty(propertyName) && @ViewData["Tenant"] != null)
         {
-            var setting = (Tenant)@ViewData["Setting"];
+            var setting = (Tenant)@ViewData["Tenant"];
             value = (string)(setting.GetType().GetProperty(propertyName).GetValue(setting, null));
         }
 
