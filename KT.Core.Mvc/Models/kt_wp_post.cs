@@ -30,5 +30,6 @@ namespace KT.Core.Mvc.Models
         public string post_type { get; set; }
         public string post_mime_type { get; set; }
         public Int64 comment_count { get; set; }
+        public UInt64 site_id { get; set; }
     }
 }
