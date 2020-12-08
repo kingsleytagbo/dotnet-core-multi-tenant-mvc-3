@@ -228,7 +228,7 @@
                 loadData: function (Http) {
                     this.showToast("Wait", "Loading ...");
 
-                    const request = Http.getUsers();
+                    const request = Http.getImages();
                     request
                         .then(response => response.json())
                         .then(function (result) {
