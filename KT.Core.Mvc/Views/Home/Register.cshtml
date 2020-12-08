@@ -3,44 +3,79 @@
 <h1>@ViewData["Title"]</h1>
 
 <div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
-        <!-- BEGIN ASKAQUESTION CARD -->
-        <div class="card-body" style="display:block;" id="InfoCard">
-            <form id="FormModule" name="FormModule" class="default-form" action="#" method="post">
-                <div class="row">
-                    <div class="form-group col-md-6 col-sm-12">
-                        <label for="FirstName">First Name*</label>
-                        <input type="text" class="form-control" id="FirstName" placeholder="First Name" value="" required>
-                    </div>
-                    <div class="form-group col-md-6 col-sm-12">
-                        <label for="LastName">Last Name*</label>
-                        <input type="text" class="form-control" id="LastName" placeholder="Last Name" value="" required>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-6 col-sm-12">
-                        <label for="EmailAddress">Email Address*</label>
-                        <input type="email" class="form-control" id="EmailAddress" placeholder="Email Address" value="" required>
-                    </div>
-                    <div class="form-group col-md-6 col-sm-12">
-                        <label for="Password">Password*</label>
-                        <input type="password" class="form-control" id="Password" placeholder="Password" value="" required>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-lg-12 col-md-12 col-sm-12">
-                        <button id="captcha-button"  type="button" class="btn btn-warning btn-block" data-loading-text="Please wait...">
-                            Register ...
-                        </button>
-                    </div>
-                </div>
+    <div class="col-2"></div>
 
-            </form>
+    <div class="col-8">
+
+        <div class="mt-4 pt-4">
+
+            <!-- BEGIN LOGIN CARD -->
+            <div class="card card-info">
+                <a id="login-top" name="login-top" href="#"></a>
+                <div class="card-title">
+                    <a class="text-dark text-center" title="Account Services">
+                        <h1>
+                            Register&nbsp;↴&nbsp;
+                        </h1>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <form id="loginForm" name="loginForm">
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label>First Name:</label>
+                                <input type="text" class="form-control input-md" id="FirstName" placeholder="Your First Name ..." />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label>Last Name:</label>
+                                <input type="text" class="form-control input-md" id="LastName" placeholder="Your Last Name ..." />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label>Email Address:</label>
+                                <input type="email" class="form-control input-md" id="EmailAddress" name="EmailAddress" placeholder="Your Email Address ..." />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label>Password:</label>
+                                <input type="password" class="form-control input-md" id="Password" name="Password" placeholder="Your Password..." />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <button type="button" class="btn btn-outline-dark btn-block" id="btnSave" onclick="return LoginModule.saveForm('#loginForm');">
+                        <i class="fa fa-save"></i>&nbsp;Login
+                    </button>
+                </div>
+            </div>
+            <!-- END LOGIN CARD -->
+
         </div>
-        <!-- END ASKAQUESION CARD -->
-        <div class="alert" role="alert" style="display:none;" id="SuccessCard">
-        </div>
+
     </div>
-    <div class="col-md-2"></div>
+
+    <div class="col-2"></div>
 </div>
+
+@section Scripts {
+    <script type="text/javascript" src="../../scripts/LocalStorageModule.js"></script>
+    <script type="text/javascript" src="../../scripts/HttpModule.js"></script>
+    <script type="text/javascript" src="../../scripts/PageModule.js"></script>
+    <script type="text/javascript" src="../../scripts/RegisterPageModule.js"></script>
+
+    <!--BEGIN JAVASCRIPT CODE -->
+
+    <script type="text/javascript">
+
+    const RegisterModule = RegisterPageModule;
+    $(document).ready(function () {
+        RegisterModule.init();
+    });
+
+    </script>
+}
