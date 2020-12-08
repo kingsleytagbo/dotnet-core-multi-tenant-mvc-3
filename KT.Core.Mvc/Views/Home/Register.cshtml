@@ -22,25 +22,21 @@
                 <div class="card-body">
                     <form id="loginForm" name="loginForm">
                         <div class="row">
-                            <div class="form-group col-md-12">
+                            <div class="form-group col-md-6">
                                 <label>First Name:</label>
                                 <input type="text" class="form-control input-md" id="FirstName" placeholder="Your First Name ..." />
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-12">
+                            <div class="form-group col-md-6">
                                 <label>Last Name:</label>
                                 <input type="text" class="form-control input-md" id="LastName" placeholder="Your Last Name ..." />
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group col-md-12">
+                            <div class="form-group col-md-6">
                                 <label>Email Address:</label>
                                 <input type="email" class="form-control input-md" id="EmailAddress" name="EmailAddress" placeholder="Your Email Address ..." />
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group col-md-12">
+                            <div class="form-group col-md-6">
                                 <label>Password:</label>
                                 <input type="password" class="form-control input-md" id="Password" name="Password" placeholder="Your Password..." />
                             </div>
@@ -48,8 +44,8 @@
                     </form>
                 </div>
                 <div class="card-footer">
-                    <button type="button" class="btn btn-outline-dark btn-block" id="btnSave" onclick="return LoginModule.saveForm('#loginForm');">
-                        <i class="fa fa-save"></i>&nbsp;Login
+                    <button type="button" class="btn btn-outline-dark btn-block" id="btnSave" onclick="return RegisterModule.saveForm('#loginForm');">
+                        <i class="fa fa-save"></i>&nbsp;Register
                     </button>
                 </div>
             </div>
