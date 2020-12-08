@@ -60,7 +60,7 @@
             return this.post('/users/updateUser', body);
         },
 
-        getimages: function () {
+        getImages: function () {
             const headers = {
                 Accept: 'application/json',
                 'Content-Type': 'application/json; charset=utf-8',

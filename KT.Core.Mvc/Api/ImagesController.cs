@@ -54,12 +54,6 @@ namespace KT.Core.Mvc.Api
             return BadRequest(result);
         }
 
-        // GET: api/AccountsContoller/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
-        {
-            return "value";
-        }
 
         // POST: api/AccountsContoller
         [HttpPost]
@@ -80,28 +74,6 @@ namespace KT.Core.Mvc.Api
         {
         }
 
-
-        // POST: api/imagse/getusers
-        [HttpPost("getimages")]
-        //[Authorize]
-        public IActionResult GetUsers()
-        {
-            //var headers = Request.Headers;
-            //var authorization = headers["Authorization"];
-            IEnumerable<wp_user> result = null;
-            var tenant = this.GetTenant();
-
-            if (tenant != null)
-            {
-                result = Users.GetAll(tenant.ConnectionString, null, null);
-                if (result != null)
-                {
-                    return Ok(result);
-                }
-            }
-
-            return BadRequest(result);
-        }
 
     }
 }
