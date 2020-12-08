@@ -57,9 +57,9 @@ namespace KT.Core.Mvc.Api
 
         // POST: api/AccountsContoller
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] string url)
         {
-            Console.WriteLine(value);
+            Console.WriteLine(url);
         }
 
         // PUT: api/AccountsContoller/5

@@ -70,6 +70,16 @@
             return this.get('/api/images', headers, body);
         },
 
+        createImage: function (model) {
+            model.Accept = 'application/json';
+            model['Content-Type'] = 'application/json; charset=utf-8';
+            model['auth_site'] = public_key;
+
+            const headers = model;
+            const body = JSON.stringify({});
+            return this.post('/api/images/register', headers, body);
+        },
+
         post: function (destination, headers, body) {
             const url = `${API_URL}${destination}`;
             //console.log({ url: url, headers: headers, body: JSON.stringify(body) });
