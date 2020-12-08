@@ -69,8 +69,9 @@
                         /**
                          * On Success of Login authentication, save the authentication / login token
                          */
-                        if (result.authenticated === true) {
-                            self.saveToken(result.auth_token);
+                        console.log(result);
+                        if (result.token && result.token.length > 0) {
+                            Page.saveAuthenticationToken(result.token);
                             Page.gotoPage('/');
                             //onSuccess();
                         }
@@ -79,7 +80,7 @@
                              * On Failure of Login authentication, clear the authentication token 
                              */
                             self.saveToken(null);
-                            Page.gotoPage('/login');
+                            //Page.gotoPage('/login');
                             //await setToken(null);
                             ///onFailure();
                         }

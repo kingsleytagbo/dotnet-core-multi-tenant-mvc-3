@@ -65,7 +65,7 @@ namespace KT.Core.Mvc.Api
 
             if (tenant != null)
             {
-                var image = Images.GetImageBytes(url, new wp_image() { url = url, path = "", site_id = 1 });
+                var image = Images.GetImageBytes(url, new wp_image() { url = url, name = "", site_id = 1 });
                 result = Images.Create(image, tenant.ConnectionString, null, null);
             }
         }

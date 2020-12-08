@@ -15,7 +15,7 @@ const LocalStorageModule = new function () {
             return this.sort(JSON.parse(data));
         }
         else {
-            thus.removeAll(key);
+            this.removeAll(key);
             return [];
         }
     };

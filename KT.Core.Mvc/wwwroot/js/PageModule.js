@@ -37,7 +37,16 @@
         },
 
         getAuthenticationKey: function () {
-            return 'JavascriptUIDevKit';
+            return 'DotNetCore3X';
+        },
+
+        getAuthenticationToken: function () {
+            const token = database.getLogin(this.getAuthenticationKey);
+            return token;
+        },
+
+        saveAuthenticationToken: function (token) {
+            databse.saveLogin(this.getAuthenticationKey, token);
         },
 
         gotoPage: function (pageName) {

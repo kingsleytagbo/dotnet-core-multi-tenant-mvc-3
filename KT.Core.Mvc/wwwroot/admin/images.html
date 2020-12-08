@@ -168,12 +168,12 @@
     <script src="/js/bootstrap/4.5/bootstrap.min.js" crossorigin="anonymous"></script>
     <script src="/js/LocalStorage.js" crossorigin="anonymous"></script>
 
-    <script type="text/javascript" src="../../js/LocalStorageModule.js"></script>
-    <script type="text/javascript" src="../../js/HttpModule.js?id=1"></script>
-    <script type="text/javascript" src="../../js/PageModule.js"></script>
+    <script type="text/javascript" src="../../js/LocalStorageModule.js?id=2"></script>
+    <script type="text/javascript" src="../../js/HttpModule.js?id=2"></script>
+    <script type="text/javascript" src="../../js/PageModule.js?id=2"></script>
 
     <script type="text/javascript">
-        const AdminPageModule = (function (Http) {
+        const AdminPageModule = (function (Http, Page) {
             /* your module code goes here */
             const DATA_KEYID = 'id';
             const formName = 'userForm';
@@ -290,6 +290,10 @@
                         model[key] = val;
                     });
 
+                    const token = Page.getAuthenticationToken();
+                    console.log({ token: token });
+                    return;
+
                     /* save the values on the form to a data store */
                     /* database.save(DATA_KEYID, model); */
                     const request = Http.createImage(model);
@@ -379,7 +383,7 @@
                 }
             };
 
-        }(HttpModule));
+        }(HttpModule, PageModule));
 
         $(document).ready(function () {
             const data = AdminPageModule.loadData();
