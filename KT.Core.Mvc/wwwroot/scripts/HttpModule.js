@@ -32,7 +32,7 @@
                 auth_site: public_key
             };
             const body = {};
-            return this.post('/api/account/getUsers', headers, body);
+            return this.post('/api/account/getusers', headers, body);
         },
 
         createUser: function (user) {
@@ -61,7 +61,10 @@
         },
 
         post: function (destination, headers, body) {
-            const result = fetch(`${API_URL}${destination}`, {
+            const url = `${API_URL}${destination}`;
+            console.log({ url: url, headers: headers, body: JSON.stringify(body) });
+      
+            const result = fetch(url, {
                 method: 'POST',
                 headers: headers,
                 body: JSON.stringify(body),
