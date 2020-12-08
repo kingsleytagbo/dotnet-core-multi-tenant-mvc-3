@@ -8,12 +8,12 @@ namespace KT.Core.Mvc.Models
     public class wp_image
     {
         [Key]
-        public UInt64 ID { get; set; }
+        public Int64 ID { get; set; }
         public string url { get; set; }
         public string path { get; set; }
 
         public byte[] content { get; set; }
-        public UInt64 site_id { get; set; }
+        public Int64 site_id { get; set; }
 
     }
 }

@@ -233,7 +233,7 @@
                                 html += '<tr>';
                                 html += '<td  colspan="2">' + '<span><strong>' + count + '<br /> </strong></span>' + '<a class="btn btn-sm btn-outline-secondary" href="#" onclick="return AdminPageModule.getbyID(' + "'" + item.id + "'" + ')">Edit</a> </td>';
                                 html += '<td  colspan="5">' + '<p><span>' + (item.url ? item.url : '') + '</td>';
-                                html += '<td  colspan="5">' + '<p><span>' + (item.path ? item.path : '') + '</td>';
+                                html += '<td  colspan="5">' +  '<img src="data:image/png;base64,' + (item.content ? item.content : '') + ']"></td>';
                                 html += '</tr>';
                             });
 

@@ -55,16 +55,18 @@ namespace KT.Core.Mvc.Api
         }
 
 
+
         // POST: api/AccountsContoller
         [HttpPost]
         public void Post([FromHeader] string url)
         {
             var tenant = this.GetTenant();
+            var result = 0;
 
             if (tenant != null)
             {
                 var image = Images.GetImageBytes(url, new wp_image() { url = url, path = "", site_id = 1 });
-                Images.Create(image, tenant.ConnectionString, null, null);
+                result = Images.Create(image, tenant.ConnectionString, null, null);
             }
         }
 
