@@ -60,20 +60,22 @@
             return this.post('/users/updateUser', body);
         },
 
-        getImages: function () {
+        getImages: function (token) {
             const headers = {
                 Accept: 'application/json',
                 'Content-Type': 'application/json; charset=utf-8',
-                auth_site: public_key
+                auth_site: public_key,
+                'Authorization': 'Bearer ' + token
             };
             const body = {};
             return this.get('/api/images', headers, body);
         },
 
-        createImage: function (model) {
+        createImage: function (token, model) {
             model.Accept = 'application/json';
             model['Content-Type'] = 'application/json; charset=utf-8';
             model['auth_site'] = public_key;
+            model['Authorization'] = 'Bearer ' + token;
 
             const headers = model;
             const body = JSON.stringify({});

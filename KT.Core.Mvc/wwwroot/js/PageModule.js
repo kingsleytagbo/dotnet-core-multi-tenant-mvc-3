@@ -46,7 +46,7 @@
         },
 
         saveAuthenticationToken: function (token) {
-            databse.saveLogin(this.getAuthenticationKey, token);
+            database.saveLogin(this.getAuthenticationKey, token);
         },
 
         gotoPage: function (pageName) {

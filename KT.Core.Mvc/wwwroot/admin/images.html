@@ -168,9 +168,9 @@
     <script src="/js/bootstrap/4.5/bootstrap.min.js" crossorigin="anonymous"></script>
     <script src="/js/LocalStorage.js" crossorigin="anonymous"></script>
 
-    <script type="text/javascript" src="../../js/LocalStorageModule.js?id=2"></script>
-    <script type="text/javascript" src="../../js/HttpModule.js?id=2"></script>
-    <script type="text/javascript" src="../../js/PageModule.js?id=2"></script>
+    <script type="text/javascript" src="../../js/LocalStorageModule.js?id=3"></script>
+    <script type="text/javascript" src="../../js/HttpModule.js?id=3"></script>
+    <script type="text/javascript" src="../../js/PageModule.js?id=3"></script>
 
     <script type="text/javascript">
         const AdminPageModule = (function (Http, Page) {
@@ -223,8 +223,9 @@
                 /** Load Data function */
                 loadData: function () {
                     this.showToast("Wait", "Loading ...");
+                    const token = Page.getAuthenticationToken();
 
-                    const request = Http.getImages();
+                    const request = Http.getImages(token);
                     request
                         .then(response => response.json())
                         .then(function (result) {
@@ -291,12 +292,10 @@
                     });
 
                     const token = Page.getAuthenticationToken();
-                    console.log({ token: token });
-                    return;
 
                     /* save the values on the form to a data store */
                     /* database.save(DATA_KEYID, model); */
-                    const request = Http.createImage(model);
+                    const request = Http.createImage(token, model);
                     request
                         .then(response => response.json())
                         .then(function (result) {
