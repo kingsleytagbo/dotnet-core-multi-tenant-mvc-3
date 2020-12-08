@@ -32,16 +32,16 @@
                     <a class="nav-link py-0" href="../admin/images.html">Images<span class="sr-only">(current)</span></a>
                 </li>
                 <!--
-    <li class="nav-item">
-        <a class="nav-link disabled py-0" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-    </li>
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle py-0" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-        <div class="dropdown-menu" aria-labelledby="dropdown01">
-            <a class="dropdown-item py-o" href="#">Action</a>
-        </div>
-    </li>
-    -->
+                <li class="nav-item">
+                    <a class="nav-link disabled py-0" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle py-0" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01">
+                        <a class="dropdown-item py-o" href="#">Action</a>
+                    </div>
+                </li>
+                -->
             </ul>
             <!--
             <form class="form-inline my-2 my-lg-0">
@@ -69,18 +69,18 @@
                         <div class="card-body" style="display:block;">
                             <form id="userForm" name="userForm">
                                 <div class="row">
-                                    <div class="form-group col-12 col-sm-5">
+                                    <div class="form-group col-12 col-sm-12">
                                         <label>First Name:</label>
-                                        <input type="text" class="form-control input-md" id="firstName" name="firstName" placeholder="First Name" />
+                                        <input type="text" class="form-control input-md" id="first_name" name="first_name" placeholder="First Name" />
                                     </div>
-                                    <div class="form-group col-12 col-sm-5">
+                                    <div class="form-group col-12 col-sm-12">
                                         <label>Last Name:</label>
-                                        <input type="text" class="form-control input-md" id="lastName" name="lastName" placeholder="Last Name" />
+                                        <input type="text" class="form-control input-md" id="last_name" name="last_name" placeholder="Last Name" />
                                     </div>
 
-                                    <div class="form-group col-12 col-sm-2">
-                                        <label>Sorting:</label>
-                                        <span> <input type="text" class="form-control input-md" id="sort" name="sort" /></span>
+                                    <div class="form-group col-12 col-sm-12">
+                                        <label>Email:</label>
+                                        <span> <input type="text" class="form-control input-md" id="user_email" name="user_email" /></span>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -103,7 +103,7 @@
                         <table class="table table-striped table-condensed table-hover">
                             <thead>
                                 <tr>
-                                    <th colspan="4">
+                                    <th colspan="3">
                                         #
                                     </th>
                                     <th colspan="3">
@@ -112,8 +112,8 @@
                                     <th colspan="3">
                                         Last Name
                                     </th>
-                                    <th colspan="2">
-                                        Sorting
+                                    <th colspan="3">
+                                        Email
                                     </th>
                                 </tr>
                             </thead>
@@ -157,7 +157,6 @@
 
     </div>
     <!-- /.container -->
-
     <!-- BEGIN FOOTER -->
     <footer class="text-primary">
         <div class="container">
@@ -167,16 +166,20 @@
         </div>
     </footer>
     <!-- END FOOTER -->
-
     <!--BEGIN JAVASCRIPT CODE -->
     <script src="/js/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="/js/bootstrap/4.5/bootstrap.min.js" crossorigin="anonymous"></script>
     <script src="/js/LocalStorage.js" crossorigin="anonymous"></script>
 
-    <script type="text/javascript">const AdminPageModule = (function () {
+    <script type="text/javascript" src="../../js/LocalStorageModule.js"></script>
+    <script type="text/javascript" src="../../js/HttpModule.js?id=1"></script>
+    <script type="text/javascript" src="../../js/PageModule.js"></script>
+
+    <script type="text/javascript">
+        const AdminPageModule = (function () {
             /* your module code goes here */
-            const DATA_KEYID = 'Id';
+            const DATA_KEYID = 'id';
             const formName = 'userForm';
 
             return {
@@ -184,9 +187,9 @@
                 getUserModel: function () {
                     const model = {
                         Id: '',
-                        firstName: '',
-                        lastName: '',
-                        sort: 0
+                        first_name: '',
+                        last_name: '',
+                        user_email: ''
                     };
                     return model;
                 },
@@ -222,24 +225,34 @@
                 },
 
                 /** Load Data function */
-                loadData: function () {
+                loadData: function (Http) {
                     this.showToast("Wait", "Loading ...");
 
-                    let result = database.fetch(DATA_KEYID);
-                    let html = '';
-                    let count = result.length + 1;
+                    const request = Http.getUsers();
+                    request
+                        .then(response => response.json())
+                        .then(function (result) {
+                            // console.log({ result: result });
+                            let html = '';
+                            let count = result.length + 1;
 
-                    $.each(result, function (key, item) {
-                        count -= 1;
-                        html += '<tr>';
-                        html += '<td  colspan="4">' + '<span><strong>' + count + '<br /> </strong></span>' + '<a class="btn btn-sm btn-outline-secondary" href="#" onclick="return AdminPageModule.getbyID(' + "'" + item.Id + "'" + ')">Edit</a> </td>';
-                        html += '<td  colspan="3">' + '<p><span>' + (item.firstName ? item.firstName : '') + '</td>';
-                        html += '<td  colspan="3">' + '<p><span>' + (item.lastName ? item.lastName : '') + '</td>';
-                        html += '<td  colspan="2">' + '<p><span>' + (item.sort ? item.sort : '') + '</td>';
-                        html += '</tr>';
-                    });
+                            $.each(result, function (key, item) {
+                                /* save the values on the form to a data store */
+                                database.save(DATA_KEYID, item);
+                                count -= 1;
+                                html += '<tr>';
+                                html += '<td  colspan="4">' + '<span><strong>' + count + '<br /> </strong></span>' + '<a class="btn btn-sm btn-outline-secondary" href="#" onclick="return AdminPageModule.getbyID(' + "'" + item.id + "'" + ')">Edit</a> </td>';
+                                html += '<td  colspan="3">' + '<p><span>' + (item.first_name ? item.first_name : '') + '</td>';
+                                html += '<td  colspan="3">' + '<p><span>' + (item.last_name ? item.last_name : '') + '</td>';
+                                html += '<td  colspan="2">' + '<p><span>' + (item.user_email ? item.user_email : '') + '</td>';
+                                html += '</tr>';
+                            });
 
-                    $('.tbody').html(html);
+                            $('.tbody').html(html);
+                        })
+                        .catch(async function (error) {
+                            console.log({ error: error });
+                        });
                 },
 
                 /** Select one item using a unique key */
@@ -247,6 +260,7 @@
 
                     //get one item from a collection based on the item's unique key
                     let result = database.selectOne(ID, DATA_KEYID);
+                    console.log({ ID: ID, DATA_KEYID: DATA_KEYID, result: result })
 
                     // Put the value of each field back into the form
                     $('#' + formName).find('input, select, textarea').each(function () {
@@ -308,7 +322,7 @@
                 /** Validate using jquery */
                 validate: function () {
                     let isValid = true;
-                    const elements = ['firstName', 'lastName', 'sort'];
+                    const elements = ['first_name', 'last_name', 'user_email'];
 
                     if (elements != null && elements.length > 0) {
                         for (let e = 0; e < elements.length; e++) {
@@ -349,7 +363,8 @@
         }());
 
         $(document).ready(function () {
-            const data = AdminPageModule.loadData();
+            const Http = HttpModule;
+            const data = AdminPageModule.loadData(Http);
             AdminPageModule.showFormHeader($('#userForm'));
         });</script>
 
@@ -357,3 +372,4 @@
 
 </body>
 </html>
+
