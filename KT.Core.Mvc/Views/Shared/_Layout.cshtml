@@ -118,8 +118,12 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Login">Login</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" href="/admin/users.html">Admin</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
+                            <div class="dropdown-menu" aria-labelledby="">
+                                <a class="dropdown-item" href="/admin/images.html">Images</a>
+                                <a class="dropdown-item" href="/admin/users.html">Users</a>
+                            </div>
                         </li>
                     </ul>
                 </div>
