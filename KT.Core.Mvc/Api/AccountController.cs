@@ -96,7 +96,11 @@ namespace KT.Core.Mvc.Api
         /// </summary>
         /// <returns>Return a valid user account or null if authentication is unsuccessful</returns>
         [HttpPost("register")]
-        public IActionResult Register([FromHeader] string first_name, string last_name, string user_email, string user_pass)
+        public IActionResult Register(
+            [FromHeader] string first_name,
+            [FromHeader] string last_name,
+            [FromHeader] string user_email,
+            [FromHeader] string user_pass)
         {
             wp_user user = null;
             var tenant = this.GetTenant();
