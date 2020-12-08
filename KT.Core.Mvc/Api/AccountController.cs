@@ -81,8 +81,11 @@ namespace KT.Core.Mvc.Api
             if (tenant != null)
             {
                 user = Users.Login("", username, password, tenant.ConnectionString, null, null);
-                var token = this.CreateJWT(user, tenant, tenant.Key, rememberme);
-                return Ok(new { token = token });
+                if (user != null)
+                {
+                    var token = this.CreateJWT(user, tenant, tenant.Key, rememberme);
+                    return Ok(new { token = token });
+                }
             }
 
             return Ok(new { token = tenant.Key});
