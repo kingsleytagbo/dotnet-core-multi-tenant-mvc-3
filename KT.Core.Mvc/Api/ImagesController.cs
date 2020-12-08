@@ -35,6 +35,7 @@ namespace KT.Core.Mvc.Api
 
         // GET: api/images
         [HttpGet]
+        [Authorize]
         public IActionResult Get()
         {
             //var headers = Request.Headers;

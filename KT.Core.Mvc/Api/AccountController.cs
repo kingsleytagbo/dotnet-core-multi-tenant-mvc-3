@@ -119,7 +119,7 @@ namespace KT.Core.Mvc.Api
 
         // POST: api/Accounts/getusers
         [HttpPost("getusers")]
-        [Authorize]
+        //[Authorize]
         public IActionResult GetUsers()
         {
             //var headers = Request.Headers;
