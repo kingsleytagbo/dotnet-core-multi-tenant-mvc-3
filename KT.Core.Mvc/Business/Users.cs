@@ -69,5 +69,24 @@ namespace KT.Core.Mvc.Business
 
             return result;
         }
+
+        public static int? register(string firstname, string lastname, string email, string password, string connectionString, IDbConnection connection, IDbTransaction transaction)
+        {
+            int? result = null;
+
+            var _connection = GetConnection(connection, connectionString);
+            var username = string.Format("{0}-{1}", firstname.Trim().ToLower(), lastname.Trim().ToLower());
+            var user = new wp_user()
+            {
+                first_name = firstname, last_name = lastname, user_email = email, user_pass = password,
+                user_activation_key = Guid.NewGuid().ToString(),
+                 display_name = username, user_login = email, user_nicename = username, 
+                user_registered = DateTime.Now, user_status = 1, user_url = ""
+            };
+
+            result = _connection.Insert<wp_user>(user, transaction: transaction);
+
+            return result;
+        }
     }
 }

@@ -102,21 +102,19 @@ namespace KT.Core.Mvc.Api
             [FromHeader] string user_email,
             [FromHeader] string user_pass)
         {
-            wp_user user = null;
+            int? result = null;
             var tenant = this.GetTenant();
 
-            // Validate that this user is authentic and is authorized to access your system
-            // TODO: Implement your own authetication logic
             if (tenant != null)
             {
-                //user = Users.Login("", username, password, tenant.ConnectionString, null, null);
-                if (user != null)
+                result = Users.register(first_name, last_name, user_email, user_pass,  tenant.ConnectionString, null, null);
+                if (result != null)
                 {
-                    return Ok(user);
+                    return Ok(result);
                 }
             }
 
-            return BadRequest(user);
+            return BadRequest(result);
         }
 
         // POST: api/Accounts/getusers
