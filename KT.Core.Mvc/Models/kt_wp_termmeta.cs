@@ -1,7 +1,7 @@
 ﻿using System;
 namespace KT.Core.Mvc.Models
 {
-    public class kt_wp_termmeta
+    public class wp_termmeta
     {
         public UInt64 meta_id { get; set; }
         public UInt64 term_id { get; set; }

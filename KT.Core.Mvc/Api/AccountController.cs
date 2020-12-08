@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
+using KT.Core.Mvc.Business;
 
 namespace KT.Core.Mvc.Api
 {
@@ -72,14 +73,14 @@ namespace KT.Core.Mvc.Api
         [HttpPost("login")]
         public IActionResult Login([FromHeader] String username, [FromHeader] string password, [FromHeader] bool rememberme)
         {
-            kt_wp_user user = null;
+            wp_user user = null;
             var tenant = this.GetTenant();
 
             // Validate that this user is authentic and is authorized to access your system
             // TODO: Implement your own authetication logic
-            if (tenant != null && username == "Kingsley")
+            if (tenant != null)
             {
-                user = new kt_wp_user { user_login = "Kingsley Tagbo", user_email = "test.test@gmail.com" };
+                user = Users.Login("", username, password, tenant.ConnectionString, null, null);
                 var token = this.CreateJWT(user, tenant, tenant.Key, rememberme);
                 return Ok(new { token = token });
             }

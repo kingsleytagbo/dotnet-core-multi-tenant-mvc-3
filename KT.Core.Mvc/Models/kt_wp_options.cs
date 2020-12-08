@@ -1,7 +1,7 @@
 ﻿using System;
 namespace KT.Core.Mvc.Models
 {
-    public class kt_wp_options
+    public class wp_options
     {
         public UInt64 option_id { get; set; }
         public string option_name { get; set; }

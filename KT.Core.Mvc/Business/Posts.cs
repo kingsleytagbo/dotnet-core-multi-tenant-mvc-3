@@ -8,7 +8,7 @@ using Dapper;
 
 namespace KT.Core.Mvc.Business
 {
-    public class Post
+    public class Posts
     {
         public IDbConnection GetConnection(IDbConnection connection, string connectionString)
         {
@@ -20,15 +20,15 @@ namespace KT.Core.Mvc.Business
             return connection;
         }
 
-        public List<kt_wp_post> GetAllPosts(string connectionString, IDbConnection connection, IDbTransaction transaction)
+        public List<wp_post> GetAllPosts(string connectionString, IDbConnection connection, IDbTransaction transaction)
         {
-            List<kt_wp_post> result = null;
+            List<wp_post> result = null;
 
             var _connection = GetConnection(connection, connectionString);
 
             var sQuery = "SELECT TOP 1000 * FROM wp_post WHERE (post_status = @post_status) ";
 
-            result = _connection.Query<kt_wp_post>(sQuery, new
+            result = _connection.Query<wp_post>(sQuery, new
             {
                 post_status = "publish"
             }, transaction: transaction).ToList();
@@ -37,15 +37,15 @@ namespace KT.Core.Mvc.Business
         }
 
 
-        public kt_wp_post GetPost(string id, string connectionString, IDbConnection connection, IDbTransaction transaction)
+        public wp_post GetPost(string id, string connectionString, IDbConnection connection, IDbTransaction transaction)
         {
-            kt_wp_post result = null;
+            wp_post result = null;
 
             var _connection = GetConnection(connection, connectionString);
 
-            var sQuery = "SELECT TOP 10 * FROM kt_wp_posts WHERE (post_name = @post_name) ";
+            var sQuery = "SELECT TOP 10 * FROM wp_posts WHERE (post_name = @post_name) ";
 
-            result = _connection.Query<kt_wp_post>(sQuery, new
+            result = _connection.Query<wp_post>(sQuery, new
             {
                 post_name = id
             }, transaction: transaction).FirstOrDefault();

@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace KT.Core.Mvc.Models
 {
-    [Table("kt_wp_image")]
-    public class kt_wp_image
+    [Table("wp_image")]
+    public class wp_image
     {
         [Key]
         public UInt64 ID { get; set; }

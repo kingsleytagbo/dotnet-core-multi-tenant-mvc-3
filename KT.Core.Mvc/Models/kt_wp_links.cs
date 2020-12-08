@@ -1,7 +1,7 @@
 ﻿using System;
 namespace KT.Core.Mvc.Models
 {
-    public class kt_wp_links
+    public class wp_links
     {
         public UInt64 link_id { get; set; }
         public string link_url { get; set; }

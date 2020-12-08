@@ -83,7 +83,7 @@ namespace KT.Core.Mvc.Api
             return tenant;
         }
 
-        protected string CreateJWT(kt_wp_user userInfo, Tenant tenant, string tenantId, bool rememberMe)
+        protected string CreateJWT(wp_user userInfo, Tenant tenant, string tenantId, bool rememberMe)
         {
             var privateKey = ((tenant != null) && !string.IsNullOrEmpty(tenant.PrivateKey)) ? tenant.PrivateKey : tenantId;
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(privateKey));

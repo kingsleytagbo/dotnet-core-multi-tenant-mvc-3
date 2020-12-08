@@ -2,7 +2,7 @@
 namespace KT.Core.Mvc.Models
 {
 
-    public class kt_wp_term_taxonomy
+    public class wp_term_taxonomy
     {
         public UInt64 term_taxonomy_id { get; set; }
         public UInt64 term_id { get; set; }

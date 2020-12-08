@@ -1,7 +1,7 @@
 ﻿using System;
 namespace KT.Core.Mvc.Models
 {
-    public class kt_wp_comment
+    public class wp_comment
     {
         public UInt64 comment_ID { get; set; }
         public UInt64 comment_post_ID { get; set; }
