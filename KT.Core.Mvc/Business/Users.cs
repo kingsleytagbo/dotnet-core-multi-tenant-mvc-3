@@ -20,17 +20,16 @@ namespace KT.Core.Mvc.Business
             return connection;
         }
 
-        public static List<wp_user> GetAllPosts(string connectionString, IDbConnection connection, IDbTransaction transaction)
+        public static List<wp_user> GetAll(string connectionString, IDbConnection connection, IDbTransaction transaction)
         {
             List<wp_user> result = null;
 
             var _connection = GetConnection(connection, connectionString);
 
-            var sQuery = "SELECT TOP 1000 * FROM wp_post WHERE (post_status = @post_status) ";
+            var sQuery = "SELECT TOP 1000 * FROM wp_user ";
 
             result = _connection.Query<wp_user>(sQuery, new
             {
-                post_status = "publish"
             }, transaction: transaction).ToList();
 
             return result;

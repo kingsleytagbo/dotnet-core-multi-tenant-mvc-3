@@ -120,11 +120,24 @@ namespace KT.Core.Mvc.Api
         // POST: api/Accounts/getusers
         [HttpPost("getusers")]
         [Authorize]
-        public IEnumerable<string> GetUsers()
+        public IActionResult GetUsers()
         {
             var headers = Request.Headers;
             var authorization = headers["Authorization"];
-            return new string[] { "value1", "value2" };
+            IEnumerable<wp_user> result = null;
+            var tenant = this.GetTenant();
+
+            if (tenant != null)
+            {
+                result = Users.GetAll(tenant.ConnectionString, null, null);
+                if (result != null)
+                {
+                    return Ok(result);
+                }
+            }
+
+            return BadRequest(result);
         }
+
     }
 }
