@@ -59,7 +59,13 @@ namespace KT.Core.Mvc.Api
         [HttpPost]
         public void Post([FromHeader] string url)
         {
-            Console.WriteLine(url);
+            var tenant = this.GetTenant();
+
+            if (tenant != null)
+            {
+                var image = Images.GetImageBytes(url, new wp_image() { url = url, path = "", site_id = 1 });
+                Images.Create(image, tenant.ConnectionString, null, null);
+            }
         }
 
         // PUT: api/AccountsContoller/5

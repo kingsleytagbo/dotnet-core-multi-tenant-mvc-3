@@ -84,12 +84,21 @@ namespace KT.Core.Mvc.Business
 
         }
 
+        public static int Create(wp_image image, string connectionString, IDbConnection connection, IDbTransaction transaction)
+        {
+            var _connection = GetConnection(connection, connectionString);
+
+            var result = _connection.Insert<wp_image>(image, transaction: transaction).Value;
+
+            return result;
+        }
+
         public static wp_image GetImageBytes(string sourceUrl, wp_image image)
         {
             try
             {
                 var source = GetImageBytesFromUrl(sourceUrl);
-                image.content = source.ToString();
+                image.content = source;
             }
             catch (Exception ex) { }
             return image;
