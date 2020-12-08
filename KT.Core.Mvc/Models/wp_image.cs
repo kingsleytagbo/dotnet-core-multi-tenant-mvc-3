@@ -10,7 +10,7 @@ namespace KT.Core.Mvc.Models
         [Key]
         public Int64 ID { get; set; }
         public string url { get; set; }
-        public string path { get; set; }
+        public string name { get; set; }
 
         public byte[] content { get; set; }
         public Int64 site_id { get; set; }

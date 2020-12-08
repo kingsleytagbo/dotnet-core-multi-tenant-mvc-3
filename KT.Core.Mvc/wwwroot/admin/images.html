@@ -74,6 +74,12 @@
                                         <label>Url:</label>
                                         <span> <input type="text" class="form-control input-md" id="url" name="url" /></span>
                                     </div>
+
+                                    <div class="form-group col-12 col-sm-12">
+                                        <label>Name:</label>
+                                        <span> <input type="text" class="form-control input-md" id="name" name="name" /></span>
+                                    </div>
+
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-md-12">
@@ -177,7 +183,7 @@
                 getUserModel: function () {
                     const model = {
                         id: '',
-                        path: '',
+                        name: '',
                         content: '',
                         url: ''
                     };
@@ -301,7 +307,7 @@
                                 html += '<tr>';
                                 html += '<td  colspan="2">' + '<span><strong>' + count + '<br /> </strong></span>' + '<a class="btn btn-sm btn-outline-secondary" href="#" onclick="return AdminPageModule.getbyID(' + "'" + item.id + "'" + ')">Edit</a> </td>';
                                 html += '<td  colspan="5">' + '<p><span>' + (item.url ? item.url : '') + '</td>';
-                                html += '<td  colspan="5">' + '<p><span>' + (item.path ? item.path : '') + '</td>';
+                                html += '<td  colspan="5">' + '<p><span>' + (item.name ? item.name : '') + '</td>';
                                 html += '</tr>';
                             });
 
@@ -335,7 +341,7 @@
                 /** Validate using jquery */
                 validate: function () {
                     let isValid = true;
-                    const elements = ['url'];
+                    const elements = ['url', 'name'];
 
                     if (elements != null && elements.length > 0) {
                         for (let e = 0; e < elements.length; e++) {
