@@ -76,10 +76,23 @@ namespace KT.Core.Mvc.Api
         {
         }
 
-        // DELETE: api/ApiWithActions/5
+        // DELETE: api/images/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            int? result = null;
+            var tenant = this.GetTenant();
+
+            if (tenant != null)
+            {
+                result = Images.Delete(id, tenant.ConnectionString, null, null);
+                if (result.HasValue)
+                {
+                    return Ok(result);
+                }
+            }
+
+            return BadRequest(result);
         }
 
 

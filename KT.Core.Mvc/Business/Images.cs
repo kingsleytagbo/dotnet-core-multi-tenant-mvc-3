@@ -39,8 +39,33 @@ namespace KT.Core.Mvc.Business
             return result;
         }
 
+        public static int Create(wp_image image, string connectionString, IDbConnection connection, IDbTransaction transaction)
+        {
+            var _connection = GetConnection(connection, connectionString);
+
+            var result = _connection.Insert<wp_image>(image, transaction: transaction).Value;
+
+            return result;
+        }
+
+        public static int ? Delete(int id, string connectionString, IDbConnection connection, IDbTransaction transaction)
+        {
+            int ? result= null;
+
+            var _connection = GetConnection(connection, connectionString);
+
+            wp_image image = _connection.Get<wp_image>(id, transaction: transaction);
+
+            if(image != null)
+            {
+                result = _connection.Delete<wp_image>(id, transaction: transaction);
+            }
+
+            return result;
+        }
+
         public static wp_image DownloadImage(Tenant setting, Guid id, Guid entityId, string sourceUrl,
-              string fileFolder = "gallery")
+      string fileFolder = "gallery")
         {
             string publishUrl = string.Empty;
             string fileName = string.Empty;
@@ -72,7 +97,7 @@ namespace KT.Core.Mvc.Business
                         }
                     }
 
-                    publishUrl = string.Format("http://api2.launchfeatures.com/api/images/upload1/{0}/{1}/{2}/{3}{4}", id.ToString(), fileFolder, entityId.ToString(), "850x450", fileExtension);
+                    publishUrl = string.Format("http://api2.launchfeatures.com/api/images/upload1/{0}/{1}/{2}/{3}{4}", id.ToString(), fileFolder, entityId.ToString(), "850x450", fileExtension);
                     image = new wp_image();
                     image.url = sourceUrl;
                     image.url = publishUrl;
@@ -82,15 +107,6 @@ namespace KT.Core.Mvc.Business
 
             return image;
 
-        }
-
-        public static int Create(wp_image image, string connectionString, IDbConnection connection, IDbTransaction transaction)
-        {
-            var _connection = GetConnection(connection, connectionString);
-
-            var result = _connection.Insert<wp_image>(image, transaction: transaction).Value;
-
-            return result;
         }
 
         public static wp_image GetImageBytes(string sourceUrl, wp_image image)
