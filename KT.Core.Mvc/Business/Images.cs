@@ -70,11 +70,11 @@ namespace KT.Core.Mvc.Business
 
             var _connection = GetConnection(connection, connectionString);
 
-            var sQuery = "SELECT * FROM wp_image WHERE (name = @name) ";
+            var sQuery = "SELECT * FROM wp_image WHERE name like @name ";
 
             result = _connection.Query<wp_image>(sQuery, new
             {
-                name = name
+                name = "%" + name + "%"
             }, transaction: transaction).ToList();
 
             return result;
