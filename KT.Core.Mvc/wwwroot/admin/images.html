@@ -167,7 +167,7 @@
     <script type="text/javascript" src="../../js/PageModule.js"></script>
 
     <script type="text/javascript">
-        const AdminPageModule = (function () {
+        const AdminPageModule = (function (Http) {
             /* your module code goes here */
             const DATA_KEYID = 'id';
             const formName = 'userForm';
@@ -215,7 +215,7 @@
                 },
 
                 /** Load Data function */
-                loadData: function (Http) {
+                loadData: function () {
                     this.showToast("Wait", "Loading ...");
 
                     const request = Http.getImages();
@@ -286,7 +286,7 @@
 
                     /* save the values on the form to a data store */
                     /* database.save(DATA_KEYID, model); */
-                    const request = Http.createImageImage(model);
+                    const request = Http.createImage(model);
                     request
                         .then(response => response.json())
                         .then(function (result) {
@@ -335,7 +335,7 @@
                 /** Validate using jquery */
                 validate: function () {
                     let isValid = true;
-                    const elements = ['path', 'content', 'url'];
+                    const elements = ['url'];
 
                     if (elements != null && elements.length > 0) {
                         for (let e = 0; e < elements.length; e++) {
@@ -373,11 +373,10 @@
                 }
             };
 
-        }());
+        }(HttpModule));
 
         $(document).ready(function () {
-            const Http = HttpModule;
-            const data = AdminPageModule.loadData(Http);
+            const data = AdminPageModule.loadData();
             AdminPageModule.showFormHeader($('#userForm'));
         });</script>
 

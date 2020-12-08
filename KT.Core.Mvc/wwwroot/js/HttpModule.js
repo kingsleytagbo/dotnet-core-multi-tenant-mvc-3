@@ -77,7 +77,7 @@
 
             const headers = model;
             const body = JSON.stringify({});
-            return this.post('/api/images/register', headers, body);
+            return this.post('/api/images', headers, body);
         },
 
         post: function (destination, headers, body) {
