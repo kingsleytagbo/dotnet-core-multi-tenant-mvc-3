@@ -26,8 +26,13 @@
         },
 
         getUsers: function () {
+            const headers = {
+                Accept: 'application/json',
+                'Content-Type': 'application/json; charset=utf-8',
+                auth_site: public_key
+            };
             const body = {};
-            return this.post('/users/getUsers', body);
+            return this.post('/api/account/getUsers', headers, body);
         },
 
         createUser: function (user) {
