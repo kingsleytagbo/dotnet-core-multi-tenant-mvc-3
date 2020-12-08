@@ -175,9 +175,9 @@
     <script src="/js/bootstrap/4.5/bootstrap.min.js" crossorigin="anonymous"></script>
     <script src="/js/LocalStorage.js" crossorigin="anonymous"></script>
 
-    <script type="text/javascript" src="../../scripts/LocalStorageModule.js"></script>
-    <script type="text/javascript" src="../../scripts/HttpModule.js?id=1"></script>
-    <script type="text/javascript" src="../../scripts/PageModule.js"></script>
+    <script type="text/javascript" src="../../js/LocalStorageModule.js"></script>
+    <script type="text/javascript" src="../../js/HttpModule.js?id=1"></script>
+    <script type="text/javascript" src="../../js/PageModule.js"></script>
 
     <script type="text/javascript">
     const AdminPageModule = (function () {
@@ -235,7 +235,7 @@
                     request
                         .then(response => response.json())
                         .then(function (result) {
-                            console.log({ result: result });
+                            // console.log({ result: result });
                             let html = '';
                             let count = result.length + 1;
 

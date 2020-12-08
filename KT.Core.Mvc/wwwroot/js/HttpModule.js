@@ -62,7 +62,7 @@
 
         post: function (destination, headers, body) {
             const url = `${API_URL}${destination}`;
-            console.log({ url: url, headers: headers, body: JSON.stringify(body) });
+            //console.log({ url: url, headers: headers, body: JSON.stringify(body) });
       
             const result = fetch(url, {
                 method: 'POST',
