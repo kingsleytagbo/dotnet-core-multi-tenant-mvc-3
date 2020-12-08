@@ -88,7 +88,7 @@ namespace KT.Core.Mvc.Api
                 }
             }
 
-            return Ok(new { token = tenant.Key});
+            return BadRequest("you are nto logged-in");
         }
 
         // POST: api/Accounts/getusers
