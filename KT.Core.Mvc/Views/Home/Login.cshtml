@@ -2,63 +2,126 @@
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to @ViewData["Title"].</p>
+<div class="row">
+    <div class="col-2"></div>
+
+    <div class="col-8">
+
+        <div class="mt-4 pt-4">
+
+            <!-- BEGIN LOGIN CARD -->
+            <div class="card card-info">
+                <a id="login-top" name="login-top" href="#"></a>
+                <div class="card-title">
+                    <a class="text-dark text-center" title="Account Services">
+                        <h1>
+                            Login&nbsp;↴&nbsp;
+                        </h1>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <form id="loginForm" name="loginForm">
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label>Email Address:</label>
+                                <input type="text" class="form-control input-md" id="EmailAddress" name="EmailAddress" placeholder="Your Email Address ..." required />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                <label>Password:</label>
+                                <input type="text" class="form-control input-md" id="Password" name="Password" placeholder="Your Password..." required />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <button type="button" class="btn btn-outline-dark btn-block" id="btnSave" onclick="return LoginModule.saveForm('#loginForm');">
+                        <i class="fa fa-save"></i>&nbsp;Login
+                    </button>
+                </div>
+            </div>
+            <!-- END LOGIN CARD -->
+
+        </div>
+
+    </div>
+
+    <div class="col-2"></div>
+</div>
 
 @section Scripts {
-    <script type="text/javascript">$(document).ready(function () {
+<script type="text/javascript" src="../../scripts/LocalStorageModule.js"></script>
+<script type="text/javascript" src="../../scripts/HttpModule.js"></script>
+<script type="text/javascript" src="../../scripts/PageModule.js"></script>
+<script type="text/javascript" src="../../scripts/LoginPageModule.js"></script>
 
-            // ### TODO: Change this to the url of your api server
-            const apiUrl = 'https://localhost:5001';
+<!--BEGIN JAVASCRIPT CODE -->
 
-            const public_key = "d62c03a2-57b6-4e14-8153-d05d3aa9ab10";
+<script type="text/javascript">
 
-            const data = { "UserName": "Kingsley", Password: "..gmail.com", RememberMe: true };
+    const LoginModule = LoginPageModule;
+    $(document).ready(function () {
+        LoginModule.init();
+    });
 
-            const login = { auth_site: public_key, username: data.UserName, password: data.Password, rememberme: data.RememberMe };
+</script>
 
-            const self = this;
+<script type="text/javascript">
+    $(document).ready(function () {
 
-            /* Function used to authenticate a user */
-            const authenticate = function (url, login) {
-                return $.ajax({
-                    method: 'post',
-                    url: url + "/api/account/login",
-                    headers: login,
-                    body: JSON.stringify({})
-                });
-            };
+        // ### TODO: Change this to the url of your api server
+        const apiUrl = 'https://localhost:5001';
 
-            /* Function used to get authenticated data */
-            const getUsers = function (url, jwt) {
-                console.log({ jwt: jwt, token: jwt.token });
-                return $.ajax({
-                    method: 'post',
-                    url: url + "/api/account/getusers",
-                    body: JSON.stringify({}),
-                    headers: {
-                        'Authorization': 'Bearer ' + jwt.token
-                    }
-                })
-                    .done(function (users) {
-                        console.log({ "getUsers > Success ...": users });
-                    })
-                    .fail(function (xhr, status, error) {
-                        console.log({ "getUsers > Error ...": xhr.responseText, status: status, error: error });
-                    });
-            };
+        const public_key = "d62c03a2-57b6-4e14-8153-d05d3aa9ab10";
 
-            /* Main Function used to 1. authenticate and 2. get user data */
-            authenticate(apiUrl, login).done(function (jwt) {
-                console.log({ "Authentication done > ": jwt });
+        const data = { "UserName": "Kingsley", Password: "..gmail.com", RememberMe: true };
 
-                setTimeout(
-                    function () {
-                        getUsers(apiUrl, jwt);
-                    }, 5000);
+        const login = { auth_site: public_key, username: data.UserName, password: data.Password, rememberme: data.RememberMe };
 
-            }).fail(function (xhr, status, error) {
-                console.log({ "Authentication > Error ...": xhr.responseText, status: status, error: error });
+        const self = this;
+
+        /* Function used to authenticate a user */
+        const authenticate = function (url, login) {
+            return $.ajax({
+                method: 'post',
+                url: url + "/api/account/login",
+                headers: login,
+                body: JSON.stringify({})
             });
+        };
 
-        });</script>
+        /* Function used to get authenticated data */
+        const getUsers = function (url, jwt) {
+            console.log({ jwt: jwt, token: jwt.token });
+            return $.ajax({
+                method: 'post',
+                url: url + "/api/account/getusers",
+                body: JSON.stringify({}),
+                headers: {
+                    'Authorization': 'Bearer ' + jwt.token
+                }
+            })
+                .done(function (users) {
+                    console.log({ "getUsers > Success ...": users });
+                })
+                .fail(function (xhr, status, error) {
+                    console.log({ "getUsers > Error ...": xhr.responseText, status: status, error: error });
+                });
+        };
+
+        /* Main Function used to 1. authenticate and 2. get user data */
+        authenticate(apiUrl, login).done(function (jwt) {
+            console.log({ "Authentication done > ": jwt });
+
+            setTimeout(
+                function () {
+                    getUsers(apiUrl, jwt);
+                }, 5000);
+
+        }).fail(function (xhr, status, error) {
+            console.log({ "Authentication > Error ...": xhr.responseText, status: status, error: error });
+        });
+
+    });</script>
 }
