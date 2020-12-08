@@ -39,7 +39,7 @@ namespace KT.Core.Mvc.Business
             return result;
         }
 
-        public static wp_image DownloadImage(Tenant setting, Guid id, Guid entityId, string sourceUrl,
+        public static byte[] DownloadImage(Tenant setting, Guid id, Guid entityId, string sourceUrl,
               string fileFolder = "gallery")
         {
             string publishUrl = string.Empty;
@@ -82,6 +82,17 @@ namespace KT.Core.Mvc.Business
 
             return image;
 
+        }
+
+        public static wp_image GetImageBytes(string sourceUrl, wp_image image)
+        {
+            try
+            {
+                var source = GetImageBytesFromUrl(sourceUrl);
+                image.content = source.ToString();
+            }
+            catch (Exception ex) { }
+            return image;
         }
 
         public static string GetCorrectFileName(Tenant setting, Guid site, Guid id, string folder, string name)
