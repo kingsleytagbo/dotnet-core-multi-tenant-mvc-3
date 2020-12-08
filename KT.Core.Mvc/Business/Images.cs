@@ -24,6 +24,21 @@ namespace KT.Core.Mvc.Business
             return connection;
         }
 
+        public static List<wp_image> GetAll(string connectionString, IDbConnection connection, IDbTransaction transaction)
+        {
+            List<wp_image> result = null;
+
+            var _connection = GetConnection(connection, connectionString);
+
+            var sQuery = "SELECT TOP 1000 * FROM wp_image ";
+
+            result = _connection.Query<wp_image>(sQuery, new
+            {
+            }, transaction: transaction).ToList();
+
+            return result;
+        }
+
         public static wp_image DownloadImage(Tenant setting, Guid id, Guid entityId, string sourceUrl,
               string fileFolder = "gallery")
         {
