@@ -63,6 +63,7 @@
             // console.log({model: model, http: Http});
             if (model.EmailAddress && model.Password) {
                 const response = Http.login(model.EmailAddress, model.Password);
+                console.log({ response: response });
                 response
                     .then(response => response.json())
                     .then(function (result) {

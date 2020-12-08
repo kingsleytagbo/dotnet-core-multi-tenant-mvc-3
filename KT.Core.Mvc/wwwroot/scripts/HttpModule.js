@@ -1,17 +1,18 @@
 ﻿const HttpModule = (function () {
     /* Http Module used for making Http api calls */
-    const API_URL = 'https://nodejsappapi.herokuapp.com';
+    const API_URL = 'https://localhost:44373';
+    const public_key = "d62c03a2-57b6-4e14-8153-d05d3aa9ab10";
 
     return {
 
         login: function (username, password) {
-            const body = {
-                "login": {
-                    "username": username,
-                    "password": password
-                }
+            const headers = {
+                Accept: 'application/json',
+                'Content-Type': 'application/json; charset=utf-8',
+                auth_site: public_key, "UserName": username, Password: password, RememberMe: true
             };
-            return this.post('/login', body);
+            const body = JSON.stringify({});
+            return this.post('/api/account/login',headers, body);
         },
 
         getUsers: function () {
@@ -44,16 +45,10 @@
             return this.post('/users/updateUser', body);
         },
 
-        post: function (destination, body) {
-            const headers = {
-                Accept: 'application/json',
-                'Content-Type': 'application/json; charset=utf-8',
-            };
+        post: function (destination, headers, body) {
             const result = fetch(`${API_URL}${destination}`, {
                 method: 'POST',
-                headers: {
-                    "Content-Type": "text/plain"
-                },
+                headers: headers,
                 body: JSON.stringify(body),
             });
             const response = result;
