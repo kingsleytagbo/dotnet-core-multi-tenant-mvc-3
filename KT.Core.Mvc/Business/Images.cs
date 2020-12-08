@@ -64,6 +64,22 @@ namespace KT.Core.Mvc.Business
             return result;
         }
 
+        public static List<wp_image> Search(string name, string connectionString, IDbConnection connection, IDbTransaction transaction)
+        {
+            List<wp_image> result = null;
+
+            var _connection = GetConnection(connection, connectionString);
+
+            var sQuery = "SELECT * FROM wp_image WHERE (name = @name) ";
+
+            result = _connection.Query<wp_image>(sQuery, new
+            {
+                name = name
+            }, transaction: transaction).ToList();
+
+            return result;
+        }
+
         public static wp_image DownloadImage(Tenant setting, Guid id, Guid entityId, string sourceUrl,
       string fileFolder = "gallery")
         {

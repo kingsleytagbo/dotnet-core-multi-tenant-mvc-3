@@ -96,5 +96,29 @@ namespace KT.Core.Mvc.Api
         }
 
 
+        /// <summary>
+        /// Authenticates a User / Account
+        /// </summary>
+        /// <returns>Return a valid user account or null if authentication is unsuccessful</returns>
+        [HttpPost("search")]
+        public IActionResult Search(
+            [FromHeader] string name)
+        {
+            int? result = null;
+            var tenant = this.GetTenant();
+
+            if (tenant != null)
+            {
+                result = null; // Users.register(first_name, last_name, user_email, user_pass, tenant.ConnectionString, null, null);
+                if (result != null)
+                {
+                    return Ok(result);
+                }
+            }
+
+            return BadRequest(result);
+        }
+
+
     }
 }
