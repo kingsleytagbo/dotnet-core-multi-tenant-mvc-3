@@ -5,6 +5,16 @@
 
     return {
 
+        register: function (model) {
+            model.Accept = 'application/json';
+            model['Content-Type'] = 'application/json; charset=utf-8';
+            model['auth_site'] = public_key;
+
+            const headers = model;
+            const body = JSON.stringify({});
+            return this.post('/api/account/register', headers, body);
+        },
+
         login: function (username, password) {
             const headers = {
                 Accept: 'application/json',

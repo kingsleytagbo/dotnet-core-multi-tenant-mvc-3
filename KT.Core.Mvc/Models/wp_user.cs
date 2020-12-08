@@ -13,5 +13,8 @@ namespace KT.Core.Mvc.Models
         public string user_activation_key { get; set; }
         public int user_status { get; set; }
         public string display_name { get; set; }
+
+        public string last_name { get; set; }
+        public string first_name { get; set; }
     }
 }

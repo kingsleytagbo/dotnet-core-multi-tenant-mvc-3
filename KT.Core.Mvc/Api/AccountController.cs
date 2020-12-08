@@ -91,6 +91,30 @@ namespace KT.Core.Mvc.Api
             return BadRequest("you are nto logged-in");
         }
 
+        /// <summary>
+        /// Authenticates a User / Account
+        /// </summary>
+        /// <returns>Return a valid user account or null if authentication is unsuccessful</returns>
+        [HttpPost("register")]
+        public IActionResult Register([FromHeader] wp_user value)
+        {
+            wp_user user = null;
+            var tenant = this.GetTenant();
+
+            // Validate that this user is authentic and is authorized to access your system
+            // TODO: Implement your own authetication logic
+            if (tenant != null)
+            {
+                //user = Users.Login("", username, password, tenant.ConnectionString, null, null);
+                if (user != null)
+                {
+                    return Ok(user);
+                }
+            }
+
+            return BadRequest(user);
+        }
+
         // POST: api/Accounts/getusers
         [HttpPost("getusers")]
         [Authorize]
