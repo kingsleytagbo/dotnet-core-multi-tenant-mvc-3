@@ -72,17 +72,17 @@
                         <div class="card-body" style="display:block;">
                             <form id="userForm" name="userForm">
                                 <div class="row">
-                                    <div class="form-group col-12 col-sm-5">
+                                    <div class="form-group col-12 col-sm-12">
                                         <label>First Name:</label>
                                         <input type="text" class="form-control input-md" id="first_name" name="first_name" placeholder="First Name" />
                                     </div>
-                                    <div class="form-group col-12 col-sm-5">
+                                    <div class="form-group col-12 col-sm-12">
                                         <label>Last Name:</label>
                                         <input type="text" class="form-control input-md" id="last_name" name="last_name" placeholder="Last Name" />
                                     </div>
 
-                                    <div class="form-group col-12 col-sm-2">
-                                        <label>user_emailing:</label>
+                                    <div class="form-group col-12 col-sm-12">
+                                        <label>Email:</label>
                                         <span> <input type="text" class="form-control input-md" id="user_email" name="user_email" /></span>
                                     </div>
                                 </div>
@@ -263,6 +263,7 @@
 
                     //get one item from a collection based on the item's unique key
                     let result = database.selectOne(ID, DATA_KEYID);
+                    console.log({ID: ID, DATA_KEYID: DATA_KEYID, result : result})
 
                     // Put the value of each field back into the form
                     $('#' + formName).find('input, select, textarea').each(function () {
