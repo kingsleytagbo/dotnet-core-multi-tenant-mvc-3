@@ -39,7 +39,7 @@ namespace KT.Core.Mvc.Business
             return result;
         }
 
-        public static byte[] DownloadImage(Tenant setting, Guid id, Guid entityId, string sourceUrl,
+        public static wp_image DownloadImage(Tenant setting, Guid id, Guid entityId, string sourceUrl,
               string fileFolder = "gallery")
         {
             string publishUrl = string.Empty;
