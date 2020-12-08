@@ -92,6 +92,12 @@ IOptions<List<Tenant>> tenants, IHttpContextAccessor httpContextAccessor) : base
             return View();
         }
 
+        public IActionResult Register()
+        {
+            @ViewData["Title"] = "Register";
+            return View();
+        }
+
         public IActionResult Slug(string id)
         {
             @ViewData["Title"] = id;

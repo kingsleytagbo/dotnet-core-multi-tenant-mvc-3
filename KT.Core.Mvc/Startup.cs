@@ -192,12 +192,12 @@ namespace KT.Core.Mvc
                         name: "askaquestion",
                             pattern: "/askaquestion",
                           defaults: new { controller = "Home", action = "askaquestion" });
-
                 //Privacy
                 endpoints.MapControllerRoute(
                         name: "privacy",
                             pattern: "/privacy",
                           defaults: new { controller = "Home", action = "Privacy" });
+
 
                 //Blog Permalinks
                 endpoints.MapControllerRoute(
