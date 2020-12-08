@@ -67,7 +67,7 @@
                 auth_site: public_key
             };
             const body = {};
-            return this.get('/api/account/images', headers, body);
+            return this.get('/api/images', headers, body);
         },
 
         post: function (destination, headers, body) {
@@ -85,12 +85,11 @@
 
         get: function (destination, headers, body) {
             const url = `${API_URL}${destination}`;
-            //console.log({ url: url, headers: headers, body: JSON.stringify(body) });
+            // console.log({ url: url, headers: headers, body: JSON.stringify(body) });
 
             const result = fetch(url, {
                 method: 'GET',
-                headers: headers,
-                body: JSON.stringify(body),
+                headers: headers
             });
             const response = result;
             return response;
