@@ -80,7 +80,7 @@
                              * On Failure of Login authentication, clear the authentication token 
                              */
                             self.saveToken(null);
-                            Page.gotoPage('/login.html');
+                            Page.gotoPage('/login');
                             //await setToken(null);
                             ///onFailure();
                         }
