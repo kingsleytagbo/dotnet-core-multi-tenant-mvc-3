@@ -68,6 +68,7 @@
                 'Authorization': 'Bearer ' + token
             };
             const body = {};
+            console.log(headers);
             return this.get('/api/images', headers, body);
         },
 
