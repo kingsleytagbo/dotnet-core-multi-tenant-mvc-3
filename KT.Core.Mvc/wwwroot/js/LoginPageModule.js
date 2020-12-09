@@ -69,7 +69,6 @@
                         /**
                          * On Success of Login authentication, save the authentication / login token
                          */
-                        console.log(result);
                         if (result.token && result.token.length > 0) {
                             Page.saveAuthenticationToken(result.token);
                             Page.gotoPage('/');
@@ -79,14 +78,14 @@
                             /**
                              * On Failure of Login authentication, clear the authentication token 
                              */
-                            self.saveToken({});
+                            self.saveToken(null);
                             //Page.gotoPage('/login');
                             //await setToken(null);
                             ///onFailure();
                         }
                     })
                     .catch(async function (error) {
-                        self.saveToken({});
+                        self.saveToken(null);
                         // console.log({ error: error });
                     });
             }

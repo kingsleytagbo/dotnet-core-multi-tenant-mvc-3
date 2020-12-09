@@ -31,6 +31,12 @@
             }
         },
 
+        /* logout this user by removing authentication */
+        logout: function () {
+            database.logout(Page.getAuthenticationKey());
+            Page.gotoPage('/login');
+        },
+
         validate: function (elements) {
             let isValid = true;
 
