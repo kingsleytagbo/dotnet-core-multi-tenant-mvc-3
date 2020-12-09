@@ -36,10 +36,12 @@ IOptions<List<Tenant>> tenants, IHttpContextAccessor httpContextAccessor) : base
 
         public IActionResult Index()
         {
-            @ViewData["Title"] = "Login";
-            @ViewData["Tenant"] = this._tenant;
-            @ViewData["Layout"] = this._tenant.Template;
-            // var login = new { auth_site= "d62c03a2-57b6-4e14-8153-d05d3aa9ab10", username="Kingsley", password= "..gmail.com", rememberme=false  };
+            @ViewData["Title"] = "Home";
+            List<wp_image> result = Images.GetAll(this._connectionString, null, null);
+            return View(result);
+
+            /*
+            var login = new { auth_site= "d62c03a2-57b6-4e14-8153-d05d3aa9ab10", username="Kingsley", password= "..gmail.com", rememberme=false  };
             var headers = new Dictionary<string, string>(){
                 {
                     "auth_site", "d62c03a2-57b6-4e14-8153-d05d3aa9ab10"
@@ -54,11 +56,12 @@ IOptions<List<Tenant>> tenants, IHttpContextAccessor httpContextAccessor) : base
                     "rememberme", "false"
                 }
             };
+            /*
             var result = this.PostHttpRequest("/api/account/login", headers, null);
-
             var data = Posts.GetAllPosts(this._connectionString, null, null);
+            */
 
-            return View(data);
+
         }
 
         public IActionResult AskAQuestion()

@@ -30,7 +30,7 @@ namespace KT.Core.Mvc.Business
 
             var _connection = GetConnection(connection, connectionString);
 
-            var sQuery = "SELECT TOP 1000 * FROM wp_image ";
+            var sQuery = "SELECT TOP 100 * FROM wp_image ";
 
             result = _connection.Query<wp_image>(sQuery, new
             {

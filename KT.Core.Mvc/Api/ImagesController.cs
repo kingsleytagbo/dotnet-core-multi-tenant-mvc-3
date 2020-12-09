@@ -108,28 +108,31 @@ namespace KT.Core.Mvc.Api
 
                             var postChild = new wp_post()
                             {
-                                post_name = category,
                                 post_parent = parentPostId.Value,
+                                post_name = category,
                                 post_content = category,
-                                comment_count = 0,
-                                guid = Guid.NewGuid().ToString(),
+
                                 post_status = "active",
                                 post_type = "image",
                                 post_date = DateTime.Now,
                                 post_title = category,
-                                to_ping = "",
-                                post_date_gmt = DateTime.Now,
-                                post_modified = DateTime.Now,
-                                post_modified_gmt = DateTime.Now,
-                                site_id = 1,
+
                                 comment_status = "",
                                 post_mime_type = "",
-                                post_password = "",
-                                pinged = "",
-                                ping_status = "",
+                                guid = Guid.NewGuid().ToString(),
                                 post_author = 0,
                                 post_content_filtered = "",
                                 post_excerpt = "",
+
+                                to_ping = "",
+                                post_password = "",
+                                pinged = "",
+                                ping_status = "",
+                                post_date_gmt = DateTime.Now,
+                                post_modified = DateTime.Now,
+                                post_modified_gmt = DateTime.Now,
+                                comment_count = 0,
+                                site_id = 1,
                             };
 
                             var newChildPostId = Posts.Create(postChild, tenant.ConnectionString, null, null);

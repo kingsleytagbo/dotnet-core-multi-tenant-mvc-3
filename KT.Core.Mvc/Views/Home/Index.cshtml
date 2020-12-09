@@ -1,13 +1,25 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
     @using KT.Core.Mvc.Models;
 }
-
-<div class="text-center">
-    <ol>
-        @foreach (wp_post post in Model)
+<h1 class="text-center">@ViewData["Title"]: Images </h1>
+@if (Model != null && Model.Count > 0)
+{
+    foreach (wp_image item in Model)
+    {
+        @if (item.content != null && item.content.Length > 0)
         {
-            <li><a href="~/@post.post_name" target="_new" class="btn btn-block">@post.post_name</a></li>
+            <div class="row">
+                <div class="col-sm-12">
+                    <a href="#" class="thumbnail">
+                        <p class="text-center">@item.name</p>
+                        <img class="rounded mx-auto" src="data:image/png;base64,@Convert.ToBase64String(item.content)" alt="@item.name" title="@item.name">
+                    </a>
+                </div>
+            </div>
         }
-    </ol>
-</div>
+    }
+}
+else
+{
+    <h3 class="text-center">No images have been added ...</h3>
+}
