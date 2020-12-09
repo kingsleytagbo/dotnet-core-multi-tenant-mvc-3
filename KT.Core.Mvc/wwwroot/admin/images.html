@@ -108,6 +108,7 @@
                             <div class="row">
                                 <div class="col-sm-2">
                                     <input type="hidden" id="page" />
+                                    <input type="hidden" id="total" />
                                     <select class="form-control" id="pageSize" onchange="AdminPageModule.loadData()">
                                         <option value="1" selected>1</option>
                                         <option value="2">2</option>
@@ -256,14 +257,18 @@
                     request
                         .then(response => response.json())
                         .then(function (result) {
-                            // console.log({ result: result });
+                            const data = result.data;
+                            const total = result.total || 1;
+                            $('#total').val(total);
+                            console.log({ result: result });
                             let html = '';
-                            let count = result.length + 1;
+                            let count = data.length + 1;
+
 
                             database.removeAll(DATA_KEYID);
-                            database.save(DATA_KEYID, result);
+                            database.save(DATA_KEYID, data);
 
-                            $.each(result, function (key, item) {
+                            $.each(data, function (key, item) {
                                 /* save the values on the form to a data store */
                                 //database.save(DATA_KEYID, item);
 
@@ -450,10 +455,10 @@
 
         $(function () {
             $('#paginator').Pagination({
-                size: 87,
-                pageShow: 5,
+                size:  ($('#total').val() || 1),
+                pageShow: 1,
                 page: 1,
-                limit: 10,
+                limit: 1,
             }, function (obj) {
                 $('#info').html('Current page: ' + obj.page);
                 $('#page').val(obj.page);

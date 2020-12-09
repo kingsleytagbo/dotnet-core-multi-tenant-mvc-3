@@ -42,6 +42,21 @@ namespace KT.Core.Mvc.Business
             return result;
         }
 
+        public static int GetTotal(string connectionString,IDbConnection connection = null, IDbTransaction transaction = null)
+        {
+            int result = 0;
+
+            var _connection = GetConnection(connection, connectionString);
+
+            var sQuery = "SELECT Count(*) FROM wp_image; ";
+
+            result = _connection.Query<int>(sQuery, new
+            {
+            }, transaction: transaction).First();
+
+            return result;
+        }
+
         public static Int64 Create(wp_image image, string connectionString, IDbConnection connection, IDbTransaction transaction)
         {
             var _connection = GetConnection(connection, connectionString);

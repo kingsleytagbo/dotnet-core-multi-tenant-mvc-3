@@ -47,9 +47,18 @@ namespace KT.Core.Mvc.Api
             if (tenant != null)
             {
                 result = Images.GetAll(tenant.ConnectionString, page, pageSize, null, null);
+                var total = Images.GetTotal(tenant.ConnectionString);
                 if (result != null)
                 {
-                    return Ok(result);
+                    return Ok(
+                        new
+                        {
+                            data = result,
+                            total = total,
+                            page = page,
+                            pageSize = pageSize
+                        }
+                      );
                 }
             }
 
