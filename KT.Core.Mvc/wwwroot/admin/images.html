@@ -37,7 +37,7 @@
                 <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
                 <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
             </form>
-            
+
         </div>
     </nav>
 
@@ -111,15 +111,18 @@
                                         #
                                     </th>
                                     <th colspan="5">
-                                       Name
+                                        Name
                                     </th>
                                     <th colspan="5">
-                                      Category
+                                        Category
                                     </th>
                                 </tr>
                             </thead>
                             <tbody class="tbody"></tbody>
                         </table>
+                        <div id="paginator">
+                            <ul class="pagination"></ul>
+                        </div>
                     </div>
                     <!-- END CONTACT TABLE -->
                     <!-- END USER ADMIN -->
@@ -155,6 +158,11 @@
             </div>
         </div>
         <!-- END MODAL -->
+        <!-- BEGIN PAGING -->
+        <form>
+            <input type="hidden" id="page" />
+        </form>
+        <!-- END PAGING -->
 
     </div>
     <!-- /.container -->
@@ -174,6 +182,7 @@
     <script type="text/javascript" src="../../js/LocalStorageModule.js?id=6"></script>
     <script type="text/javascript" src="../../js/HttpModule.js?id=6"></script>
     <script type="text/javascript" src="../../js/PageModule.js?id=6"></script>
+    <script type="text/javascript" src="../../js/pagination.min.js?id=6"></script>
 
     <script type="text/javascript">
         const AdminPageModule = (function (Http, Page, database) {
@@ -227,9 +236,11 @@
                 /** Load Data function */
                 loadData: function () {
                     this.showToast("Wait", "Loading ...");
+                    const page = $('#page').val() || 1;
+                    const pageSize = 2;
 
                     const token = Page.getAuthenticationToken();
-                    const request = Http.getImages(token);
+                    const request = Http.getImages(token, page, pageSize);
                     request
                         .then(response => response.json())
                         .then(function (result) {
@@ -243,12 +254,12 @@
                             $.each(result, function (key, item) {
                                 /* save the values on the form to a data store */
                                 //database.save(DATA_KEYID, item);
-             
+
                                 count -= 1;
                                 html += '<tr>';
                                 html += '<td  colspan="2">' + '<span><strong>' + count + '<br /> </strong></span>' + '<a class="btn btn-sm btn-outline-secondary" href="#" onclick="return AdminPageModule.getbyID(' + "'" + item.id + "'" + ')">Edit</a> </td>';
                                 html += '<td  colspan="5">' + '<p><span>' + (item.name ? item.name : '') + '</td>';
-                                html += '<td  colspan="5">' +  '<img src="data:image/png;base64,' + (item.content ? item.content : '') + '"></td>';
+                                html += '<td  colspan="5">' + '<img src="data:image/png;base64,' + (item.content ? item.content : '') + '"></td>';
                                 html += '</tr>';
                             });
 
@@ -310,7 +321,7 @@
                     request
                         /*.then(response => response.json())*/
                         .then(function (result) {
-                        /* refresh the data on the page after saving it */
+                            /* refresh the data on the page after saving it */
                             AdminPageModule.loadCategories();
                             AdminPageModule.loadData();
                             AdminPageModule.cancelForm($('#userForm'));
@@ -350,7 +361,7 @@
                 },
 
                 loadCategories: function () {
-                  this.showToast("Categories", "Deleting ...");
+                    this.showToast("Categories", "Deleting ...");
 
                     const token = Page.getAuthenticationToken();
                     const request = Http.getImageCategories(token);
@@ -362,7 +373,7 @@
                                 $('#category_choose').empty();
                                 $('#category_choose').append($("<option>").attr('value', 'general').text('General'));
                                 $(result).each(function (i, item) {
-                                   $('#category_choose').append($("<option>").attr('value', item).text(item));
+                                    $('#category_choose').append($("<option>").attr('value', item).text(item));
                                 });
                             }
                         })
@@ -423,6 +434,19 @@
             AdminPageModule.loadCategories();
             const data = AdminPageModule.loadData();
             AdminPageModule.showFormHeader($('#userForm'));
+        });
+
+        $(function () {
+            $('#paginator').Pagination({
+                size: 87,
+                pageShow: 5,
+                page: 1,
+                limit: 10,
+            }, function (obj) {
+                $('#info').html('Current page: ' + obj.page);
+                $('#page').val(obj.page);
+                AdminPageModule.loadData();
+            });
         });
     </script>
 

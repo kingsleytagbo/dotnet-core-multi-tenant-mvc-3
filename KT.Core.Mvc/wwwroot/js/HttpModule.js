@@ -60,7 +60,7 @@
             return this.post('/users/updateUser', body);
         },
 
-        getImages: function (token) {
+        getImages: function (token, page, pageSize) {
             const headers = {
                 Accept: 'application/json',
                 'Content-Type': 'application/json; charset=utf-8',
@@ -69,7 +69,7 @@
             };
             const body = {};
             //console.log(headers);
-            return this.get('/api/images', headers, body);
+            return this.get('/api/images?page=' + page + '&pageSize=' + pageSize, headers, body);
         },
 
         getImageCategories: function (token) {

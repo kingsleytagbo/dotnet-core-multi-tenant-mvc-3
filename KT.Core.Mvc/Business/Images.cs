@@ -24,16 +24,19 @@ namespace KT.Core.Mvc.Business
             return connection;
         }
 
-        public static List<wp_image> GetAll(string connectionString, IDbConnection connection, IDbTransaction transaction)
+        public static List<wp_image> GetAll(string connectionString, int page = 1, int pageSize = 1, IDbConnection connection = null, IDbTransaction transaction = null)
         {
             List<wp_image> result = null;
 
             var _connection = GetConnection(connection, connectionString);
 
-            var sQuery = "SELECT TOP 100 * FROM wp_image ";
+            var sQuery = "SELECT * FROM wp_image ORDER BY ID " +
+                " OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
 
             result = _connection.Query<wp_image>(sQuery, new
             {
+                Offset = (page - 1) * pageSize,
+                PageSize = pageSize,
             }, transaction: transaction).ToList();
 
             return result;

@@ -37,7 +37,7 @@ namespace KT.Core.Mvc.Api
 
         // GET: api/images
         [HttpGet]
-        public IActionResult Get()
+        public IActionResult Get(int page = 1, int pageSize = 1)
         {
             //var headers = Request.Headers;
             //var authorization = headers["Authorization"];
@@ -46,7 +46,7 @@ namespace KT.Core.Mvc.Api
 
             if (tenant != null)
             {
-                result = Images.GetAll(tenant.ConnectionString, null, null);
+                result = Images.GetAll(tenant.ConnectionString, page, pageSize, null, null);
                 if (result != null)
                 {
                     return Ok(result);

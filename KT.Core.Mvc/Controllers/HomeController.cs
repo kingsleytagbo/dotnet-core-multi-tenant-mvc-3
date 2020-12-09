@@ -37,7 +37,7 @@ IOptions<List<Tenant>> tenants, IHttpContextAccessor httpContextAccessor) : base
         public IActionResult Index()
         {
             @ViewData["Title"] = "Home";
-            List<wp_image> result = Images.GetAll(this._connectionString, null, null);
+            List<wp_image> result = Images.GetAll(this._connectionString);
             return View(result);
 
             /*
