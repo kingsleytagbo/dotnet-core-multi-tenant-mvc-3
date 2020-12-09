@@ -99,12 +99,46 @@ namespace KT.Core.Mvc.Api
 
                     if (parentPostId.HasValue)
                     {
+                        var image = Images.GetImageBytes(url, new wp_image() { url = url, name = name, site_id = 1 });
+                        using (var transaction = new System.Transactions.TransactionScope())
+                        {
+                            var newImageId = Images.Create(image, tenant.ConnectionString, null, null);
 
+                            var postChild = new wp_post()
+                            {
+                                post_name = category,
+                                post_parent = parentPostId.Value,
+                                post_content = category,
+                                comment_count = 0,
+                                guid = Guid.NewGuid().ToString(),
+                                post_status = "active",
+                                post_type = "image",
+                                post_date = DateTime.Now,
+                                post_title = category,
+                                to_ping = "",
+                                post_date_gmt = DateTime.Now,
+                                post_modified = DateTime.Now,
+                                post_modified_gmt = DateTime.Now,
+                                site_id = 1,
+                                comment_status = "",
+                                post_mime_type = "",
+                                post_password = "",
+                                pinged = "",
+                                ping_status = "",
+                                post_author = 0,
+                                post_content_filtered = "",
+                                post_excerpt = "",
+                            };
+
+                            var newChildPostId = Posts.Create(post_parent, tenant.ConnectionString, null, null);
+                            if(newImageId > 0 && newChildPostId > 0)
+                            {
+                                transaction.Complete();
+                            }
+                        }
                     }
 
                     return;
-                    var image = Images.GetImageBytes(url, new wp_image() { url = url, name = name, site_id = 1 });
-                    result = Images.Create(image, tenant.ConnectionString, null, null);
                 }
             }
         }
