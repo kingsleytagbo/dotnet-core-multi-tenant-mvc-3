@@ -106,11 +106,10 @@
                         <h3 class="text-center"> Manage Images</h3>
                         <form>
                             <div class="row">
-                                <div class="col-sm-3">
-
+                                <div class="col-sm-2">
                                     <input type="hidden" id="page" />
                                     <select class="form-control" id="pageSize" onchange="AdminPageModule.loadData()">
-                                        <option value="1">1</option>
+                                        <option value="1" selected>1</option>
                                         <option value="2">2</option>
                                         <option value="4">4</option>
                                         <option value="6">6</option>
@@ -118,7 +117,7 @@
 
                                     <!-- END PAGING -->
                                 </div>
-                                <div class="col-sm-9 mx-auto">
+                                <div class="col-sm-10 mx-auto">
                                     <div id="paginator">
                                         <ul class="pagination"></ul>
                                     </div>
