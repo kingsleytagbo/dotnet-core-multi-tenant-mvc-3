@@ -349,10 +349,10 @@
                         .then(function (result) {
                             console.log(result)
                             if (result) {
-                                $('#category-create').empty();
-                                $('#category-create').append($("<option>").attr('value', 'general').text('General'));
+                                $('#category-choose').empty();
+                                $('#category-choose').append($("<option>").attr('value', 'general').text('General'));
                                 $(result).each(function (i, item) {
-                                   $('#category-create').append($("<option>").attr('value', item).text(item));
+                                   $('#category-choose').append($("<option>").attr('value', item).text(item));
                                 });
                             }
                         })
