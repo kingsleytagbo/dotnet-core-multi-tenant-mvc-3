@@ -334,9 +334,16 @@
                     const token = Page.getAuthenticationToken();
                     const request = Http.deleteImage(token, model[DATA_KEYID]);
 
-                    AdminPageModule.cancelForm($('#userForm'));
-                    AdminPageModule.loadCategories();
-                    AdminPageModule.loadData();
+                    request
+                        .then(response => response.json())
+                        .then(function (result) {
+                            AdminPageModule.cancelForm($('#userForm'));
+                            AdminPageModule.loadCategories();
+                            AdminPageModule.loadData();
+                        })
+                        .catch(async function (error) {
+                            console.log({ error: error });
+                        });
                 },
 
                 loadCategories: function () {
