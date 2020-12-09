@@ -299,30 +299,14 @@
                     request
                         .then(response => response.json())
                         .then(function (result) {
-                            console.log({ result: result });
-                            let html = '';
-                            let count = result.length + 1;
-
-                            $.each(result, function (key, item) {
-                                /* save the values on the form to a data store */
-                                database.save(DATA_KEYID, item);
-                                count -= 1;
-                                html += '<tr>';
-                                html += '<td  colspan="2">' + '<span><strong>' + count + '<br /> </strong></span>' + '<a class="btn btn-sm btn-outline-secondary" href="#" onclick="return AdminPageModule.getbyID(' + "'" + item.id + "'" + ')">Edit</a> </td>';
-                                html += '<td  colspan="5">' + '<p><span>' + (item.url ? item.url : '') + '</td>';
-                                html += '<td  colspan="5">' + '<p><span>' + (item.name ? item.name : '') + '</td>';
-                                html += '</tr>';
-                            });
-
-                            $('.tbody').html(html);
+                            /* refresh the data on the page after saving it */
+                            AdminPageModule.loadData();
+                            AdminPageModule.cancelForm($('#userForm'));
                         })
                         .catch(async function (error) {
                             console.log({ error: error });
                         });
-                    AdminPageModule.cancelForm($('#userForm'));
 
-                    /* refresh the data on the page after saving it */
-                    AdminPageModule.loadData();
                 },
 
                 deleteForm: function () {

@@ -58,6 +58,7 @@ namespace KT.Core.Mvc.Api
 
         // POST: api/AccountsContoller
         [HttpPost]
+        [Authorize]
         public void Post([FromHeader] string url)
         {
             var tenant = this.GetTenant();
