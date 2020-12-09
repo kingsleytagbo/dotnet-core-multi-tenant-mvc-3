@@ -34,10 +34,15 @@ IOptions<List<Tenant>> tenants, IHttpContextAccessor httpContextAccessor) : base
             _connectionString = _tenant.ConnectionString;
     }
 
-        public IActionResult Index()
+        public IActionResult Index(int page = 1, string search = null)
         {
             @ViewData["Title"] = "Home";
-            List<wp_image> result = Images.GetAll(this._connectionString);
+            var pageSize = 1;
+            var total = Images.GetTotal(this._connectionString);
+            List<wp_image> result = Images.GetAll(this._connectionString, page, pageSize);
+
+            var pager = new Pager(total, page, 1, search);
+            ViewData["Pager"] = pager;
             return View(result);
 
             /*

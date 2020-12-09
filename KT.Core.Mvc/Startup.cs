@@ -205,6 +205,11 @@ namespace KT.Core.Mvc
                         pattern: "{id}",
                       defaults: new { controller = "Home", action = "Slug" });
 
+                endpoints.MapControllerRoute(
+                name: "pagination",
+                pattern: "page/{page}",
+                defaults: new { controller = "Home", action = "index" });
+
             });
 
             #endregion ORIGINAL

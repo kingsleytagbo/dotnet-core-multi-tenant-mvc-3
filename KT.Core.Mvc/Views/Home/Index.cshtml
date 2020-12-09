@@ -1,7 +1,61 @@
 ﻿@{
     @using KT.Core.Mvc.Models;
+    var Pager = (KT.Core.Mvc.Business.Pager) ViewData["Pager"];
+}
+@functions{
+    public string GetSearchUrl(string search)
+    {
+        var result = string.Empty;
+        if (!string.IsNullOrEmpty(search))
+        {
+            result = string.Format("/?search={0}", search);
+        }
+        return result;
+    }
 }
 <h1 class="text-center">@ViewData["Title"]: Images </h1>
+<!-- BEGIN PAGER -->
+<div class="row mt-2 pt-2">
+    <div class="col-1"></div>
+    <div class="col-10">
+        <div class="">
+            @if (Pager.EndPage > 1)
+            {
+                <ul class="pagination justify-content-center">
+                    @if (Pager.CurrentPage > 1)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="~/page/1@(GetSearchUrl(Pager.SearchString))">First</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="~/page/@(Pager.CurrentPage - 1)@(GetSearchUrl(Pager.SearchString))">Previous</a>
+                        </li>
+                    }
+
+                    @for (var item = Pager.StartPage; item <= Pager.EndPage; item++)
+                    {
+                        <li class="page-item @(item == Pager.CurrentPage ? "active" : "")">
+                            <a class="page-link" href="~/page/@item@(GetSearchUrl(Pager.SearchString))"> @item</a>
+                        </li>
+                    }
+
+                    @if (Pager.CurrentPage < Pager.TotalPages)
+                    {
+                        <li class="page-item">
+                            <a class="page-link" href="~/page/@(Pager.CurrentPage + 1)@(GetSearchUrl(Pager.SearchString))">Next</a>
+                        </li>
+                        <li class="page-item">
+                            <a class="page-link" href="~/page/@(Pager.TotalPages)@(GetSearchUrl(Pager.SearchString))">Last</a>
+                        </li>
+                    }
+                </ul>/**/
+                                /**/
+                            }
+        </div>
+    </div>
+    <div class="col-1"></div>
+</div>
+<!-- END PAGER-->
 @if (Model != null && Model.Count > 0)
 {
     foreach (wp_image item in Model)
