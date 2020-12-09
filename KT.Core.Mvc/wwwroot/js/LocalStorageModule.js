@@ -23,7 +23,7 @@ const LocalStorageModule = new function () {
     this.sort = function (data) {
         let sortSorted = data.sort(function (first, second) {
             if (first.sort === second.sort) {
-                return (second.lastName > first.lastName ? 1 : -1);
+                return (second.id > first.id ? 1 : -1);
             }
             return (second.sort - first.sort);
         });

@@ -61,7 +61,7 @@
 
                                     <div class="form-group col-6 col-sm-6">
                                         <label>Choose a Category:</label>
-                                        <select class="form-control" id="category-choose" onchange="AdminPageModule.setCategory()">
+                                        <select class="form-control" id="category_choose" onchange="AdminPageModule.setCategory()">
                                             <option value="general">General</option>
                                         </select>
                                     </div>
@@ -171,9 +171,9 @@
     <script src="/js/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="/js/bootstrap/4.5/bootstrap.min.js" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="../../js/LocalStorageModule.js?id=5"></script>
-    <script type="text/javascript" src="../../js/HttpModule.js?id=5"></script>
-    <script type="text/javascript" src="../../js/PageModule.js?id=5"></script>
+    <script type="text/javascript" src="../../js/LocalStorageModule.js?id=6"></script>
+    <script type="text/javascript" src="../../js/HttpModule.js?id=6"></script>
+    <script type="text/javascript" src="../../js/PageModule.js?id=6"></script>
 
     <script type="text/javascript">
         const AdminPageModule = (function (Http, Page, database) {
@@ -237,9 +237,13 @@
                             let html = '';
                             let count = result.length + 1;
 
+                            database.removeAll(DATA_KEYID);
+                            database.save(DATA_KEYID, result);
+
                             $.each(result, function (key, item) {
                                 /* save the values on the form to a data store */
-                                database.save(DATA_KEYID, item);
+                                //database.save(DATA_KEYID, item);
+             
                                 count -= 1;
                                 html += '<tr>';
                                 html += '<td  colspan="2">' + '<span><strong>' + count + '<br /> </strong></span>' + '<a class="btn btn-sm btn-outline-secondary" href="#" onclick="return AdminPageModule.getbyID(' + "'" + item.id + "'" + ')">Edit</a> </td>';
@@ -247,6 +251,7 @@
                                 html += '<td  colspan="5">' +  '<img src="data:image/png;base64,' + (item.content ? item.content : '') + '"></td>';
                                 html += '</tr>';
                             });
+
 
                             $('.tbody').html(html);
                         })
@@ -258,16 +263,14 @@
                 /** Select one item using a unique key */
                 getbyID: function (ID) {
 
-                    //get one item from a collection based on the item's unique key
-                    let result = database.selectOne(ID, DATA_KEYID);
-                    //console.log({ ID: ID, DATA_KEYID: DATA_KEYID, result: result })
+                    /* get one item from a collection based on the item's unique key */
+                    const result = database.selectOne(ID, DATA_KEYID);
 
                     // Put the value of each field back into the form
                     $('#' + formName).find('input, select, textarea').each(function () {
                         let id = $(this).attr('id');
                         let val = (result[id]) || '';
                         $(this).val(val);
-                        console.log({ id: id, val: val, result: result });
                     });
 
                     $('#' + formName).closest('.card').find('.card-body').show();
