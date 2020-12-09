@@ -16,6 +16,17 @@
             $(form).closest('.card').find('.card-footer').toggle();
         },
 
+        toggleAdminMenu: function () {
+            const auth_token = this.getAuthenticationToken();
+            console.log({ auth_token: auth_token });
+            if (auth_token && auth_token.length) {
+                $('#navItemAdminMenu').show();
+            }
+            else {
+                $('#navItemAdminMenu').show();
+            }
+        },
+
         validate: function (elements) {
             let isValid = true;
 
