@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace KT.Core.Mvc.Models
 {
-    [Table("wp_posts  ")]
+    [Table("wp_post")]
     public class wp_post
     {
         [Key]
