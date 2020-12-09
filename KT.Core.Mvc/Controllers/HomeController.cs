@@ -98,6 +98,12 @@ IOptions<List<Tenant>> tenants, IHttpContextAccessor httpContextAccessor) : base
             return View();
         }
 
+        public IActionResult Search(string search)
+        {
+            @ViewData["Title"] = search;
+            return View();
+        }
+
         public IActionResult Slug(string id)
         {
             @ViewData["Title"] = id;
