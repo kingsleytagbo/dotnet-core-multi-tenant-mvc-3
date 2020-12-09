@@ -1,18 +1,18 @@
 ﻿@{
     @using KT.Core.Mvc.Models;
 }
-<h1 class="text-center">Search Results for: (@ViewData["Title"])</h1>
+    <h1 class="text-center">@ViewData["Title"]: Search Results </h1>
 @if (Model != null && Model.Count > 0)
 {
     foreach (wp_image item in Model)
     {
-        <li><a href="~/@item.url" target="_new" class="btn btn-block">@item.name</a></li>
         @if (item.content != null && item.content.Length > 0)
         {
             <div class="row">
-                <div class="col-sm-6 col-md-3">
+                <div class="col-sm-12">
                     <a href="#" class="thumbnail">
-                        <img src="data:image/png;base64,@Convert.ToBase64String(item.content)" alt="@item.name" title="@item.name">
+                        <p class="text-center">@item.name</p>
+                        <img class="rounded mx-auto" src="data:image/png;base64,@Convert.ToBase64String(item.content)" alt="@item.name" title="@item.name">
                     </a>
                 </div>
             </div>
@@ -21,5 +21,5 @@
 }
 else
 {
-    <h3>No matching results found ...</h3>
+    <h3 class="text-center">No matching results found ...</h3>
 }
