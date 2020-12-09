@@ -83,6 +83,10 @@
 
         useApi: function () {
             return true;
+        },
+
+       init: function (key, item) {
+            return true;
         }
     }
 

@@ -9,5 +9,6 @@ namespace KT.Core.Mvc.Models
         public string Template { get; set; }
         public string Host { get; set; }
         public string ConnectionString { get; set; }
+        public string ApiUrl { get; set; }
     }
 }

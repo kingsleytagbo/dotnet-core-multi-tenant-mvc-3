@@ -1,4 +1,7 @@
 ﻿@{
+    var tenant = ((Tenant)ViewData["Tenant"]);
+    var apiKey = (tenant != null && !string.IsNullOrEmpty(tenant.Key)) ? tenant.Key : string.Empty;
+    var apiUrl = (tenant != null && !string.IsNullOrEmpty(tenant.ApiUrl)) ? tenant.ApiUrl : string.Empty;
 }
 <h1>@ViewData["Title"]</h1>
 
@@ -57,8 +60,10 @@
 <!--BEGIN JAVASCRIPT CODE -->
 
 <script type="text/javascript">
-
     const LoginModule = LoginPageModule;
+    const apiKey = '@apiKey';
+    const apiUrl = '@apiUrl';
+    PageModule.init(apiKey, apiUrl);
     $(document).ready(function () {
         LoginModule.init();
     });
