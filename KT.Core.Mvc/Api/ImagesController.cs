@@ -132,7 +132,7 @@ namespace KT.Core.Mvc.Api
                                 post_excerpt = "",
                             };
 
-                            var newChildPostId = Posts.Create(post_parent, tenant.ConnectionString, null, null);
+                            var newChildPostId = Posts.Create(postChild, tenant.ConnectionString, null, null);
                             if(newImageId > 0 && newChildPostId > 0)
                             {
                                 transaction.Complete();
