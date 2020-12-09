@@ -246,7 +246,7 @@
                     });
                 },
 
-                /** Load Data function */
+               /** Load Data function */
                 loadData: function () {
                     this.showToast("Wait", "Loading ...");
                     const page = $('#page').val() || 1;
@@ -260,7 +260,7 @@
                             const data = result.data;
                             const total = result.total || 1;
                             $('#total').val(total);
-                            console.log({ result: result });
+                           //console.log({ result: result, total :  $('#total').val()});
                             let html = '';
                             let count = data.length + 1;
 
@@ -270,7 +270,6 @@
 
                             $.each(data, function (key, item) {
                                 /* save the values on the form to a data store */
-                                //database.save(DATA_KEYID, item);
 
                                 count -= 1;
                                 html += '<tr>';
@@ -455,10 +454,10 @@
 
         $(function () {
             $('#paginator').Pagination({
-                size:  ($('#total').val() || 1),
-                pageShow: 1,
+                size: 40,
+                pageShow: 4,
                 page: 1,
-                limit: 1,
+                limit: 10,
             }, function (obj) {
                 $('#info').html('Current page: ' + obj.page);
                 $('#page').val(obj.page);
