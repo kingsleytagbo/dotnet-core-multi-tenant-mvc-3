@@ -111,10 +111,10 @@
                                         #
                                     </th>
                                     <th colspan="5">
-                                       Url
+                                       Name
                                     </th>
                                     <th colspan="5">
-                                       Path
+                                      Category
                                     </th>
                                 </tr>
                             </thead>
@@ -178,7 +178,8 @@
     <script type="text/javascript">
         const AdminPageModule = (function (Http, Page, database) {
             /* your module code goes here */
-            const DATA_KEYID = 'id';
+            const DATA_KEYID = 'image_id';
+            const MODEL_KEYID = 'id';
             const formName = 'userForm';
 
             return {
@@ -242,7 +243,7 @@
                                 count -= 1;
                                 html += '<tr>';
                                 html += '<td  colspan="2">' + '<span><strong>' + count + '<br /> </strong></span>' + '<a class="btn btn-sm btn-outline-secondary" href="#" onclick="return AdminPageModule.getbyID(' + "'" + item.id + "'" + ')">Edit</a> </td>';
-                                html += '<td  colspan="5">' + '<p><span>' + (item.url ? item.url : '') + '</td>';
+                                html += '<td  colspan="5">' + '<p><span>' + (item.name ? item.name : '') + '</td>';
                                 html += '<td  colspan="5">' +  '<img src="data:image/png;base64,' + (item.content ? item.content : '') + '"></td>';
                                 html += '</tr>';
                             });
@@ -266,6 +267,7 @@
                         let id = $(this).attr('id');
                         let val = (result[id]) || '';
                         $(this).val(val);
+                        console.log({ id: id, val: val, result: result });
                     });
 
                     $('#' + formName).closest('.card').find('.card-body').show();
@@ -300,7 +302,7 @@
 
                     /* save the values on the form to a data store */
                     /* database.save(DATA_KEYID, model); */
-                    const request = model[DATA_KEYID].trim().length > 0 ? Http.updateImage(token, model, model[DATA_KEYID]) : Http.createImage(token, model);
+                    const request = model[MODEL_KEYID].trim().length > 0 ? Http.updateImage(token, model, model[MODEL_KEYID]) : Http.createImage(token, model);
 
                     request
                         /*.then(response => response.json())*/
@@ -330,7 +332,7 @@
                     database.removeOne(DATA_KEYID, model);
 
                     const token = Page.getAuthenticationToken();
-                    const request = Http.deleteImage(token, model[DATA_KEYID]);
+                    const request = Http.deleteImage(token, model[MODEL_KEYID]);
 
                     request
                         .then(response => response.json())
