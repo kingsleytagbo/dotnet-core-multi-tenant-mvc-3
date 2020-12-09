@@ -347,10 +347,12 @@
                     request
                         .then(response => response.json())
                         .then(function (result) {
-                            if (result && result.length > 0) {
-                                $('#').empty();
-                                $.each(result, function (key, item) {
-                                    $('#').append($("<option>".attr('value', item).text(item));
+                            console.log(result)
+                            if (result) {
+                                $('#category-create').empty();
+                                $('#category-create').append($("<option>").attr('value', 'general').text('General'));
+                                $(result).each(function (i, item) {
+                                   $('#category-create').append($("<option>").attr('value', item).text(item));
                                 });
                             }
                         })
