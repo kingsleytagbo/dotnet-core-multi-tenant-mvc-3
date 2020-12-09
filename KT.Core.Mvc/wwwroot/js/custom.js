@@ -7,6 +7,6 @@
 }(PageModule));
 
  $(document).ready(function () {
-     console.log(SiteModule.init());
+     SiteModule.init();
      //SiteModule.loadCategories();
  });

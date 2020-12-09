@@ -33,7 +33,7 @@
 
         /* logout this user by removing authentication */
         logout: function () {
-            database.logout(Page.getAuthenticationKey());
+            database.logout(this.getAuthenticationKey());
             Page.gotoPage('/login');
         },
 
