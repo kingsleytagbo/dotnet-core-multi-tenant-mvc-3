@@ -18,7 +18,7 @@
 
         toggleAdminMenu: function () {
             const auth_token = this.getAuthenticationToken();
-            console.log({ auth_token: auth_token });
+            // console.log({ auth_token: auth_token });
             if (auth_token && auth_token.length) {
                 $('#navItemAdminMenu').show();
                 $('#navItemLogin').hide();
@@ -33,8 +33,8 @@
 
         /* logout this user by removing authentication */
         logout: function () {
-            database.logout(this.getAuthenticationKey());
-            Page.gotoPage('/login');
+            this.saveAuthenticationToken(null);
+            this.gotoPage('/login');
         },
 
         validate: function (elements) {
