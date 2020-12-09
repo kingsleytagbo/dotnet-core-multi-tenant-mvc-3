@@ -187,6 +187,29 @@ namespace KT.Core.Mvc.Api
         /// Authenticates a User / Account
         /// </summary>
         /// <returns>Return a valid user account or null if authentication is unsuccessful</returns>
+        [HttpGet("categories")]
+        public IActionResult Categoriess()
+        {
+            List<string> result = null;
+            var tenant = this.GetTenant();
+
+            if (tenant != null)
+            {
+                result = Posts.GetImageCategories(tenant.ConnectionString, null, null);
+                if (result != null)
+                {
+                    return Ok(result);
+                }
+            }
+
+            return BadRequest(result);
+        }
+
+
+        /// <summary>
+        /// Authenticates a User / Account
+        /// </summary>
+        /// <returns>Return a valid user account or null if authentication is unsuccessful</returns>
         [HttpPost("search")]
         public IActionResult Search(
             [FromHeader] string name)

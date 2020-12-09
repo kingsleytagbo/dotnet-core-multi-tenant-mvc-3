@@ -78,5 +78,21 @@ namespace KT.Core.Mvc.Business
 
             return result;
         }
+
+        public static List<string> GetImageCategories(string connectionString, IDbConnection connection, IDbTransaction transaction)
+        {
+            List<string> result = null;
+
+            var _connection = GetConnection(connection, connectionString);
+
+            var sQuery = "SELECT DISTINCT POST_NAME FROM wp_post WHERE ( (post_type = @post_type) AND (post_parent = 0) ) ";
+
+            result = _connection.Query<string>(sQuery, new
+            {
+                post_type = "image",
+            }, transaction: transaction).ToList();
+
+            return result;
+        }
     }
 }

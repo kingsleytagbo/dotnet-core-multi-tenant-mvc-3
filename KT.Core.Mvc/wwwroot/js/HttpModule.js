@@ -72,6 +72,18 @@
             return this.get('/api/images', headers, body);
         },
 
+        getImageCategories: function (token) {
+            const headers = {
+                Accept: 'application/json',
+                'Content-Type': 'application/json; charset=utf-8',
+                auth_site: public_key,
+                'Authorization': 'Bearer ' + token
+            };
+            const body = {};
+            //console.log(headers);
+            return this.get('/api/images/categories', headers, body);
+        },
+
         createImage: function (token, model) {
 
             const headers = {

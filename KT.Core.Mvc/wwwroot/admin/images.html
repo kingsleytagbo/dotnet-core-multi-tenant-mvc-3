@@ -228,8 +228,8 @@
                 /** Load Data function */
                 loadData: function () {
                     this.showToast("Wait", "Loading ...");
-                    const token = Page.getAuthenticationToken();
 
+                    const token = Page.getAuthenticationToken();
                     const request = Http.getImages(token);
                     request
                         .then(response => response.json())
@@ -307,7 +307,8 @@
                     request
                         .then(response => response.json())
                         .then(function (result) {
-                            /* refresh the data on the page after saving it */
+                        /* refresh the data on the page after saving it */
+                            AdminPageModule.loadCategories();
                             AdminPageModule.loadData();
                             AdminPageModule.cancelForm($('#userForm'));
                         })
@@ -334,7 +335,28 @@
                     const request = Http.deleteImage(token, model[DATA_KEYID]);
 
                     AdminPageModule.cancelForm($('#userForm'));
+                    AdminPageModule.loadCategories();
                     AdminPageModule.loadData();
+                },
+
+                loadCategories: function () {
+                  this.showToast("Categories", "Deleting ...");
+
+                    const token = Page.getAuthenticationToken();
+                    const request = Http.getImageCategories(token);
+                    request
+                        .then(response => response.json())
+                        .then(function (result) {
+                            if (result && result.length > 0) {
+                                $('#').empty();
+                                $.each(result, function (key, item) {
+                                    $('#').append($("<option>".attr('value', item).text(item));
+                                });
+                            }
+                        })
+                        .catch(async function (error) {
+                            console.log({ error: error });
+                        });
                 },
 
                 /** Validate using jquery */
@@ -386,6 +408,7 @@
         }(HttpModule, PageModule));
 
         $(document).ready(function () {
+            AdminPageModule.loadCategories();
             const data = AdminPageModule.loadData();
             AdminPageModule.showFormHeader($('#userForm'));
         });</script>
