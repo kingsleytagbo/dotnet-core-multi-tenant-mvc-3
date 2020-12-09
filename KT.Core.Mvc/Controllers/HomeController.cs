@@ -101,7 +101,18 @@ IOptions<List<Tenant>> tenants, IHttpContextAccessor httpContextAccessor) : base
         public IActionResult Search(string search)
         {
             @ViewData["Title"] = search;
-            return View();
+            List<wp_image> result = null;
+            if (!string.IsNullOrEmpty(search))
+            {
+                result = Images.Search(search, this._connectionString, null, null);
+                return View(result);
+            }
+            else
+            {
+                result = new List<wp_image>();
+            }
+
+            return View(result);
         }
 
         public IActionResult Slug(string id)
