@@ -57,6 +57,7 @@
         },
 
         saveAuthenticationToken: function (token) {
+            console.log({ getAuthenticationKey: this.getAuthenticationKey(), token : token})
             database.saveLogin(this.getAuthenticationKey, token);
         },
 

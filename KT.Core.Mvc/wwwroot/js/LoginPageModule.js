@@ -79,14 +79,14 @@
                             /**
                              * On Failure of Login authentication, clear the authentication token 
                              */
-                            self.saveToken(null);
+                            self.saveToken({});
                             //Page.gotoPage('/login');
                             //await setToken(null);
                             ///onFailure();
                         }
                     })
                     .catch(async function (error) {
-                        self.saveToken(null);
+                        self.saveToken({});
                         console.log({ error: error });
                     });
             }
