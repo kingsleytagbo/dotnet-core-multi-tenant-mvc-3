@@ -83,15 +83,17 @@
             return this.post('/api/images', headers, body);
         },
 
-        updateImage: function (token, model) {
-            model.Accept = 'application/json';
-            model['Content-Type'] = 'application/json; charset=utf-8';
-            model['auth_site'] = public_key;
-            model['Authorization'] = 'Bearer ' + token;
+        updateImage: function (token, model, id) {
 
-            const headers = model;
-            const body = JSON.stringify({});
-            return this.put('/api/images/' + model[id], headers, body);
+            const headers = {
+                Accept: 'application/json',
+                'Content-Type': 'application/json; charset=utf-8',
+                auth_site: public_key,
+                'Authorization': 'Bearer ' + token
+            };
+
+            const body = JSON.stringify(model);
+            return this.put('/api/images/' + id, headers, body);
         },
 
         deleteImage: function (token, id) {

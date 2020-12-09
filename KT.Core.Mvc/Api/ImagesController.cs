@@ -73,8 +73,21 @@ namespace KT.Core.Mvc.Api
 
         // PUT: api/AccountsContoller/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [Authorize]
+        public IActionResult Put(int id, [FromBody] string value)
         {
+            int? result = null;
+            var tenant = this.GetTenant();
+            wp_image body = System.Text.Json.JsonSerializer.Deserialize<wp_image>(value);
+            if (tenant != null)
+            {
+                result = Images.Update(id, body.url, body.name, tenant.ConnectionString, null, null);
+                if (result.HasValue)
+                {
+                    return Ok(result);
+                }
+            }
+            return BadRequest(result);
         }
 
         // DELETE: api/images/5

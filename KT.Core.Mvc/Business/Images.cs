@@ -48,6 +48,24 @@ namespace KT.Core.Mvc.Business
             return result;
         }
 
+        public static int? Update(int id, string url, string name, string connectionString, IDbConnection connection, IDbTransaction transaction)
+        {
+            int? result = null;
+
+            var _connection = GetConnection(connection, connectionString);
+
+            wp_image image = _connection.Get<wp_image>(id, transaction: transaction);
+            image.name = name;
+            if(url != image.url)
+            {
+                image.content = GetImageBytesFromUrl(url);
+            }
+
+            result = _connection.Update<wp_image>(image, transaction: transaction);
+
+            return result;
+        }
+
         public static int ? Delete(int id, string connectionString, IDbConnection connection, IDbTransaction transaction)
         {
             int ? result= null;

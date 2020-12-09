@@ -290,12 +290,13 @@
                         let val = $("#" + key).val() || ' ';
                         model[key] = val;
                     });
+                    model['content'] = '';
 
                     const token = Page.getAuthenticationToken();
 
                     /* save the values on the form to a data store */
                     /* database.save(DATA_KEYID, model); */
-                    const request = model[DATA_KEYID] > 0 ? Http.updateImage(token, model) : Http.createImage(token, model);
+                    const request = model[DATA_KEYID].trim().length > 0 ? Http.updateImage(token, model, model[DATA_KEYID]) : Http.createImage(token, model);
 
                     request
                         .then(response => response.json())
