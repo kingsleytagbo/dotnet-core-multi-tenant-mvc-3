@@ -57,7 +57,7 @@ namespace KT.Core.Mvc.Business
         {
             var _connection = GetConnection(connection, connectionString);
 
-            var result = _connection.Insert<wp_post>(item, transaction: transaction).Value;
+            Int64 result = _connection.Insert<wp_post>(item, transaction: transaction).Value;
 
             return result;
         }
