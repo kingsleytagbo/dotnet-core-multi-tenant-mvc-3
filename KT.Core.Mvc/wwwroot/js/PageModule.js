@@ -21,9 +21,13 @@
             console.log({ auth_token: auth_token });
             if (auth_token && auth_token.length) {
                 $('#navItemAdminMenu').show();
+                $('#navItemLogin').hide();
+                $('#navItemLogout').show();
             }
             else {
                 $('#navItemAdminMenu').hide();
+                $('#navItemLogin').show();
+                $('#navItemLogout').hide();
             }
         },
 

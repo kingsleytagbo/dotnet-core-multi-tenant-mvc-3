@@ -87,7 +87,7 @@
                     })
                     .catch(async function (error) {
                         self.saveToken({});
-                        console.log({ error: error });
+                        // console.log({ error: error });
                     });
             }
 
