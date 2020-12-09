@@ -83,6 +83,17 @@
             return this.post('/api/images', headers, body);
         },
 
+        updateImage: function (token, model) {
+            model.Accept = 'application/json';
+            model['Content-Type'] = 'application/json; charset=utf-8';
+            model['auth_site'] = public_key;
+            model['Authorization'] = 'Bearer ' + token;
+
+            const headers = model;
+            const body = JSON.stringify({});
+            return this.put('/api/images/' + model[id], headers, body);
+        },
+
         deleteImage: function (token, id) {
             const headers = {
                 Accept: 'application/json',
@@ -101,6 +112,18 @@
 
             const result = fetch(url, {
                 method: 'DELETE',
+                headers: headers,
+                body: JSON.stringify(body),
+            });
+            const response = result;
+            return response;
+        },
+
+        put: function (destination, headers, body) {
+            const url = `${API_URL}${destination}`;
+
+            const result = fetch(url, {
+                method: 'PUT',
                 headers: headers,
                 body: JSON.stringify(body),
             });
