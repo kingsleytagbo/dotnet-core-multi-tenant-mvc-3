@@ -85,6 +85,7 @@
                                     <div class="form-group col-md-12">
                                         <input type="hidden" id="id" />
                                         <input type="hidden" id="site_id" />
+                                        <input type="hidden" id="content" />
                                     </div>
                                 </div>
                             </form>
@@ -290,7 +291,8 @@
                         let val = $("#" + key).val() || ' ';
                         model[key] = val;
                     });
-                    model['content'] = '';
+                    //model['content'] = '[]';
+                    model['site_id'] = model['site_id'].length > 0 ? Number(model['site_id']) : 0;
 
                     const token = Page.getAuthenticationToken();
 
