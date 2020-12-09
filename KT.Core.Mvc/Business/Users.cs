@@ -42,7 +42,7 @@ namespace KT.Core.Mvc.Business
 
             var _connection = GetConnection(connection, connectionString);
 
-            var sQuery = "SELECT TOP 10 * FROM wp_users WHERE (post_name = @post_name) ";
+            var sQuery = "SELECT TOP 10 * FROM wp_user WHERE (post_name = @post_name) ";
 
             result = _connection.Query<wp_user>(sQuery, new
             {
