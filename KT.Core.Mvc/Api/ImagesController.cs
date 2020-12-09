@@ -70,7 +70,7 @@ namespace KT.Core.Mvc.Api
             {
                 Int64 ? parentPostId = null;
                 var body = JsonSerializer.Deserialize<object>(value) as System.Text.Json.JsonElement?;
-                var category = body?.GetProperty("category-create").ToString();
+                var category = body?.GetProperty("category").ToString();
                 var url = body?.GetProperty("url").ToString();
                 var name = body?.GetProperty("name").ToString();
                 if (!string.IsNullOrEmpty(category) && !string.IsNullOrEmpty(url) && !string.IsNullOrEmpty(name))
@@ -104,6 +104,7 @@ namespace KT.Core.Mvc.Api
                         var image = Images.GetImageBytes(url, new wp_image() { url = url, name = name, site_id = 1 });
                         using (var transaction = new System.Transactions.TransactionScope())
                         {
+                            image.category = category;
                             var newImageId = Images.Create(image, tenant.ConnectionString, null, null);
 
                             var postChild = new wp_post()
@@ -111,7 +112,7 @@ namespace KT.Core.Mvc.Api
                                 post_parent = parentPostId.Value,
                                 post_name = category,
                                 post_content = category,
-
+                                post_category = category,
                                 post_status = "active",
                                 post_type = "image",
                                 post_date = DateTime.Now,

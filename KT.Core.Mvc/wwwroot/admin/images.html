@@ -68,7 +68,7 @@
 
                                     <div class="form-group col-6 col-sm-6">
                                         <label>Create a Category:</label>
-                                        <span> <input type="text" class="form-control input-md" id="category-create" /></span>
+                                        <span> <input type="text" class="form-control input-md" id="category" /></span>
                                     </div>
 
                                 </div>
@@ -303,7 +303,7 @@
                     const request = model[DATA_KEYID].trim().length > 0 ? Http.updateImage(token, model, model[DATA_KEYID]) : Http.createImage(token, model);
 
                     request
-                        .then(response => response.json())
+                        /*.then(response => response.json())*/
                         .then(function (result) {
                         /* refresh the data on the page after saving it */
                             AdminPageModule.loadCategories();
@@ -354,10 +354,10 @@
                         .then(function (result) {
                             //console.log(result)
                             if (result) {
-                                $('#category-choose').empty();
-                                $('#category-choose').append($("<option>").attr('value', 'general').text('General'));
+                                $('#category_choose').empty();
+                                $('#category_choose').append($("<option>").attr('value', 'general').text('General'));
                                 $(result).each(function (i, item) {
-                                   $('#category-choose').append($("<option>").attr('value', item).text(item));
+                                   $('#category_choose').append($("<option>").attr('value', item).text(item));
                                 });
                             }
                         })
@@ -369,7 +369,7 @@
                 /** Validate using jquery */
                 validate: function () {
                     let isValid = true;
-                    const elements = ['url', 'name', 'category-create'];
+                    const elements = ['url', 'name', 'category'];
 
                     if (elements != null && elements.length > 0) {
                         for (let e = 0; e < elements.length; e++) {
@@ -389,8 +389,8 @@
                 },
 
                 setCategory: function () {
-                    var chooseCategory = $('#category-choose').val();
-                    $('#category-create').val(chooseCategory);
+                    var chooseCategory = $('#category_choose').val();
+                    $('#category').val(chooseCategory);
                 }
 
                 /** Display a customized modal message */

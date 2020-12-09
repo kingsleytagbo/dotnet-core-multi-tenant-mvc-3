@@ -11,7 +11,7 @@ namespace KT.Core.Mvc.Models
         public Int64 ID { get; set; }
         public string url { get; set; }
         public string name { get; set; }
-
+        public string category { get; set; }
         public byte[] content { get; set; }
         public Int64 site_id { get; set; }
 
