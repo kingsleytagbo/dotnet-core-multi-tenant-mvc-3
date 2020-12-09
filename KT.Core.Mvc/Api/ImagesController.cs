@@ -61,7 +61,7 @@ namespace KT.Core.Mvc.Api
         // POST: api/AccountsContoller
         [HttpPost]
         [Authorize]
-        public void Post([FromHeader] string url, [FromHeader] string name, [FromBody] string value)
+        public void Post([FromBody] string value)
         {
             var tenant = this.GetTenant();
             Int64 result = 0;
@@ -71,7 +71,9 @@ namespace KT.Core.Mvc.Api
                 Int64 ? parentPostId = null;
                 var body = JsonSerializer.Deserialize<object>(value) as System.Text.Json.JsonElement?;
                 var category = body?.GetProperty("category-create").ToString();
-                if (!string.IsNullOrEmpty(category))
+                var url = body?.GetProperty("url").ToString();
+                var name = body?.GetProperty("name").ToString();
+                if (!string.IsNullOrEmpty(category) && !string.IsNullOrEmpty(url) && !string.IsNullOrEmpty(name))
                 {
                     var post_parent = Posts.GetParentImage(category, tenant.ConnectionString, null, null);
                     if(post_parent == null)
