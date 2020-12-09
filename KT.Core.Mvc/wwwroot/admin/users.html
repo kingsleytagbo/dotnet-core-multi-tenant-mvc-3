@@ -175,7 +175,7 @@
     <script type="text/javascript" src="../../js/PageModule.js"></script>
 
     <script type="text/javascript">
-    const AdminPageModule = (function () {
+    const AdminPageModule = (function (database) {
             /* your module code goes here */
             const DATA_KEYID = 'id';
             const formName = 'userForm';
@@ -358,7 +358,7 @@
                 }
             };
 
-        }());
+        }(LocalStorageModule));
 
         $(document).ready(function () {
             const Http = HttpModule;
