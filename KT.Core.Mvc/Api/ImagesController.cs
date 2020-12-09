@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Authorization;
+using System.Text.Json;
+using Newtonsoft.Json.Linq;
 using KT.Core.Mvc.Business;
 
 namespace KT.Core.Mvc.Api
@@ -59,13 +61,16 @@ namespace KT.Core.Mvc.Api
         // POST: api/AccountsContoller
         [HttpPost]
         [Authorize]
-        public void Post([FromHeader] string url, [FromHeader] string name)
+        public void Post([FromHeader] string url, [FromHeader] string name, [FromBody] string value)
         {
             var tenant = this.GetTenant();
             var result = 0;
 
             if (tenant != null)
             {
+                var body = JsonSerializer.Deserialize<object>(value) as System.Text.Json.JsonElement?;
+                var category = body?.GetProperty("category-create").ToString();
+
                 var image = Images.GetImageBytes(url, new wp_image() { url = url, name = name, site_id = 1 });
                 result = Images.Create(image, tenant.ConnectionString, null, null);
             }

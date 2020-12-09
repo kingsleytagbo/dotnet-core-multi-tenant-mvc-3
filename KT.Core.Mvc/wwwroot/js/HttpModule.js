@@ -68,18 +68,19 @@
                 'Authorization': 'Bearer ' + token
             };
             const body = {};
-            console.log(headers);
+            //console.log(headers);
             return this.get('/api/images', headers, body);
         },
 
         createImage: function (token, model) {
-            model.Accept = 'application/json';
-            model['Content-Type'] = 'application/json; charset=utf-8';
-            model['auth_site'] = public_key;
-            model['Authorization'] = 'Bearer ' + token;
 
-            const headers = model;
-            const body = JSON.stringify({});
+            const headers = {
+                Accept: 'application/json',
+                'Content-Type': 'application/json; charset=utf-8',
+                auth_site: public_key,
+                'Authorization': 'Bearer ' + token
+            };
+            const body = JSON.stringify(model);
             return this.post('/api/images', headers, body);
         },
 
