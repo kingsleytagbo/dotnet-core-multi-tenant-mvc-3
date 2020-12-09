@@ -83,6 +83,31 @@
             return this.post('/api/images', headers, body);
         },
 
+        deleteImage: function (token, id) {
+            const headers = {
+                Accept: 'application/json',
+                'Content-Type': 'application/json; charset=utf-8',
+                auth_site: public_key,
+                'Authorization': 'Bearer ' + token
+            };
+
+            const body = JSON.stringify({});
+            return this.delete('/api/images/' + id, headers, body);
+        },
+
+        delete: function (destination, headers, body) {
+            const url = `${API_URL}${destination}`;
+            //console.log({ url: url, headers: headers, body: JSON.stringify(body) });
+
+            const result = fetch(url, {
+                method: 'DELETE',
+                headers: headers,
+                body: JSON.stringify(body),
+            });
+            const response = result;
+            return response;
+        },
+
         post: function (destination, headers, body) {
             const url = `${API_URL}${destination}`;
             //console.log({ url: url, headers: headers, body: JSON.stringify(body) });

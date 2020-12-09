@@ -35,7 +35,6 @@ namespace KT.Core.Mvc.Api
 
         // GET: api/images
         [HttpGet]
-        [Authorize]
         public IActionResult Get()
         {
             //var headers = Request.Headers;
@@ -79,11 +78,11 @@ namespace KT.Core.Mvc.Api
 
         // DELETE: api/images/5
         [HttpDelete("{id}")]
+        [Authorize]
         public IActionResult Delete(int id)
         {
             int? result = null;
             var tenant = this.GetTenant();
-
             if (tenant != null)
             {
                 result = Images.Delete(id, tenant.ConnectionString, null, null);
@@ -92,7 +91,6 @@ namespace KT.Core.Mvc.Api
                     return Ok(result);
                 }
             }
-
             return BadRequest(result);
         }
 

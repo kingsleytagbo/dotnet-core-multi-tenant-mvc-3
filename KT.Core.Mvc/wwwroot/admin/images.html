@@ -337,6 +337,10 @@
                     });
 
                     database.removeOne(DATA_KEYID, model);
+
+                    const token = Page.getAuthenticationToken();
+                    const request = Http.deleteImage(token, model[DATA_KEYID]);
+
                     AdminPageModule.cancelForm($('#userForm'));
                     AdminPageModule.loadData();
                 },
