@@ -69,19 +69,31 @@
                                     <div class="form-group col-6 col-sm-6">
                                         <label>Create a Category:</label>
                                         <span> <input type="text" class="form-control input-md" id="category" /></span>
+                                        <div class="alert alert-warning" id="category-validator" style="display:none;">
+                                            <span>
+                                            </span>
+                                        </div>
                                     </div>
 
                                 </div>
                                 <div class="row">
 
                                     <div class="form-group col-12 col-sm-12">
-                                        <label>Url:</label>
+                                        <label>Image Url: ( Image will be downloaded):</label>
                                         <span> <input type="text" class="form-control input-md" id="url" name="url" /></span>
+                                        <div class="alert alert-warning" id="url-validator" style="display:none;">
+                                            <span>
+                                            </span>
+                                        </div>
                                     </div>
 
                                     <div class="form-group col-12 col-sm-12">
                                         <label>Name:</label>
                                         <span> <input type="text" class="form-control input-md" id="name" name="name" /></span>
+                                        <div class="alert alert-warning" id="name-validator" style="display:none;">
+                                            <span>
+                                            </span>
+                                        </div>
                                     </div>
 
                                 </div>
@@ -415,6 +427,41 @@
                                 $element.css('border-color', 'green');
                             }
                         }
+                    }
+
+                    /* validate name */
+                    if (!$('#name').val() || ($('#name').val().length == 0)) {
+                        isValid = false;
+                        $('#name-validator').fadeIn();
+                        var $message = $('#name-validator').find('span').text("*Image Name is required").show();
+                    }
+                    else if ($('#name').val().length > 32) {
+                        isValid = false;
+                        $('#name-validator').fadeIn();
+                        var $message = $('#name-validator').find('span').text("The maximum length is 32 characters").show();
+                    }
+                    else {
+                        $('#name-validator').fadeOut().hide();
+                    }
+
+                    /* validate url */
+                    if (!$('#url').val() || ($('#url').val().length == 0)) {
+                        isValid = false;
+                        $('#url-validator').fadeIn();
+                        var $message = $('#url-validator').find('span').text("*Image Url is required").show();
+                    }
+                    else {
+                        $('#url-validator').fadeOut().hide();
+                    }
+
+                     /* validate category */
+                    if (!$('#category').val() || ($('#category').val().length == 0)) {
+                        isValid = false;
+                        $('#category-validator').fadeIn();
+                        var $message = $('#category-validator').find('span').text("*Image Category is required, choose or create a new one").show();
+                    }
+                    else {
+                        $('#category-validator').fadeOut().hide();
                     }
 
                     return isValid;
