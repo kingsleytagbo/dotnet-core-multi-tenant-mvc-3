@@ -23,7 +23,7 @@
                 $('#navItemAdminMenu').show();
             }
             else {
-                $('#navItemAdminMenu').show();
+                $('#navItemAdminMenu').hide();
             }
         },
 

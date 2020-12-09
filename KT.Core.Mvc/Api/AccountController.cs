@@ -88,7 +88,7 @@ namespace KT.Core.Mvc.Api
                 }
             }
 
-            return BadRequest("you are nto logged-in");
+            return BadRequest("you are not logged-in ");
         }
 
         /// <summary>

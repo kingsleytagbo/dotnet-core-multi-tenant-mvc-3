@@ -38,7 +38,7 @@
         },
 
         saveToken: async function (token) {
-            database.saveLogin(Page.getAuthenticationKey(), token);
+            Page.saveAuthenticationToken(token);
         },
 
         /* Save Data on a Form */
