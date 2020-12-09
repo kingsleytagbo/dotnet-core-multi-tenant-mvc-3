@@ -104,6 +104,27 @@
                     <!-- BEGIN USER TABLE -->
                     <div class="table-responsive mt-5">
                         <h3 class="text-center"> Manage Images</h3>
+                        <form>
+                            <div class="row">
+                                <div class="col-sm-3">
+
+                                    <input type="hidden" id="page" />
+                                    <select class="form-control" id="pageSize" onchange="AdminPageModule.loadData()">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="4">4</option>
+                                        <option value="6">6</option>
+                                    </select>
+
+                                    <!-- END PAGING -->
+                                </div>
+                                <div class="col-sm-9 mx-auto">
+                                    <div id="paginator">
+                                        <ul class="pagination"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                         <table class="table table-striped table-condensed table-hover">
                             <thead>
                                 <tr>
@@ -120,13 +141,10 @@
                             </thead>
                             <tbody class="tbody"></tbody>
                         </table>
-                        <div id="paginator">
-                            <ul class="pagination"></ul>
-                        </div>
                     </div>
-                    <!-- END CONTACT TABLE -->
-                    <!-- END USER ADMIN -->
-                </div>
+                        <!-- END CONTACT TABLE -->
+                        <!-- END USER ADMIN -->
+                    </div>
             </div>
         </div>
 
@@ -158,11 +176,6 @@
             </div>
         </div>
         <!-- END MODAL -->
-        <!-- BEGIN PAGING -->
-        <form>
-            <input type="hidden" id="page" />
-        </form>
-        <!-- END PAGING -->
 
     </div>
     <!-- /.container -->
@@ -237,7 +250,7 @@
                 loadData: function () {
                     this.showToast("Wait", "Loading ...");
                     const page = $('#page').val() || 1;
-                    const pageSize = 2;
+                    const pageSize = $('#pageSize').val() || 1;
 
                     const token = Page.getAuthenticationToken();
                     const request = Http.getImages(token, page, pageSize);
