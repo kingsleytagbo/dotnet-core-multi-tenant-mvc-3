@@ -8,8 +8,8 @@ namespace KT.Core.Mvc.Models
     public class wp_post
     {
         [Key]
-        public UInt64 ID { get; set; }
-        public UInt64 post_author { get; set; }
+        public Int64 ID { get; set; }
+        public Int64 post_author { get; set; }
         public DateTime post_date { get; set; }
         public DateTime post_date_gmt { get; set; }
         public string post_content { get; set; }
@@ -25,11 +25,11 @@ namespace KT.Core.Mvc.Models
         public DateTime post_modified { get; set; }
         public DateTime post_modified_gmt { get; set; }
         public string post_content_filtered { get; set; }
-        public UInt64 post_parent { get; set; }
+        public Int64 post_parent { get; set; }
         public string guid { get; set; }
         public string post_type { get; set; }
         public string post_mime_type { get; set; }
         public Int64 comment_count { get; set; }
-        public UInt64 site_id { get; set; }
+        public Int64 site_id { get; set; }
     }
 }

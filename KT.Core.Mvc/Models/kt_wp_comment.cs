@@ -3,8 +3,8 @@ namespace KT.Core.Mvc.Models
 {
     public class wp_comment
     {
-        public UInt64 comment_ID { get; set; }
-        public UInt64 comment_post_ID { get; set; }
+        public Int64 comment_ID { get; set; }
+        public Int64 comment_post_ID { get; set; }
         public string comment_author { get; set; }
         public string comment_author_email { get; set; }
         public string comment_author_url { get; set; }
@@ -16,7 +16,7 @@ namespace KT.Core.Mvc.Models
         public string comment_approved { get; set; }
         public string comment_agent { get; set; }
         public string comment_type { get; set; }
-        public UInt64 comment_parent { get; set; }
-        public UInt64 user_id { get; set; }
+        public Int64 comment_parent { get; set; }
+        public Int64 user_id { get; set; }
     }
 }

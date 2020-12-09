@@ -10,7 +10,7 @@ namespace KT.Core.Mvc.Business
 {
     public class Posts
     {
-        public IDbConnection GetConnection(IDbConnection connection, string connectionString)
+        public static IDbConnection GetConnection(IDbConnection connection, string connectionString)
         {
             if (connection == null)
             {
@@ -20,7 +20,7 @@ namespace KT.Core.Mvc.Business
             return connection;
         }
 
-        public List<wp_post> GetAllPosts(string connectionString, IDbConnection connection, IDbTransaction transaction)
+        public static List<wp_post> GetAllPosts(string connectionString, IDbConnection connection, IDbTransaction transaction)
         {
             List<wp_post> result = null;
 
@@ -37,17 +37,43 @@ namespace KT.Core.Mvc.Business
         }
 
 
-        public wp_post GetPost(string id, string connectionString, IDbConnection connection, IDbTransaction transaction)
+        public static wp_post GetPost(string id, string connectionString, IDbConnection connection, IDbTransaction transaction)
         {
             wp_post result = null;
 
             var _connection = GetConnection(connection, connectionString);
 
-            var sQuery = "SELECT TOP 10 * FROM wp_posts WHERE (post_name = @post_name) ";
+            var sQuery = "SELECT TOP 10 * FROM wp_post WHERE (post_name = @post_name) ";
 
             result = _connection.Query<wp_post>(sQuery, new
             {
                 post_name = id
+            }, transaction: transaction).FirstOrDefault();
+
+            return result;
+        }
+
+        public static Int64 Create(wp_post item, string connectionString, IDbConnection connection, IDbTransaction transaction)
+        {
+            var _connection = GetConnection(connection, connectionString);
+
+            var result = _connection.Insert<wp_post>(item, transaction: transaction).Value;
+
+            return result;
+        }
+
+        public static wp_post GetParentImage(string id, string connectionString, IDbConnection connection, IDbTransaction transaction)
+        {
+            wp_post result = null;
+
+            var _connection = GetConnection(connection, connectionString);
+
+            var sQuery = "SELECT * FROM wp_post WHERE ( (post_type = @post_type) AND (post_name = @post_name) AND (post_parent = 0) ) ";
+
+            result = _connection.Query<wp_post>(sQuery, new
+            {
+                post_type = "image",
+                post_name = id,
             }, transaction: transaction).FirstOrDefault();
 
             return result;

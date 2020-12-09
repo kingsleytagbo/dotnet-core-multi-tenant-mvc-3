@@ -56,8 +56,7 @@ IOptions<List<Tenant>> tenants, IHttpContextAccessor httpContextAccessor) : base
             };
             var result = this.PostHttpRequest("/api/account/login", headers, null);
 
-            var post = new Posts();
-            var data = post.GetAllPosts(this._connectionString, null, null);
+            var data = Posts.GetAllPosts(this._connectionString, null, null);
 
             return View(data);
         }
@@ -120,11 +119,11 @@ IOptions<List<Tenant>> tenants, IHttpContextAccessor httpContextAccessor) : base
             @ViewData["Title"] = id;
             @ViewData["Tenant"] = this._tenant;
             @ViewData["Layout"] = this._tenant.Template;
-            var post = new Posts();
+
             wp_post data = null;
             try
             {
-                data = post.GetPost(id, this._connectionString, null, null);
+                data = Posts.GetPost(id, this._connectionString, null, null);
             }
             catch (Exception) { }
             @ViewData["Title"] = string.Concat( (((data!= null) && !string.IsNullOrEmpty(data.post_title))

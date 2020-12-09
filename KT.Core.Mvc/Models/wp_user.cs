@@ -3,7 +3,7 @@ namespace KT.Core.Mvc.Models
 {
     public class wp_user
     {
-        public UInt64 ID { get; set; }
+        public Int64 ID { get; set; }
         public string user_login { get; set; }
         public string user_pass { get; set; }
         public string user_nicename { get; set; }

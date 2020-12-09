@@ -64,15 +64,48 @@ namespace KT.Core.Mvc.Api
         public void Post([FromHeader] string url, [FromHeader] string name, [FromBody] string value)
         {
             var tenant = this.GetTenant();
-            var result = 0;
+            Int64 result = 0;
 
             if (tenant != null)
             {
+                Int64 ? parentPostId = null;
                 var body = JsonSerializer.Deserialize<object>(value) as System.Text.Json.JsonElement?;
                 var category = body?.GetProperty("category-create").ToString();
+                if (!string.IsNullOrEmpty(category))
+                {
+                    var post_parent = Posts.GetParentImage(category, tenant.ConnectionString, null, null);
+                    if(post_parent == null)
+                    {
+                        post_parent = new wp_post()
+                        {
+                            post_name = category,
+                            post_parent = 0,
+                            post_content = category, 
+                            comment_count = 0,
+                            guid = Guid.NewGuid().ToString(),
+                            post_status = "active", post_type = "image", post_date = DateTime.Now, post_title = category,
+                            to_ping = "", post_date_gmt = DateTime.Now, post_modified = DateTime.Now, post_modified_gmt = DateTime.Now,
+                             site_id = 1,
+                            comment_status = "", post_mime_type = "", post_password = "" , 
+                            pinged = "", ping_status = "", post_author=0, post_content_filtered = "", post_excerpt = "",
+                        };
 
-                var image = Images.GetImageBytes(url, new wp_image() { url = url, name = name, site_id = 1 });
-                result = Images.Create(image, tenant.ConnectionString, null, null);
+                        parentPostId = Posts.Create(post_parent, tenant.ConnectionString, null, null);
+                    }
+                    else
+                    {
+                        parentPostId = post_parent.ID;
+                    }
+
+                    if (parentPostId.HasValue)
+                    {
+
+                    }
+
+                    return;
+                    var image = Images.GetImageBytes(url, new wp_image() { url = url, name = name, site_id = 1 });
+                    result = Images.Create(image, tenant.ConnectionString, null, null);
+                }
             }
         }
 
@@ -81,7 +114,7 @@ namespace KT.Core.Mvc.Api
         [Authorize]
         public IActionResult Put(int id, [FromBody] string value)
         {
-            int? result = null;
+            Int64? result = null;
             var tenant = this.GetTenant();
             wp_image body = System.Text.Json.JsonSerializer.Deserialize<wp_image>(value);
             if (tenant != null)

@@ -39,7 +39,7 @@ namespace KT.Core.Mvc.Business
             return result;
         }
 
-        public static int Create(wp_image image, string connectionString, IDbConnection connection, IDbTransaction transaction)
+        public static Int64 Create(wp_image image, string connectionString, IDbConnection connection, IDbTransaction transaction)
         {
             var _connection = GetConnection(connection, connectionString);
 
@@ -48,9 +48,9 @@ namespace KT.Core.Mvc.Business
             return result;
         }
 
-        public static int? Update(int id, string url, string name, string connectionString, IDbConnection connection, IDbTransaction transaction)
+        public static Int64? Update(int id, string url, string name, string connectionString, IDbConnection connection, IDbTransaction transaction)
         {
-            int? result = null;
+            Int64? result = null;
 
             var _connection = GetConnection(connection, connectionString);
 
