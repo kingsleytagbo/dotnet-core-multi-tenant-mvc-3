@@ -101,7 +101,7 @@ namespace KT.Core.Mvc.Api
 
                     if (parentPostId.HasValue)
                     {
-                        var image = Images.GetImageBytes(url, new wp_image() { url = url, name = name, site_id = 1 });
+                        var image = Images.GetImageBytes(url, new wp_image() { category = category,  url = url, name = name, site_id = 1 });
                         using (var transaction = new System.Transactions.TransactionScope())
                         {
                             image.category = category;
@@ -110,7 +110,7 @@ namespace KT.Core.Mvc.Api
                             var postChild = new wp_post()
                             {
                                 post_parent = parentPostId.Value,
-                                post_name = category,
+                                post_name = newImageId.ToString(),
                                 post_content = category,
                                 post_category = category,
                                 post_status = "active",
@@ -159,7 +159,7 @@ namespace KT.Core.Mvc.Api
             wp_image body = System.Text.Json.JsonSerializer.Deserialize<wp_image>(value);
             if (tenant != null)
             {
-                result = Images.Update(id, body.url, body.name, tenant.ConnectionString, null, null);
+                result = Images.Update(id, body.category, body.url, body.name, tenant.ConnectionString, null, null);
                 if (result.HasValue)
                 {
                     return Ok(result);

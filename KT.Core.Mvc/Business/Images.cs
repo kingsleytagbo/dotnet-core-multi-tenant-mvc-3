@@ -48,7 +48,7 @@ namespace KT.Core.Mvc.Business
             return result;
         }
 
-        public static Int64? Update(int id, string url, string name, string connectionString, IDbConnection connection, IDbTransaction transaction)
+        public static Int64? Update(int id, string category, string url, string name, string connectionString, IDbConnection connection, IDbTransaction transaction)
         {
             Int64? result = null;
 
@@ -56,6 +56,7 @@ namespace KT.Core.Mvc.Business
 
             wp_image image = _connection.Get<wp_image>(id, transaction: transaction);
             image.name = name;
+            image.category = category;
             if(url != image.url)
             {
                 image.content = GetImageBytesFromUrl(url);
