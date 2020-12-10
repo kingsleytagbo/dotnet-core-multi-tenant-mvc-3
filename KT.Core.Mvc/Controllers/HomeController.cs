@@ -32,7 +32,7 @@ IOptions<List<Tenant>> tenants, IHttpContextAccessor httpContextAccessor) : base
         _tenants = tenants;
             _tenant = this.GetTenant();
             _connectionString = (_tenant != null && 
-                !string.IsNullOrEmpty(_tenant.ConnectionString) ? _tenant.ConnectionString : string.Empty;
+                !string.IsNullOrEmpty(_tenant.ConnectionString)) ? _tenant.ConnectionString : string.Empty;
     }
 
         public IActionResult Index(int page = 1, string search = null)
