@@ -1,10 +1,10 @@
 ﻿const HttpModule = (function () {
 /* Http Module used for making Http api calls */
     const STORE_KEY = 'AppKey-DotNetCore3X';
-    const store = localStorage.getItem(STORE_KEY) ? JSON.parse(localStorage.getItem(STORE_KEY)) : null;
+    const store = localStorage.getItem(STORE_KEY) ? JSON.parse(localStorage.getItem(STORE_KEY)) : {};
     console.log({ store: store });
-    const API_URL = 'https://localhost:44373';
-    const public_key = "d62c03a2-57b6-4e14-8153-d05d3aa9ab10";
+    const API_URL = store.API_URL; //'https://localhost:44373';
+    const public_key = store.API_KEY; //"d62c03a2-57b6-4e14-8153-d05d3aa9ab10";
 
     return {
 

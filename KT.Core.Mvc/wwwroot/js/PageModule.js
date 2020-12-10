@@ -85,10 +85,10 @@
             return true;
         },
 
-        init: function (appKey, apiKey, item) {
+        init: function (appKey, apiKey, apiUrl) {
             const storeKey = 'AppKey' + '-' + appKey;
-            database.setItem(storeKey, { storeKey: storeKey, apiKey: apiKey, item: item });
-            console.log({ storeKey: storeKey, apiKey: apiKey, item: item });
+            const store = { STORE_KEY: storeKey, API_KEY: apiKey, API_URL: apiUrl };
+            database.setItem(storeKey, store);
             return true;
         }
     }
