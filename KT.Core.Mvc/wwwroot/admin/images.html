@@ -56,7 +56,7 @@
                             </button>
                         </div>
                         <div class="card-body" style="display:block;">
-                            <form id="userForm" name="userForm">
+                            <form id="userForm" name="userForm" enctype="multipart/form-data">
                                 <div class="row">
 
                                     <div class="form-group col-6 col-sm-6">
@@ -76,16 +76,30 @@
                                     </div>
 
                                 </div>
+
                                 <div class="row">
 
-                                    <div class="form-group col-12 col-sm-12">
-                                        <label>Image Url: ( Image will be downloaded):</label>
+                                    <div class="form-group col-6 col-sm-6">
+                                        <label for="url">Download Image: (Image will be downloaded from this Url)</label>
                                         <span> <input type="text" class="form-control input-md" id="url" name="url" /></span>
                                         <div class="alert alert-warning" id="url-validator" style="display:none;">
                                             <span>
                                             </span>
                                         </div>
                                     </div>
+
+                                    <div class="form-group col-6 col-sm-6">
+                                        <label for="upload">Upload Image: ( Choose Image to Upload from Your Files)</label>
+                                        <input type="file" class="form-control-file" id="image_upload" placeholder="Choose an Image">
+                                        <div class="alert alert-warning" id="image_upload-validator" style="display:none;">
+                                            <span>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
 
                                     <div class="form-group col-12 col-sm-12">
                                         <label>Name:</label>
@@ -258,7 +272,7 @@
                     });
                 },
 
-               /** Load Data function */
+                /** Load Data function */
                 loadData: function () {
                     this.showToast("Wait", "Loading ...");
                     const page = $('#page').val() || 1;
@@ -272,7 +286,7 @@
                             const data = result.data;
                             const total = result.total || 1;
                             $('#total').val(total);
-                           //console.log({ result: result, total :  $('#total').val()});
+                            //console.log({ result: result, total :  $('#total').val()});
                             let html = '';
                             let count = data.length + 1;
 
@@ -413,7 +427,7 @@
                 /** Validate using jquery */
                 validate: function () {
                     let isValid = true;
-                    const elements = ['url', 'name', 'category'];
+                    const elements = ['name', 'category'];
 
                     if (elements != null && elements.length > 0) {
                         for (let e = 0; e < elements.length; e++) {
@@ -444,17 +458,7 @@
                         $('#name-validator').fadeOut().hide();
                     }
 
-                    /* validate url */
-                    if (!$('#url').val() || ($('#url').val().length == 0)) {
-                        isValid = false;
-                        $('#url-validator').fadeIn();
-                        var $message = $('#url-validator').find('span').text("*Image Url is required").show();
-                    }
-                    else {
-                        $('#url-validator').fadeOut().hide();
-                    }
-
-                     /* validate category */
+                    /* validate category */
                     if (!$('#category').val() || ($('#category').val().length == 0)) {
                         isValid = false;
                         $('#category-validator').fadeIn();
@@ -464,7 +468,42 @@
                         $('#category-validator').fadeOut().hide();
                     }
 
-                    return isValid;
+                /* validate image */
+                    const $imageUpload = $('#image_upload').val(); const $imageDownload = $('#url').val();
+                    if ($imageUpload && $imageUpload.length > 0) {
+                        $('#url').val($('#image_upload').val());
+                    }
+                    if (!($imageUpload && $imageUpload.length > 0) && !($imageDownload && $imageDownload.length > 0)) {
+                        isValid = false;
+                        $('#url').css('border-color', 'red');
+                        $('#image_upload').css('border-color', 'red');
+                        $('#image_upload-validator').fadeIn();
+                        $('#image_upload-validator').find('span').text("*Choose an Image to Upload Or Enter a Url for an Existing Image").show();
+                        $('#url-validator').fadeIn();
+                        $('#url-validator').find('span').text("*Enter a Url for an Existing Image or Choose an Image from your Files").show();
+
+                    }
+                    else {
+                        $('#url').css('border-color', 'green');
+                        $('#image_upload').css('border-color', 'green');
+                        $('#image_upload-validator').fadeOut().hide();
+                        $('#image_upload-validator').find('span').text("*Choose an Image to Upload Or Enter a Url for an Existing Image").show();
+                        $('#url-validator').fadeOut().hide();
+                        $('#url-validator').find('span').text("*Enter a Url for an Existing Image or Choose an Image from your Files").show();
+                    }
+
+                    /*
+                    if (!$('#url').val() || ($('#url').val().length == 0)) {
+                        isValid = false;
+                        $('#url-validator').fadeIn();
+                        var $message = $('#url-validator').find('span').text("*Enter a Url for an Existing Image or Choose an Image from your Files").show();
+                    }
+                    else {
+                        $('#url-validator').fadeOut().hide();
+                    }
+                    */
+
+                    return false;
                 },
 
                 setCategory: function () {
