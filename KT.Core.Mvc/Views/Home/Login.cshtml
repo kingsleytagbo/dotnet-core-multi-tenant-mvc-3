@@ -33,7 +33,7 @@
                         <div class="row">
                             <div class="form-group col-md-12">
                                 <label>Password:</label>
-                                <input type="password" class="form-control input-md" id="Password" name="Password" placeholder="Your Password..."  />
+                                <input type="password" class="form-control input-md" id="Password" name="Password" placeholder="Your Password..." />
                             </div>
                         </div>
                     </form>
@@ -54,18 +54,13 @@
 </div>
 
 @section Scripts {
-<script type="text/javascript" src="../../js/LoginPageModule.js?id=5"></script>
-
-<!--BEGIN JAVASCRIPT CODE -->
-
-<script type="text/javascript">
+    <script type="text/javascript" src="../../js/LoginPageModule.js?id=5"></script>
+    <!--BEGIN JAVASCRIPT CODE -->
+    <script type="text/javascript">
     const LoginModule = LoginPageModule;
-    const apiKey = '@apiKey';
-    const apiUrl = '@apiUrl';
-    PageModule.init(apiKey, apiUrl);
     $(document).ready(function () {
         LoginModule.init();
     });
-
-</script>
+    </script>
+    <!--END JAVASCRIPT CODE -->
 }
