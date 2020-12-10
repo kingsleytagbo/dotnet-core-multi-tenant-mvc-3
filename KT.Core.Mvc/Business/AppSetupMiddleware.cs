@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using KT.Core.Mvc.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,16 +11,18 @@ namespace KT.Core.Mvc.Business
 {
     public class AppSetupMiddleware
     {
-        public AppSetupMiddleware(RequestDelegate next)
+        private readonly RequestDelegate _next;
+        private readonly IOptions<List<Tenant>> _tenants;
+
+        public AppSetupMiddleware(RequestDelegate next, IOptions<List<Tenant>> tenants)
         {
             _next = next;
+            _tenants = tenants;
         }
-
-        readonly RequestDelegate _next;
 
         public async Task Invoke(HttpContext context, IConfiguration configuration)
         {
-            if (!IsDatabaseInstalled(configuration))
+            if (!this.IsDatabaseInstalled(configuration, context.Request))
             {
                 var url = "/Home/ConfigureSetup";
                 //check if the current url contains the path of the installation url
@@ -33,10 +37,19 @@ namespace KT.Core.Mvc.Business
             await _next(context);
         }
 
-        public static bool IsDatabaseInstalled(IConfiguration configuration)
+        public bool IsDatabaseInstalled(IConfiguration configuration, HttpRequest request)
         {
-            var key = configuration["SQLConnectionSettings:SqlServerIp"];
-            return string.IsNullOrEmpty(key);
+            // var key = configuration["AllowedHosts"];
+            var success = false;
+            if( (request != null && request.Host!= null) && (this._tenants != null) && (this._tenants.Value.Count > 0))
+            {
+                var host = request.Host.ToString().Trim().ToLower();
+                foreach(var tenant in this._tenants.Value)
+                {
+                    var tenantHost = tenant.Host.ToLower().Trim();
+                }
+            }
+            return success;
         }
     }
 }

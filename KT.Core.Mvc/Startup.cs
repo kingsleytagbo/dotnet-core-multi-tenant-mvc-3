@@ -171,8 +171,8 @@ namespace KT.Core.Mvc
             app.UseRouting();
             app.UseAuthorization();
 
-            if (!AppSetupMiddleware.IsDatabaseInstalled(Configuration))
-                app.UseMiddleware<AppSetupMiddleware>();
+            //if (!AppSetupMiddleware.IsDatabaseInstalled(Configuration))
+            app.UseMiddleware<AppSetupMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {
