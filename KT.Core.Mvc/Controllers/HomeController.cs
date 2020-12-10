@@ -86,7 +86,6 @@ IOptions<List<Tenant>> tenants, IHttpContextAccessor httpContextAccessor) : base
         {
             @ViewData["Title"] = "Configuration & Setup";
             @ViewData["Tenant"] = this._tenant;
-            @ViewData["Layout"] = this._tenant.Template;
 
             return View();
         }
