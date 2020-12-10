@@ -40,16 +40,21 @@ namespace KT.Core.Mvc.Business
         public bool IsDatabaseInstalled(IConfiguration configuration, HttpRequest request)
         {
             // var key = configuration["AllowedHosts"];
-            var success = false;
+            var failure = true;
             if( (request != null && request.Host!= null) && (this._tenants != null) && (this._tenants.Value.Count > 0))
             {
                 var host = request.Host.ToString().Trim().ToLower();
                 foreach(var tenant in this._tenants.Value)
                 {
                     var tenantHost = tenant.Host.ToLower().Trim();
+                    if(host == tenantHost || tenantHost.Contains(host))
+                    {
+                        failure = false;
+                        break;
+                    }
                 }
             }
-            return success;
+            return !failure;
         }
     }
 }
