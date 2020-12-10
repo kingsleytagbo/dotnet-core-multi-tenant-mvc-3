@@ -25,23 +25,13 @@
 
         <div class="collapse navbar-collapse" id="navbarsKTCore">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link py-0" href="../admin/users.html">Users <span class="sr-only">(current)</span></a>
-                </li>
+
                 <li class="nav-item">
                     <a class="nav-link py-0" href="../admin/images.html">Images<span class="sr-only">(current)</span></a>
                 </li>
-                <!--
-                <li class="nav-item">
-                    <a class="nav-link disabled py-0" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                <li class="nav-item active">
+                    <a class="nav-link py-0" href="../admin/users.html">Users <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle py-0" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                    <div class="dropdown-menu" aria-labelledby="dropdown01">
-                        <a class="dropdown-item py-o" href="#">Action</a>
-                    </div>
-                </li>
-                -->
             </ul>
             <!--
             <form class="form-inline my-2 my-lg-0">
@@ -62,8 +52,8 @@
                     <div class="card card-info mt-5">
                         <a id="users-top" name="users-top" href="#"></a>
                         <div class="card-header" id="userHeader" name="userHeader" style="display:block;">
-                            <button type="button" class="btn btn-info btn-block" id="createForm" onclick="return AdminPageModule.createForm(this);">
-                                Add / Edit a User
+                            <button disabled type="button" class="btn btn-info btn-block"  id="createForm" onclick="return AdminPageModule.createForm(this);">
+                                User Management
                             </button>
                         </div>
                         <div class="card-body" style="display:block;">
@@ -99,7 +89,7 @@
                     <!-- END USER CARD -->
                     <!-- BEGIN USER TABLE -->
                     <div class="table-responsive mt-5">
-                        <h3 class="text-center"> Manage Users</h3>
+                        <h3 class="text-center"> Users</h3>
                         <table class="table table-striped table-condensed table-hover">
                             <thead>
                                 <tr>
@@ -239,7 +229,7 @@
                                 database.save(DATA_KEYID, item);
                                 count -= 1;
                                 html += '<tr>';
-                                html += '<td  colspan="4">' + '<span><strong>' + count + '<br /> </strong></span>' + '<a class="btn btn-sm btn-outline-secondary" href="#" onclick="return AdminPageModule.getbyID(' + "'" + item.id + "'" + ')">Edit</a> </td>';
+                                html += '<td  colspan="4">' + '<span><strong>' + count + '<br /> </strong></span>' + '<a class="btn btn-sm btn-outline-secondary" href="#">#</a> </td>';
                                 html += '<td  colspan="3">' + '<p><span>' + (item.first_name ? item.first_name : '') + '</td>';
                                 html += '<td  colspan="3">' + '<p><span>' + (item.last_name ? item.last_name : '') + '</td>';
                                 html += '<td  colspan="2">' + '<p><span>' + (item.user_email ? item.user_email : '') + '</td>';

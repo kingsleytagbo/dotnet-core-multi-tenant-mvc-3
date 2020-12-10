@@ -25,17 +25,17 @@
 
         <div class="collapse navbar-collapse" id="navbarsKTCore">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link py-0" href="../admin/users.html">Users <span class="sr-only">(current)</span></a>
-                </li>
                 <li class="nav-item active">
                     <a class="nav-link py-0" href="../admin/images.html">Images<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link py-0" href="../admin/users.html">Users <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
 
             <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+                <input class="form-control mr-sm-2" type="text" placeholder="Search" id="search" aria-label="Search">
+                <button class="btn btn-secondary my-2 my-sm-0" type="button" onclick='submitSearch()'>Search</button>
             </form>
 
         </div>
@@ -224,6 +224,13 @@
     <script type="text/javascript" src="../../js/pagination.min.js?id=6"></script>
 
     <script type="text/javascript">
+        function submitSearch() {
+            const location = window.location.href;
+            const b = document.getElementById('search').value;
+            const newLocation = '../../' + encodeURIComponent(b);
+            window.location = '../../home/search?search=' + encodeURIComponent(b);
+        }
+
         const AdminPageModule = (function (Http, Page, database) {
             /* your module code goes here */
             const DATA_KEYID = 'image_id';
