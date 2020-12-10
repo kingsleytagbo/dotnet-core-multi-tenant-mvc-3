@@ -67,13 +67,15 @@ namespace KT.Core.Mvc.Api
 
 
 
-        [HttpPost]
-        public IActionResult Upload(IFormFile file, [FromBody] string value)
+        [HttpPost("Upload")]
+        [Authorize]
+        public IActionResult Upload([FromBody] dynamic value)
         {
+            var files = Request.Form.Files;
             var tenant = this.GetTenant();
             if (tenant != null)
             {
-                var body = JsonSerializer.Deserialize<object>(value) as System.Text.Json.JsonElement?;
+                //var body = JsonSerializer.Deserialize<object>("") as System.Text.Json.JsonElement?;
             }
             return Ok();
         }

@@ -56,7 +56,7 @@
                             </button>
                         </div>
                         <div class="card-body" style="display:block;">
-                            <form id="userForm" name="userForm" enctype="multipart/form-data">
+                            <form id="imageForm" name="imageForm" enctype="multipart/form-data">
                                 <div class="row">
 
                                     <div class="form-group col-6 col-sm-6">
@@ -79,7 +79,7 @@
 
                                 <div class="row">
 
-                                    <div class="form-group col-6 col-sm-6">
+                                    <div class="form-group col-12 col-sm-12">
                                         <label for="url">Download Image: (Image will be downloaded from this Url)</label>
                                         <span> <input type="text" class="form-control input-md" id="url" name="url" /></span>
                                         <div class="alert alert-warning" id="url-validator" style="display:none;">
@@ -88,7 +88,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group col-6 col-sm-6">
+                                    <div class="form-group col-6 col-sm-6" style="display:none;">
                                         <label for="upload">Upload Image: ( Choose Image to Upload from Your Files)</label>
                                         <input type="file" class="form-control-file" id="image_upload" placeholder="Choose an Image">
                                         <div class="alert alert-warning" id="image_upload-validator" style="display:none;">
@@ -228,7 +228,7 @@
             /* your module code goes here */
             const DATA_KEYID = 'image_id';
             const MODEL_KEYID = 'id';
-            const formName = 'userForm';
+            const formName = 'imageForm';
 
             return {
                 /* gets an empty model representing user data */
@@ -346,31 +346,40 @@
 
                     /* get the value of all the fields on the form */
                     let model = {};
+                    let request = null;
+                    const form_data = new FormData();
                     $('#' + formName).find('input, select, textarea').each(function () {
                         let key = $(this).attr('id');
                         let val = $("#" + key).val() || ' ';
                         model[key] = val;
+                        //form_data.append(key, val);
                     });
-                    //model['content'] = '[]';
+                   
                     model['site_id'] = model['site_id'].length > 0 ? Number(model['site_id']) : 0;
+                    //form_data.append(['site_id'], model['site_id']);
 
                     const token = Page.getAuthenticationToken();
 
                     /* save the values on the form to a data store */
                     /* database.save(DATA_KEYID, model); */
                     const image_upload = ($('#image_upload').val() && $('#image_upload').val().length > 0) ? $('#image_upload').prop('files')[0] : null;
-                    const form_data = new FormData(); 
-                    const request = model[MODEL_KEYID].trim().length > 0 ? Http.updateImage(token, model, model[MODEL_KEYID]) : Http.createImage(token, model);
-
-                    console.log({ model: model, image_upload: image_upload });
-                    return;
+                    if (image_upload) {
+                        form_data.append('file', image_upload);
+                        var form = document.getElementById('imageForm');
+                        var formData = new FormData(form);
+                        //console.log({ form: form, model: model, image_upload: image_upload, form_data: form_data.entries(), formData: formData.entries() });
+                        request = Http.uploadImage(token, form_data, model, model[MODEL_KEYID].trim());
+                    }
+                    else {
+                        request = model[MODEL_KEYID].trim().length > 0 ? Http.updateImage(token, model, model[MODEL_KEYID]) : Http.createImage(token, model);
+                    }
                     request
                         /*.then(response => response.json())*/
                         .then(function (result) {
                             /* refresh the data on the page after saving it */
                             AdminPageModule.loadCategories();
                             AdminPageModule.loadData();
-                            AdminPageModule.cancelForm($('#userForm'));
+                            AdminPageModule.cancelForm($('#imageForm'));
                         })
                         .catch(async function (error) {
                             console.log({ error: error });
@@ -397,7 +406,7 @@
                     request
                         .then(response => response.json())
                         .then(function (result) {
-                            AdminPageModule.cancelForm($('#userForm'));
+                            AdminPageModule.cancelForm($('#imageForm'));
                             AdminPageModule.loadCategories();
                             AdminPageModule.loadData();
                         })
@@ -479,18 +488,18 @@
                         $('#url').css('border-color', 'red');
                         $('#image_upload').css('border-color', 'red');
                         $('#image_upload-validator').fadeIn();
-                        $('#image_upload-validator').find('span').text("*Choose an Image to Upload Or Enter a Url for an Existing Image").show();
+                        $('#image_upload-validator').find('span').text("*Enter a Url for an Existing Image").show();
                         $('#url-validator').fadeIn();
-                        $('#url-validator').find('span').text("*Enter a Url for an Existing Image or Choose an Image from your Files").show();
+                        $('#url-validator').find('span').text("*Enter a Url for an Existing Image").show();
 
                     }
                     else {
                         $('#url').css('border-color', 'green');
                         $('#image_upload').css('border-color', 'green');
                         $('#image_upload-validator').fadeOut().hide();
-                        $('#image_upload-validator').find('span').text("*Choose an Image to Upload Or Enter a Url for an Existing Image").show();
+                        $('#image_upload-validator').find('span').text("*Enter a Url for an Existing Image").show();
                         $('#url-validator').fadeOut().hide();
-                        $('#url-validator').find('span').text("*Enter a Url for an Existing Image or Choose an Image from your Files").show();
+                        $('#url-validator').find('span').text("*Enter a Url for an Existing Image").show();
                     }
                     if ($imageUpload && $imageUpload.length > 0) {
                         $('#url').val($('#image_upload').val());
@@ -539,7 +548,7 @@
         $(document).ready(function () {
             AdminPageModule.loadCategories();
             const data = AdminPageModule.loadData();
-            AdminPageModule.showFormHeader($('#userForm'));
+            AdminPageModule.showFormHeader($('#imageForm'));
         });
 
         $(function () {
