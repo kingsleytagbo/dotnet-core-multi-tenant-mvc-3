@@ -1,5 +1,49 @@
 ﻿@{
 }
-<h1>@ViewData["Title"]</h1>
+<h1 class="text-center">@ViewData["Title"]</h1>
 
-<p>How to Configure & Setup this CMS.</p>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card card-header"><h3 class="text-center">Setup - Database Connection String</h3></div>
+            <div class="card card-body">
+                <div class="lead">
+                    <p>In appsettings.json, enter a valid SQL Server ConnectionString and a valid Host</p>
+                    p>The Host needs to match the url of your development or production app as it uses it to match a valid configuration</p>
+                </div>
+            </div>
+            <div class="card card-footer"><p><hr /></p></div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card card-header"><h3 class="text-center">Setup - SQL Server Database</h3></div>
+            <div class="card card-body">
+                <div class="lead">
+                    <p>Run the SQL Server Query file in [...\dotnet-core-multi-tenant-mvc-3\KT.Core.Mvc\Data\usp_Populate_NomadWP.sql) to create three (3) SQL Server tables</p>
+                    <p>wp_user, wp_image and wp_post will be created when the SQL File is executed</p>
+                </div>
+            </div>
+            <div class="card card-footer"><p><hr /></p></div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card card-header"><h3 class="text-center">Setup - User</h3></div>
+            <div class="card card-body">
+                <div class="lead">
+                    <p>Run the SQL Server Query file in [...\dotnet-core-multi-tenant-mvc-3\KT.Core.Mvc\Data\usp_Populate_NomadWP.sql) to create three (3) SQL Server tables</p>
+                    <p>wp_user, wp_image and wp_post will be created when the SQL File is executed</p>
+                </div>
+            </div>
+            <div class="card card-footer"><p><hr /></p></div>
+        </div>
+    </div>
+</div>
