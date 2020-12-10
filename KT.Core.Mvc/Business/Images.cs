@@ -30,7 +30,7 @@ namespace KT.Core.Mvc.Business
 
             var _connection = GetConnection(connection, connectionString);
 
-            var sQuery = "SELECT * FROM wp_image ORDER BY ID " +
+            var sQuery = "SELECT * FROM wp_image ORDER BY ID DESC " +
                 " OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
 
             result = _connection.Query<wp_image>(sQuery, new
@@ -107,7 +107,7 @@ namespace KT.Core.Mvc.Business
 
             var _connection = GetConnection(connection, connectionString);
 
-            var sQuery = "SELECT * FROM wp_image WHERE name like @name ";
+            var sQuery = "SELECT * FROM wp_image WHERE name like @name ORDER BY ID DESC ";
 
             result = _connection.Query<wp_image>(sQuery, new
             {
