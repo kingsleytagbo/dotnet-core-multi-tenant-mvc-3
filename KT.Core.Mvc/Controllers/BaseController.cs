@@ -38,8 +38,8 @@ namespace KT.Core.Mvc.Controllers
         {
             get
             {
-                string base_url = "https://localhost:44373";
-                return base_url;
+                //string base_url = "https://localhost:44373";
+                return "";
             }
         }
 
