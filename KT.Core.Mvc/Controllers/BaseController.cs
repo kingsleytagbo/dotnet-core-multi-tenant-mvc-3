@@ -86,7 +86,10 @@ namespace KT.Core.Mvc.Controllers
                     var hosts = this._tenants.Value[s].Host.Trim().ToLower().Split(",", StringSplitOptions.None);
                     foreach (var item in hosts)
                     {
-                        if (item == name.Trim().ToLower())
+                        var hostConfig = item.Trim().ToLower();
+                        var host = name.Trim().ToLower();
+
+                        if ( (hostConfig == host) || (hostConfig.IndexOf(host) > -1))
                         {
                             tenant = this._tenants.Value[s];
                             break;
