@@ -17,6 +17,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using KT.Core.Mvc.Business;
 
 namespace KT.Core.Mvc
 {
@@ -169,6 +170,10 @@ namespace KT.Core.Mvc
 
             app.UseRouting();
             app.UseAuthorization();
+
+            if (!AppSetupMiddleware.IsDatabaseInstalled(Configuration))
+                app.UseMiddleware<AppSetupMiddleware>();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
