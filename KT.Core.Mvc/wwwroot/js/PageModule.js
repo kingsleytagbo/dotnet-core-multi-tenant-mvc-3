@@ -85,10 +85,10 @@
             return true;
         },
 
-        init: function (key, item) {
-            const apiKey = this.getAuthenticationKey() + '-' + key;
-            database.setItem(apiKey, item);
-            console.log({ key: apiKey, item: item });
+        init: function (appKey, apiKey, item) {
+            const storeKey = 'AppKey' + '-' + appKey;
+            database.setItem(storeKey, { storeKey: storeKey, apiKey: apiKey, item: item });
+            console.log({ storeKey: storeKey, apiKey: apiKey, item: item });
             return true;
         }
     }

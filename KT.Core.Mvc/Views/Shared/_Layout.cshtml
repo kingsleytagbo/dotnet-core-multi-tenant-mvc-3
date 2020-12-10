@@ -79,7 +79,7 @@
         const apiKey = '@apiKey';
         const apiUrl = '@apiUrl';
         const appKey = PageModule.getAuthenticationKey();
-        PageModule.init(apiKey, apiUrl);
+        PageModule.init(appKey, apiKey, apiUrl);
         $(document).ready(function () {
             console.log({appKey: appKey, apiKey: apiKey, apiUrl:apiUrl})
         });
