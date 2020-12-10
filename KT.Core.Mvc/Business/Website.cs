@@ -29,13 +29,19 @@ namespace KT.Core.Mvc.Business
             try
             {
                 var connect = GetConnection(connection, connectionString);
-                connect.Open();
+                var query = "SELECT Users = (SELECT Count(*) FROM WP_USER), Posts = (SELECT Count(*) FROM WP_POST), Images = (SELECT Count(*) FROM WP_IMAGE)";
+                var result = connect.Query<int>(query, new
+                {
+                }, transaction: transaction).First();
+                success = true;
             }
-            catch
+            catch(Exception ex)
             {
+                success = false;
                 return success;
             }
 
+            /*
             //Check wp_user table
             try
             {
@@ -75,8 +81,8 @@ namespace KT.Core.Mvc.Business
             {
                 return success;
             }
+            */
 
-            success = true;
             return success;
         }
     }
