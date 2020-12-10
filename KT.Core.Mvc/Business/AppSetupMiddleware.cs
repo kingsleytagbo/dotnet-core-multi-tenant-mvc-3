@@ -40,7 +40,7 @@ namespace KT.Core.Mvc.Business
         public bool IsDatabaseInstalled(IConfiguration configuration, HttpRequest request)
         {
             // var key = configuration["AllowedHosts"];
-            var failure = true;
+            var success = false;
             if( (request != null && request.Host!= null) && (this._tenants != null) && (this._tenants.Value.Count > 0))
             {
                 var host = request.Host.ToString().Trim().ToLower();
@@ -49,12 +49,14 @@ namespace KT.Core.Mvc.Business
                     var tenantHost = tenant.Host.ToLower().Trim();
                     if(host == tenantHost || tenantHost.Contains(host))
                     {
-                        failure = false;
+                        // test the databse connection:
+                        var isReady = Website.IsDatabaseConfigured(tenant.ConnectionString, null, null);
+                        success = isReady;
                         break;
                     }
                 }
             }
-            return !failure;
+            return success;
         }
     }
 }
