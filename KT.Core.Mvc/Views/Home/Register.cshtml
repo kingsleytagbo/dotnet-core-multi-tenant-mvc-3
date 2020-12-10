@@ -1,4 +1,7 @@
 ﻿@{
+    var tenant = ((Tenant)ViewData["Tenant"]);
+    var apiKey = (tenant != null && !string.IsNullOrEmpty(tenant.Key)) ? tenant.Key : string.Empty;
+    var apiUrl = (tenant != null && !string.IsNullOrEmpty(tenant.ApiUrl)) ? tenant.ApiUrl : string.Empty;
 }
 <h1>@ViewData["Title"]</h1>
 
@@ -38,7 +41,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Password:</label>
-                                <input type="password" class="form-control input-md" id="user_pass"  placeholder="Your Password..." />
+                                <input type="password" class="form-control input-md" id="user_pass" placeholder="Your Password..." />
                             </div>
                         </div>
                     </form>
@@ -59,19 +62,20 @@
 </div>
 
 @section Scripts {
-    <script type="text/javascript" src="../../js/LocalStorageModule.js"></script>
-    <script type="text/javascript" src="../../js/HttpModule.js"></script>
-    <script type="text/javascript" src="../../js/PageModule.js"></script>
     <script type="text/javascript" src="../../js/RegisterPageModule.js"></script>
 
     <!--BEGIN JAVASCRIPT CODE -->
 
     <script type="text/javascript">
 
-    const RegisterModule = RegisterPageModule;
-    $(document).ready(function () {
-        RegisterModule.init();
-    });
+    const apiKey = '@apiKey';
+    const apiUrl = '@apiUrl';
+    PageModule.init(apiKey, apiUrl);
+
+        const RegisterModule = RegisterPageModule;
+        $(document).ready(function () {
+            RegisterModule.init();
+        });
 
     </script>
 }

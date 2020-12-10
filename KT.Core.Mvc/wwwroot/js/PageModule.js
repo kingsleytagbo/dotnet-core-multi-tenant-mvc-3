@@ -85,7 +85,10 @@
             return true;
         },
 
-       init: function (key, item) {
+        init: function (key, item) {
+            const apiKey = this.getAuthenticationKey() + '-' + key;
+            database.setItem(apiKey, item);
+            console.log({ key: apiKey, item: item });
             return true;
         }
     }

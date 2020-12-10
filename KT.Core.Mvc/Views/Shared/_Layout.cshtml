@@ -1,4 +1,9 @@
 ﻿@using System.Text.RegularExpressions;
+@{
+    var tenant = ((Tenant)ViewData["Tenant"]);
+    var apiKey = (tenant != null && !string.IsNullOrEmpty(tenant.Key)) ? tenant.Key : string.Empty;
+    var apiUrl = (tenant != null && !string.IsNullOrEmpty(tenant.ApiUrl)) ? tenant.ApiUrl : string.Empty;
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,8 +72,18 @@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/LocalStorageModule.js" asp-append-version="true"></script>
-    <script src="~/js/PageModule.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/js/LocalStorageModule.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="../../js/HttpModule.js" asp-append-version="true"></script>
+    <script type="text/javascript" src="~/js/PageModule.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        const apiKey = '@apiKey';
+        const apiUrl = '@apiUrl';
+        const appKey = PageModule.getAuthenticationKey();
+        // PageModule.init(apiKey, apiUrl);
+        $(document).ready(function () {
+            console.log({appKey: appKey, apiKey: apiKey, apiUrl:apiUrl})
+        });
+    </script>
     <script src="~/js/custom.js" asp-append-version="false"></script>
     @RenderSection("Scripts", required: false)
 </body>

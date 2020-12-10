@@ -37,6 +37,9 @@ IOptions<List<Tenant>> tenants, IHttpContextAccessor httpContextAccessor) : base
         public IActionResult Index(int page = 1, string search = null)
         {
             @ViewData["Title"] = "Home";
+            @ViewData["Tenant"] = this._tenant;
+            @ViewData["Layout"] = this._tenant.Template;
+
             var pageSize = 1;
             var total = Images.GetTotal(this._connectionString);
             List<wp_image> result = Images.GetAll(this._connectionString, page, pageSize);
@@ -74,12 +77,15 @@ IOptions<List<Tenant>> tenants, IHttpContextAccessor httpContextAccessor) : base
             @ViewData["Title"] = "Ask A Question";
             @ViewData["Tenant"] = this._tenant;
             @ViewData["Layout"] = this._tenant.Template;
+
             return View();
         }
 
         public IActionResult Contact()
         {
-            @ViewData["Title"] = "Contact";
+            @ViewData["Tenant"] = this._tenant;
+            @ViewData["Layout"] = this._tenant.Template;
+
             return View();
         }
 
@@ -96,18 +102,25 @@ IOptions<List<Tenant>> tenants, IHttpContextAccessor httpContextAccessor) : base
             @ViewData["Title"] = "Privacy";
             @ViewData["Tenant"] = this._tenant;
             @ViewData["Layout"] = this._tenant.Template;
+
             return View();
         }
 
         public IActionResult Register()
         {
             @ViewData["Title"] = "Register";
+            @ViewData["Tenant"] = this._tenant;
+            @ViewData["Layout"] = this._tenant.Template;
+
             return View();
         }
 
         public IActionResult Search(string search)
         {
             @ViewData["Title"] = search;
+            @ViewData["Tenant"] = this._tenant;
+            @ViewData["Layout"] = this._tenant.Template;
+
             List<wp_image> result = null;
             if (!string.IsNullOrEmpty(search))
             {

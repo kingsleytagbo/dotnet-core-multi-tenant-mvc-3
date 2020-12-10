@@ -1,7 +1,23 @@
 ﻿/* Manages LocalStorage data operations */
 const LocalStorageModule = new function () {
 
-    /* saves one item or a list of items */
+    /* saves one item or a list of items without merging exising */
+    this.setItem = function (key, data) {
+        localStorage.setItem(key, JSON.stringify(data));
+    };
+
+    /* gets one item or a list of items without merging exising */
+    this.getItem = function (key) {
+        let data = localStorage.getItem(key);
+        if (data) {
+            return JSON.parse(data);
+        }
+        else {
+            return null;
+        }
+    };
+
+    /* saves one item or a list of items but merges existing */
     this.save = function (key, data) {
         const items = this.merge(key, data);
         //localStorage.setItem(key, JSON.stringify([]));
