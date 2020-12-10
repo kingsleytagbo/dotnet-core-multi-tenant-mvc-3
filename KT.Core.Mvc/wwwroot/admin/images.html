@@ -358,8 +358,12 @@
 
                     /* save the values on the form to a data store */
                     /* database.save(DATA_KEYID, model); */
+                    const image_upload = ($('#image_upload').val() && $('#image_upload').val().length > 0) ? $('#image_upload').prop('files')[0] : null;
+                    const form_data = new FormData(); 
                     const request = model[MODEL_KEYID].trim().length > 0 ? Http.updateImage(token, model, model[MODEL_KEYID]) : Http.createImage(token, model);
 
+                    console.log({ model: model, image_upload: image_upload });
+                    return;
                     request
                         /*.then(response => response.json())*/
                         .then(function (result) {
@@ -470,9 +474,6 @@
 
                 /* validate image */
                     const $imageUpload = $('#image_upload').val(); const $imageDownload = $('#url').val();
-                    if ($imageUpload && $imageUpload.length > 0) {
-                        $('#url').val($('#image_upload').val());
-                    }
                     if (!($imageUpload && $imageUpload.length > 0) && !($imageDownload && $imageDownload.length > 0)) {
                         isValid = false;
                         $('#url').css('border-color', 'red');
@@ -491,6 +492,9 @@
                         $('#url-validator').fadeOut().hide();
                         $('#url-validator').find('span').text("*Enter a Url for an Existing Image or Choose an Image from your Files").show();
                     }
+                    if ($imageUpload && $imageUpload.length > 0) {
+                        $('#url').val($('#image_upload').val());
+                    }
 
                     /*
                     if (!$('#url').val() || ($('#url').val().length == 0)) {
@@ -503,7 +507,7 @@
                     }
                     */
 
-                    return false;
+                    return isValid;
                 },
 
                 setCategory: function () {

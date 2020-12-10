@@ -67,14 +67,25 @@ namespace KT.Core.Mvc.Api
 
 
 
+        [HttpPost]
+        public IActionResult Upload(IFormFile file, [FromBody] string value)
+        {
+            var tenant = this.GetTenant();
+            if (tenant != null)
+            {
+                var body = JsonSerializer.Deserialize<object>(value) as System.Text.Json.JsonElement?;
+            }
+            return Ok();
+        }
+
+
+
         // POST: api/AccountsContoller
         [HttpPost]
         [Authorize]
         public void Post([FromBody] string value)
         {
             var tenant = this.GetTenant();
-            Int64 result = 0;
-
             if (tenant != null)
             {
                 Int64 ? parentPostId = null;
