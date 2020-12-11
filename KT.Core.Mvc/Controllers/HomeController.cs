@@ -134,7 +134,7 @@ IOptions<List<Tenant>> tenants, IHttpContextAccessor httpContextAccessor) : base
             List<wp_image> result = null;
             if (!string.IsNullOrEmpty(search))
             {
-                result = Images.Search(search, this._connectionString, null, null);
+                result = Images.Search(search, null, null, this._connectionString, null, null);
                 return View(result);
             }
             else

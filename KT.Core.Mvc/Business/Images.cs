@@ -122,18 +122,33 @@ namespace KT.Core.Mvc.Business
             return result;
         }
 
-        public static List<wp_image> Search(string name, string connectionString, IDbConnection connection, IDbTransaction transaction)
+        public static List<wp_image> Search(string name, int? page, int? pageSize, string connectionString, IDbConnection connection, IDbTransaction transaction)
         {
             List<wp_image> result = null;
 
             var _connection = GetConnection(connection, connectionString);
 
-            var sQuery = "SELECT * FROM wp_image WHERE (name like @name) OR (category like @name)  ORDER BY ID DESC ";
-
-            result = _connection.Query<wp_image>(sQuery, new
+            if (page == null || pageSize == null)
             {
-                name = "%" + name + "%"
-            }, transaction: transaction).ToList();
+
+                var sQuery = "SELECT * FROM wp_image WHERE (name like @name) OR (category like @name)  ORDER BY ID DESC ";
+
+                result = _connection.Query<wp_image>(sQuery, new
+                {
+                    name = "%" + name + "%"
+                }, transaction: transaction).ToList();
+            }
+            else
+            {
+                var sQuery = "SELECT * FROM wp_image WHERE (name like @name) OR (category like @name) ORDER BY ID DESC " +
+                                " OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
+
+                result = _connection.Query<wp_image>(sQuery, new
+                {
+                    Offset = (page - 1) * pageSize,
+                    PageSize = pageSize,
+                }, transaction: transaction).ToList();
+            }
 
             return result;
         }
