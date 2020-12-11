@@ -59,6 +59,10 @@
                             <form id="imageForm" name="imageForm" enctype="multipart/form-data">
                                 <div class="row">
 
+                                    <div class="form-group col-12 col-sm-12">
+                                        <div class="text-center"><span><mark>Choose an existing Category *OR Type & Create a New Category</mark></span></div>
+                                    </div>
+
                                     <div class="form-group col-6 col-sm-6">
                                         <label>Choose a Category:</label>
                                         <select class="form-control" id="category_choose" onchange="AdminPageModule.setCategory()">
@@ -77,11 +81,17 @@
 
                                 </div>
 
+                                <p><hr /></p>
+
                                 <div class="row">
 
+                                    <div class="form-group col-12 col-sm-12">
+                                        <div class="text-center"><span><mark>Download an Image from a URL *OR Upload an Image from your Files</mark></span></div>
+                                    </div>
+
                                     <div class="form-group col-6 col-sm-6">
-                                        <label for="url">Download Image: (Image will be downloaded from this Url)</label>
-                                        <span>Example, paste: https://cdn.abcotvs.com/dip/images/6887165_100920-wabc-ny-voter-registration-deadline-img.jpg</span>
+                                        <label for="url">Download Image: (from a Url)</label>
+                                        <span>E.g., paste: https://www.img.jpg</span>
                                         <span> <input type="text" class="form-control input-md" id="url" name="url" /></span>
                                         <div class="alert alert-warning" id="url-validator" style="display:none;">
                                             <span>
@@ -90,7 +100,7 @@
                                     </div>
 
                                     <div class="form-group col-6 col-sm-6">
-                                        <label for="upload">Upload Image: ( Choose Image to Upload from Your Files)</label>
+                                        <label for="upload">Upload Image: (from Your Files)</label>
                                         <input type="file" class="form-control-file" id="image_upload" placeholder="Choose an Image">
                                         <div class="alert alert-warning" id="image_upload-validator" style="display:none;">
                                             <span>
@@ -500,7 +510,7 @@
                         $('#url').css('border-color', 'red');
                         $('#image_upload').css('border-color', 'red');
                         $('#image_upload-validator').fadeIn();
-                        $('#image_upload-validator').find('span').text("*Enter a Url for an Existing Image").show();
+                        $('#image_upload-validator').find('span').text("*Choose an Image from your Files").show();
                         $('#url-validator').fadeIn();
                         $('#url-validator').find('span').text("*Enter a Url for an Existing Image").show();
 
@@ -509,9 +519,9 @@
                         $('#url').css('border-color', 'green');
                         $('#image_upload').css('border-color', 'green');
                         $('#image_upload-validator').fadeOut().hide();
-                        $('#image_upload-validator').find('span').text("*Enter a Url for an Existing Image").show();
+                        $('#image_upload-validator').find('span').text('').hide();
                         $('#url-validator').fadeOut().hide();
-                        $('#url-validator').find('span').text("*Enter a Url for an Existing Image").show();
+                        $('#url-validator').find('span').text("").hide();
                     }
                     if ($imageUpload && $imageUpload.length > 0) {
                         $('#url').val($('#image_upload').val());
