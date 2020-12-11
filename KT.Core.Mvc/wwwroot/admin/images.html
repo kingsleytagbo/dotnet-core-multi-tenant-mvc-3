@@ -369,14 +369,23 @@
                     $('#' + formName).find('input, select, textarea').each(function () {
                         let key = $(this).attr('id');
                         let val = $("#" + key).val() || '';
-                        if (key === MODEL_KEYID && (!val || val.trim().length === 0)) {
-                            val = 0;
+                        if (key === MODEL_KEYID) {
+                            if ((!val || val.trim().length === 0)) {
+                                val = 0;
+                            }
+                            else {
+                                val = Number(val);
+                            }
                         }
-                        else if (key === "site_id" && (!val || val.trim().length === 0)) {
-                            val = 0;
+                        else if (key === "site_id") {
+                            if ((!val || val.trim().length === 0)) {
+                                val = 0;
+                            }
+                            else {
+                                val = Number(val);
+                            }
                         }
                         model[key] = val;
-                        //console.log({ key: key, val: val ,model: model });
                         form_data.append(key, val);
                     });
 
@@ -387,10 +396,7 @@
                     const image_upload = ($('#image_upload').val() && $('#image_upload').val().length > 0) ? $('#image_upload').prop('files')[0] : null;
                     if (image_upload) {
                         form_data.append('FormFile', image_upload);
-                        //var form = document.getElementById('imageForm');
-                        //var formData = new FormData(form);
-                        //console.log({ form: form, model: model, image_upload: image_upload, form_data: form_data.entries(), formData: formData.entries() });
-                        request = Http.uploadImage(token, form_data, model, model[MODEL_KEYID]);
+                            request = Http.uploadImage(token, form_data, model, model[MODEL_KEYID]);
                     }
                     else {
                         request = model[MODEL_KEYID] > 0 ? Http.updateImage(token, model, model[MODEL_KEYID]) : Http.createImage(token, model);

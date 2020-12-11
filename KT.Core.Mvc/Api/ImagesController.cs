@@ -191,6 +191,7 @@ namespace KT.Core.Mvc.Api
         {
             Int64? result = null;
             var tenant = this.GetTenant();
+            var user = Request.HttpContext.User;
             wp_image body = System.Text.Json.JsonSerializer.Deserialize<wp_image>(value);
             if (tenant != null)
             {
