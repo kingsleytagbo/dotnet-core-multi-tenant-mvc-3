@@ -294,6 +294,8 @@ namespace KT.Core.Mvc.Business
                             existing.url = url;
                             existing.content = upload;
                             Images.Update(id, existing, connectionString, null, null);
+
+                            transaction.Complete();
                         }
                     }
                 }
