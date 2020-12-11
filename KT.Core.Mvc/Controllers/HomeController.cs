@@ -132,17 +132,19 @@ IOptions<List<Tenant>> tenants, IHttpContextAccessor httpContextAccessor) : base
             @ViewData["Layout"] = this._tenant.Template;
 
             List<wp_image> result = null;
+            var pageSize = 1;
             if (!string.IsNullOrEmpty(search))
             {
-                var pageSize = 1;
                 var searchTotal = Images.SearchTotal(search, null, null, this._connectionString, null, null);
-                result = Images.Search(search, null, null, this._connectionString, null, null);
+                result = Images.Search(search, page, pageSize, this._connectionString, null, null);
                 var pager = new Pager(searchTotal, page, pageSize, search);
                 ViewData["Pager"] = pager;
                 return View(result);
             }
             else
             {
+                var pager = new Pager(0, page, pageSize, search);
+                ViewData["Pager"] = pager;
                 result = new List<wp_image>();
             }
 

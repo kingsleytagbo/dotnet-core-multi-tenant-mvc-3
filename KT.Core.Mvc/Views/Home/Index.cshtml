@@ -21,35 +21,35 @@
         <div class="">
             @if (Pager.EndPage > 1)
             {
-                <ul class="pagination justify-content-center">
-                    @if (Pager.CurrentPage > 1)
+            <ul class="pagination justify-content-center">
+                @if (Pager.CurrentPage > 1)
                     {
-                        <li class="page-item">
-                            <a class="page-link" href="~/page/1@(GetSearchUrl(Pager.SearchString))">First</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="~/page/@(Pager.CurrentPage - 1)@(GetSearchUrl(Pager.SearchString))">Previous</a>
-                        </li>
+                <li class="page-item">
+                    <a class="page-link" href="~/page/1@(GetSearchUrl(Pager.SearchString))">First</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="~/page/@(Pager.CurrentPage - 1)@(GetSearchUrl(Pager.SearchString))">Previous</a>
+                </li>
                     }
 
-                    @for (var item = Pager.StartPage; item <= Pager.EndPage; item++)
+                @for (var item = Pager.StartPage; item <= Pager.EndPage; item++)
                     {
-                        <li class="page-item @(item == Pager.CurrentPage ? "active" : "")">
-                            <a class="page-link" href="~/page/@item@(GetSearchUrl(Pager.SearchString))"> @item</a>
-                        </li>
+                <li class="page-item @(item == Pager.CurrentPage ? "active" : "")">
+                    <a class="page-link" href="~/page/@item@(GetSearchUrl(Pager.SearchString))"> @item</a>
+                </li>
                     }
 
-                    @if (Pager.CurrentPage < Pager.TotalPages)
+                @if (Pager.CurrentPage < Pager.TotalPages)
                     {
-                        <li class="page-item">
-                            <a class="page-link" href="~/page/@(Pager.CurrentPage + 1)@(GetSearchUrl(Pager.SearchString))">Next</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="~/page/@(Pager.TotalPages)@(GetSearchUrl(Pager.SearchString))">Last</a>
-                        </li>
+                <li class="page-item">
+                    <a class="page-link" href="~/page/@(Pager.CurrentPage + 1)@(GetSearchUrl(Pager.SearchString))">Next</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="~/page/@(Pager.TotalPages)@(GetSearchUrl(Pager.SearchString))">Last</a>
+                </li>
                     }
-                </ul>/**/
-                                /**/
+            </ul>
+
                             }
         </div>
     </div>
