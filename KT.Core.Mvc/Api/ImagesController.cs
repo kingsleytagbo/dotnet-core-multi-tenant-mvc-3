@@ -69,7 +69,7 @@ namespace KT.Core.Mvc.Api
 
         [HttpPost("Upload")]
         [Authorize]
-        public IActionResult Upload([FromBody] dynamic value)
+        public IActionResult Upload([FromForm] wp_image_file file)
         {
             var files = Request.Form.Files;
             var tenant = this.GetTenant();

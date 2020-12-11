@@ -113,22 +113,21 @@
 
         uploadImage: function (token, image, model, id) {
             const headers = {
-                'Content-Type': 'application/json',
                 auth_site: public_key,
                 'Authorization': 'Bearer ' + token
             };
 
             const body = JSON.stringify(model);
-            const url = '/api/images/upload/' + id;
+            const url = '/api/images/upload';
 
-            //console.log({model: model, data: image})
+            console.log({ model: model, data: image, ID : id });
 
             const result = fetch(url, {
                 method: 'POST',
                 headers: headers,
                 contentType: false,
                 processData: false,
-                body: model,
+                body: image,
                 data: image
             });
             const response = result;
