@@ -107,7 +107,7 @@ namespace KT.Core.Mvc.Business
 
             var _connection = GetConnection(connection, connectionString);
 
-            var sQuery = "SELECT * FROM wp_image WHERE name like @name ORDER BY ID DESC ";
+            var sQuery = "SELECT * FROM wp_image WHERE (name like @name) OR (category like @name)  ORDER BY ID DESC ";
 
             result = _connection.Query<wp_image>(sQuery, new
             {
