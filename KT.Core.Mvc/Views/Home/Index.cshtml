@@ -72,7 +72,7 @@
                             <div class="card-title">
                                 <a class="text-dark text-center" title="@item.name" href="#">
                                     <h1>
-                                        @item.name&nbsp;↴&nbsp;
+                                        @item.name&nbsp;↴&nbsp; @(string.IsNullOrEmpty(item.category) ? string.Empty : string.Format("in: {0}", item.category))
                                     </h1>
                                 </a>
                             </div>
