@@ -6,9 +6,9 @@ using System.Linq;
 using System.IO;
 using System.Diagnostics;
 using System.Net;
-
 using KT.Core.Mvc.Models;
 using Dapper;
+
 
 namespace KT.Core.Mvc.Business
 {
@@ -160,6 +160,110 @@ namespace KT.Core.Mvc.Business
 
             return image;
 
+        }
+
+        public static wp_image SaveImageFromStream(
+           byte [] upload,
+            string category, string url, string name,
+            string connectionString)
+        {
+            Int64? parentPostId = null;
+            wp_image image = null;
+
+            if (!string.IsNullOrEmpty(category) && !string.IsNullOrEmpty(url) && !string.IsNullOrEmpty(name))
+            {
+                var post_parent = Posts.GetParentImage(category, connectionString, null, null);
+                if (post_parent == null)
+                {
+                    post_parent = new wp_post()
+                    {
+                        post_name = category,
+                        post_parent = 0,
+                        post_content = category,
+                        comment_count = 0,
+                        guid = Guid.NewGuid().ToString(),
+                        post_status = "active",
+                        post_type = "image",
+                        post_date = DateTime.Now,
+                        post_title = category,
+                        to_ping = "",
+                        post_date_gmt = DateTime.Now,
+                        post_modified = DateTime.Now,
+                        post_modified_gmt = DateTime.Now,
+                        site_id = 1,
+                        comment_status = "",
+                        post_mime_type = "",
+                        post_password = "",
+                        pinged = "",
+                        ping_status = "",
+                        post_author = 0,
+                        post_content_filtered = "",
+                        post_excerpt = "",
+                    };
+
+                    parentPostId = Posts.Create(post_parent, connectionString, null, null);
+                }
+                else
+                {
+                    parentPostId = post_parent.ID;
+                }
+
+                if (parentPostId.HasValue)
+                {
+                    if (upload!= null && upload.Length > 0)
+                    {
+                        image = new wp_image() { category = category, url = url, name = name, site_id = 1, content = upload };
+                    }
+                    else
+                    {
+                        image = Images.GetImageBytes(url, new wp_image() { category = category, url = url, name = name, site_id = 1 });
+                    }
+
+                    using (var transaction = new System.Transactions.TransactionScope())
+                    {
+                        image.category = category;
+                        var newImageId = Images.Create(image, connectionString, null, null);
+
+                        var postChild = new wp_post()
+                        {
+                            post_parent = parentPostId.Value,
+                            post_name = newImageId.ToString(),
+                            post_content = category,
+                            post_category = category,
+                            post_status = "active",
+                            post_type = "image",
+                            post_date = DateTime.Now,
+                            post_title = category,
+
+                            comment_status = "",
+                            post_mime_type = "",
+                            guid = Guid.NewGuid().ToString(),
+                            post_author = 0,
+                            post_content_filtered = "",
+                            post_excerpt = "",
+
+                            to_ping = "",
+                            post_password = "",
+                            pinged = "",
+                            ping_status = "",
+                            post_date_gmt = DateTime.Now,
+                            post_modified = DateTime.Now,
+                            post_modified_gmt = DateTime.Now,
+                            comment_count = 0,
+                            site_id = 1,
+                        };
+
+                        var newChildPostId = Posts.Create(postChild, connectionString, null, null);
+
+                        if (newImageId > 0 && newChildPostId > 0)
+                        {
+                            transaction.Complete();
+                        }
+                    }
+                }
+            }
+
+            return image;
         }
 
         public static wp_image GetImageBytes(string sourceUrl, wp_image image)

@@ -75,7 +75,17 @@ namespace KT.Core.Mvc.Api
             var tenant = this.GetTenant();
             if (tenant != null)
             {
-                //var body = JsonSerializer.Deserialize<object>("") as System.Text.Json.JsonElement?;
+                if ((files != null) && (files.Count > 0))
+                {
+                    using (var memory = new System.IO.MemoryStream())
+                    {
+                        var image = files[0];
+                        image.CopyTo(memory);
+                        var upload = memory.ToArray();
+                        Images.SaveImageFromStream(upload, file.category, file.url, file.name, tenant.ConnectionString);
+
+                    }
+                }
             }
             return Ok();
         }
@@ -90,11 +100,13 @@ namespace KT.Core.Mvc.Api
             var tenant = this.GetTenant();
             if (tenant != null)
             {
-                Int64 ? parentPostId = null;
                 var body = JsonSerializer.Deserialize<object>(value) as System.Text.Json.JsonElement?;
                 var category = body?.GetProperty("category").ToString();
                 var url = body?.GetProperty("url").ToString();
                 var name = body?.GetProperty("name").ToString();
+                Images.SaveImageFromStream(null, category, url, name, tenant.ConnectionString);
+
+                /*
                 if (!string.IsNullOrEmpty(category) && !string.IsNullOrEmpty(url) && !string.IsNullOrEmpty(name))
                 {
                     var post_parent = Posts.GetParentImage(category, tenant.ConnectionString, null, null);
@@ -168,6 +180,7 @@ namespace KT.Core.Mvc.Api
 
                     return;
                 }
+                 */
             }
         }
 
