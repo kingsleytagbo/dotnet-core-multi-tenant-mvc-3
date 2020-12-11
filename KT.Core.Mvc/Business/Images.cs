@@ -145,6 +145,7 @@ namespace KT.Core.Mvc.Business
 
                 result = _connection.Query<wp_image>(sQuery, new
                 {
+                    name = "%" + name + "%",
                     Offset = (page - 1) * pageSize,
                     PageSize = pageSize,
                 }, transaction: transaction).ToList();
@@ -163,6 +164,7 @@ namespace KT.Core.Mvc.Business
 
             result = _connection.Query<int>(sQuery, new
             {
+                name = "%" + name + "%"
             }, transaction: transaction).First();
 
             return result;
