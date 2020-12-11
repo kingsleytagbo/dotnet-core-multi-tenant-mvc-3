@@ -120,7 +120,7 @@
             const body = JSON.stringify(model);
             const url = '/api/images/upload';
 
-            console.log({ model: model, data: image, ID : id });
+            //console.log({ model: model, data: image, ID : id });
 
             const result = fetch(url, {
                 method: 'POST',
