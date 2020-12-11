@@ -125,7 +125,7 @@ IOptions<List<Tenant>> tenants, IHttpContextAccessor httpContextAccessor) : base
             return View();
         }
 
-        public IActionResult Search(string search)
+        public IActionResult Search(string search, int page = 1)
         {
             @ViewData["Title"] = search;
             @ViewData["Tenant"] = this._tenant;
@@ -134,7 +134,11 @@ IOptions<List<Tenant>> tenants, IHttpContextAccessor httpContextAccessor) : base
             List<wp_image> result = null;
             if (!string.IsNullOrEmpty(search))
             {
+                var pageSize = 1;
+                var searchTotal = Images.SearchTotal(search, null, null, this._connectionString, null, null);
                 result = Images.Search(search, null, null, this._connectionString, null, null);
+                var pager = new Pager(searchTotal, page, pageSize, search);
+                ViewData["Pager"] = pager;
                 return View(result);
             }
             else

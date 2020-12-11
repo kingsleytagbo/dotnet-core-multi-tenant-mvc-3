@@ -131,7 +131,7 @@ namespace KT.Core.Mvc.Business
             if (page == null || pageSize == null)
             {
 
-                var sQuery = "SELECT * FROM wp_image WHERE (name like @name) OR (category like @name)  ORDER BY ID DESC ";
+                var sQuery = "SELECT * FROM wp_image WHERE ((name like @name) OR (category like @name)) ORDER BY ID DESC ";
 
                 result = _connection.Query<wp_image>(sQuery, new
                 {
@@ -140,7 +140,7 @@ namespace KT.Core.Mvc.Business
             }
             else
             {
-                var sQuery = "SELECT * FROM wp_image WHERE (name like @name) OR (category like @name) ORDER BY ID DESC " +
+                var sQuery = "SELECT * FROM wp_image WHERE ((name like @name) OR (category like @name)) ORDER BY ID DESC " +
                                 " OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
 
                 result = _connection.Query<wp_image>(sQuery, new
@@ -149,6 +149,21 @@ namespace KT.Core.Mvc.Business
                     PageSize = pageSize,
                 }, transaction: transaction).ToList();
             }
+
+            return result;
+        }
+
+        public static int SearchTotal(string name, int? page, int? pageSize, string connectionString, IDbConnection connection = null, IDbTransaction transaction = null)
+        {
+            int result = 0;
+
+            var _connection = GetConnection(connection, connectionString);
+
+            var sQuery = "SELECT Count(*) FROM wp_image WHERE ((name like @name) OR (category like @name)); ";
+
+            result = _connection.Query<int>(sQuery, new
+            {
+            }, transaction: transaction).First();
 
             return result;
         }
