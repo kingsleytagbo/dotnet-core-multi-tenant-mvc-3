@@ -57,6 +57,15 @@ namespace KT.Core.Mvc.Business
             return result;
         }
 
+        public static wp_image Get(Int64 id, string connectionString, IDbConnection connection, IDbTransaction transaction)
+        {
+            var _connection = GetConnection(connection, connectionString);
+
+            var result = _connection.Get<wp_image>(id, transaction: transaction);
+
+            return result;
+        }
+
         public static Int64 Create(wp_image image, string connectionString, IDbConnection connection, IDbTransaction transaction)
         {
             var _connection = GetConnection(connection, connectionString);
@@ -66,7 +75,19 @@ namespace KT.Core.Mvc.Business
             return result;
         }
 
-        public static Int64? Update(int id, string category, string url, string name, string connectionString, IDbConnection connection, IDbTransaction transaction)
+
+        public static Int64? Update(Int64 id, wp_image image, string connectionString, IDbConnection connection, IDbTransaction transaction)
+        {
+            Int64? result = null;
+
+            var _connection = GetConnection(connection, connectionString);
+
+            result = _connection.Update<wp_image>(image, transaction: transaction);
+
+            return result;
+        }
+
+        public static Int64? Update(Int64 id, string category, string url, string name, string connectionString, IDbConnection connection, IDbTransaction transaction)
         {
             Int64? result = null;
 
@@ -163,7 +184,7 @@ namespace KT.Core.Mvc.Business
         }
 
         public static wp_image SaveImageFromStream(
-           byte [] upload,
+           byte [] upload, Int64 id,
             string category, string url, string name,
             string connectionString)
         {
@@ -222,42 +243,57 @@ namespace KT.Core.Mvc.Business
                     using (var transaction = new System.Transactions.TransactionScope())
                     {
                         image.category = category;
-                        var newImageId = Images.Create(image, connectionString, null, null);
 
-                        var postChild = new wp_post()
+                        // create a new image
+                        if (id == 0)
                         {
-                            post_parent = parentPostId.Value,
-                            post_name = newImageId.ToString(),
-                            post_content = category,
-                            post_category = category,
-                            post_status = "active",
-                            post_type = "image",
-                            post_date = DateTime.Now,
-                            post_title = category,
+                            var newImageId = Images.Create(image, connectionString, null, null);
 
-                            comment_status = "",
-                            post_mime_type = "",
-                            guid = Guid.NewGuid().ToString(),
-                            post_author = 0,
-                            post_content_filtered = "",
-                            post_excerpt = "",
+                            var postChild = new wp_post()
+                            {
+                                post_parent = parentPostId.Value,
+                                post_name = newImageId.ToString(),
+                                post_content = category,
+                                post_category = category,
+                                post_status = "active",
+                                post_type = "image",
+                                post_date = DateTime.Now,
+                                post_title = category,
 
-                            to_ping = "",
-                            post_password = "",
-                            pinged = "",
-                            ping_status = "",
-                            post_date_gmt = DateTime.Now,
-                            post_modified = DateTime.Now,
-                            post_modified_gmt = DateTime.Now,
-                            comment_count = 0,
-                            site_id = 1,
-                        };
+                                comment_status = "",
+                                post_mime_type = "",
+                                guid = Guid.NewGuid().ToString(),
+                                post_author = 0,
+                                post_content_filtered = "",
+                                post_excerpt = "",
 
-                        var newChildPostId = Posts.Create(postChild, connectionString, null, null);
+                                to_ping = "",
+                                post_password = "",
+                                pinged = "",
+                                ping_status = "",
+                                post_date_gmt = DateTime.Now,
+                                post_modified = DateTime.Now,
+                                post_modified_gmt = DateTime.Now,
+                                comment_count = 0,
+                                site_id = 1,
+                            };
 
-                        if (newImageId > 0 && newChildPostId > 0)
+                            var newChildPostId = Posts.Create(postChild, connectionString, null, null);
+
+                            if (newImageId > 0 && newChildPostId > 0)
+                            {
+                                transaction.Complete();
+                            }
+                        }
+                        else
                         {
-                            transaction.Complete();
+                            // update an existing image
+                            var existing = Images.Get(id, connectionString, null, null);
+                            existing.name = name;
+                            existing.category = category;
+                            existing.url = url;
+                            existing.content = upload;
+                            Images.Update(id, existing, connectionString, null, null);
                         }
                     }
                 }

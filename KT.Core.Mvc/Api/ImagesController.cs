@@ -82,7 +82,7 @@ namespace KT.Core.Mvc.Api
                         var image = files[0];
                         image.CopyTo(memory);
                         var upload = memory.ToArray();
-                        Images.SaveImageFromStream(upload, file.category, file.url, file.name, tenant.ConnectionString);
+                        Images.SaveImageFromStream(upload, file.ID, file.category, file.url, file.name, tenant.ConnectionString);
 
                     }
                 }
@@ -104,7 +104,7 @@ namespace KT.Core.Mvc.Api
                 var category = body?.GetProperty("category").ToString();
                 var url = body?.GetProperty("url").ToString();
                 var name = body?.GetProperty("name").ToString();
-                Images.SaveImageFromStream(null, category, url, name, tenant.ConnectionString);
+                Images.SaveImageFromStream(null, 0, category, url, name, tenant.ConnectionString);
 
                 /*
                 if (!string.IsNullOrEmpty(category) && !string.IsNullOrEmpty(url) && !string.IsNullOrEmpty(name))
